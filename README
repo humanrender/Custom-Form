@@ -1,0 +1,56 @@
+checkboxes is a jQuery plugin for custom radios and checkboxes.
+
+I wrote this tired of having to call update methods with existing input beautifier tools.
+
+Besides autoupdating, the inputs will still trigger any "change" or "click" bindings you have placed on them.
+
+checkboxes does not honor any other events besides "click" and "change", nor does it 
+
+// =========
+// = USAGE =
+// =========
+
+$(selector).checkboxes();
+
+After initialization, if you want to check one or more checkboxes, then do:
+
+$(selector).checkboxes("check",true);
+
+Giving false as the second argument will uncheck the checkboxes, and giving no second argument toggle the checks.
+
+// ===========
+// = Example =
+// ===========
+
+The following:
+
+<input id="radio_1" type="radio" name="radio_group"/>
+<label for="radio_1">Radio 1</label>
+
+<input id="radio_2" type="radio" name="radio_group"/>
+<label for="radio_2">Radio 2</label>
+
+<input id="checkbox_1" type="checkbox" name="options[]"/>
+<label for="checkbox_1">Checkbox 1</label>
+
+<script type="text/javascript" charset="utf-8">
+  $("input[type=checkbox],input[type=radio]").checkboxes()
+</script>
+
+Will yield the following markup:
+
+<span class="radio">
+  <input id="radio_1" type="radio" name="radio_group"/>
+</span>
+<label for="radio_1">Radio 1</label>
+
+<span class="radio">
+  <input id="radio_2" type="radio" name="radio_group"/>
+</span>
+<label for="radio_2">Radio 2</label>
+
+<span class="checkbox">
+  <input id="checkbox_1" type="checkbox" name="options[]"/>
+</span>
+<label for="checkbox_1">Checkbox 1</label>
+
