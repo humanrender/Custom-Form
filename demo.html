@@ -6,7 +6,6 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<title>index</title>
   	<link rel="stylesheet" href="custom_form.css" type="text/css" media="screen" title="no title" charset="utf-8">
-  	
   </head>
   <body>
     <form autocomplete="off">
@@ -73,7 +72,7 @@
             <label for="address_4">Radio 2 - 4</label>
           </div>
           
-          <select id='select_1' name="select_1" class="checkboxes">
+          <select id='select_1' name="select_1" class="custom_select">
             <option value="1">Option 1</option>
             <option value="2">Option 2</option>
             <option value="3">Option 3</option>
@@ -81,7 +80,7 @@
             <option value="5">Option 5</option>
             <option value="6">Option 6</option>
           </select>
-          <select id='select_2' name="select_2" class="checkboxes">
+          <select id='select_2' name="select_2" class="custom_select">
             <option value="1">Other option 1</option>
             <option value="2">Other option 2</option>
             <option value="3">Other option 3</option>
@@ -113,7 +112,7 @@
     <script src="custom_form.js" type="text/javascript" charset="utf-8"></script>
     
     <script type="text/javascript" charset="utf-8">
-      var inputs = $("input[type=checkbox],input[type=radio],select.checkboxes").custom_form();
+      var inputs = $("input[type=checkbox],input[type=radio], select.custom_select").custom_form();
     </script>
   </body>
 </html>

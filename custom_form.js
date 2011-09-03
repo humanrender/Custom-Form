@@ -77,7 +77,6 @@
   Select.prototype.get_replacement = function(){
     var def_option = $("option:selected",this.element);
     (def_option.length != 0) ||(def_option = $("option:first-child",this.element))
-    console.log(def_option,this.element)
     return $("<span class='select'>\
       <span class='select_content' >\
         <span class='select_button'>\
