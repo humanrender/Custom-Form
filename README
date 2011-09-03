@@ -8,6 +8,9 @@ Don't get me wrong, plugins like Uniform.js are great. However, I'm lazy and I d
 
 I know it's not the most lightweight plugin out there;  it requires a full 20kb between js, styles and a png. But it does the job for me :D 
 
+I'm not a very good designer so I took the designs from the Yahoo! developer network.
+http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html
+
 More method and customization options are on the way.
 
 Feel free to use it or send feedback.
