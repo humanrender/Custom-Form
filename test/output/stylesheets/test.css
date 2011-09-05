@@ -1,0 +1,17 @@
+.wrap{
+  
+}
+
+.two-block{
+  display:table-row;
+}
+
+.two-block .content, .two-block .tools{
+  display:table-cell;
+  vertical-align:top;
+  padding:10px;
+}
+
+.two-block .content{
+  width:300px;
+}

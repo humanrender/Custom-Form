@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Custom-Form tests - Checkboxes</title>
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="../../stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    
+      <link rel="stylesheet" href="../../javascripts/qunit/qunit-styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    
+  	
+  </head>
+  <body>
+    <div class="wrap two-block">
+      <div class="content">
+        
+
+
+
+<form>
+  <fieldset>
+    <legend>Checkboxes</legend>    
+    
+      <input type="checkbox"  id="checkbox-0">
+      <label for="checkbox-0">Checkbox 0</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-1">
+      <label for="checkbox-1">Checkbox 1</label>
+      <br/>
+    
+      <input type="checkbox" checked='checked' id="checkbox-2">
+      <label for="checkbox-2">Checkbox 2</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-3">
+      <label for="checkbox-3">Checkbox 3</label>
+      <br/>
+    
+      <input type="checkbox" checked='checked' id="checkbox-4">
+      <label for="checkbox-4">Checkbox 4</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-5">
+      <label for="checkbox-5">Checkbox 5</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-6">
+      <label for="checkbox-6">Checkbox 6</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-7">
+      <label for="checkbox-7">Checkbox 7</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-8">
+      <label for="checkbox-8">Checkbox 8</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-9">
+      <label for="checkbox-9">Checkbox 9</label>
+      <br/>
+    
+  </fieldset>
+</form>
+      </div>
+      
+      
+      <div class="tools">
+        
+    <h1 id="qunit-header">QUnit Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup</div>
+  
+      </div>
+      
+    </div>
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script src="../../javascripts/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      
+  $("input[type=checkbox]").custom_form();
+  var checked = $("#checkbox-2,#checkbox-4");
+  console.log(checked.hasClass("active_checkbox"))
+  //active_checkbox
+
+    </script>
+  </body>
+</html>

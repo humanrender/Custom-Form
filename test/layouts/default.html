@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Custom-Form tests - <%= @item[:title] %></title>
+    <link rel="stylesheet" href="/stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="/stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    <% if @item[:qunit] %>
+      <link rel="stylesheet" href="/javascripts/qunit/qunit-styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    <% end %>
+  	<%= @item[:content_for_css] %>
+  </head>
+  <body>
+    <div class="wrap two-block">
+      <div class="content">
+        <%= yield %>
+      </div>
+      
+      <% if @item[:qunit] %>
+      <div class="tools">
+        <%= qunit_gui %>
+      </div>
+      <% end %>
+    </div>
+    <script src="/javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <% if @item[:qunit] %>
+      <script src="/javascripts/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+    <% end %>
+    <script src="/javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    <%= @item[:content_for_extra_js] %>
+    <script type="text/javascript" charset="utf-8">
+      <%= @item[:content_for_js] %>
+    </script>
+  </body>
+</html>

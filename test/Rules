@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+compile /\/(javascripts|stylesheets)\/*/ do
+  # don’t filter or layout
+end
+
+compile '*' do
+  if item.binary?
+    # don’t filter binary items
+  else
+    filter :erb
+    layout 'default'
+    filter :relativize_paths, :type =>:html
+  end
+end
+
+route /\/(javascripts|stylesheets)\/*/ do
+  item.identifier.chop + '.' + item[:extension]
+end
+
+route '*' do
+  if item.binary?
+    # Write item with identifier /foo/ to /foo.ext
+    item.identifier.chop + '.' + item[:extension]
+  else
+    # Write item with identifier /foo/ to /foo/index.html
+    item.identifier + 'index.html'
+  end
+end
+
+layout '*', :erb

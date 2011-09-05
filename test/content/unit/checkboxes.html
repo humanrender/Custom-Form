@@ -1,0 +1,25 @@
+--- 
+title: Checkboxes
+qunit: true
+---
+<% 
+  checked = [2,4]
+%>
+
+<% content_for :js do %>
+  $("input[type=checkbox]").custom_form();
+  var checked = $(<%=mapped_selectors "#checkbox-", checked%>);
+  console.log(checked.hasClass("active_checkbox"))
+  //active_checkbox
+<% end %>
+
+<form>
+  <fieldset>
+    <legend>Checkboxes</legend>    
+    <% 10.times do |i| %>
+      <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>">
+      <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
+      <br/>
+    <% end %>
+  </fieldset>
+</form>
