@@ -1898,13 +1898,8 @@ QUnit.diff = (function() {
 })(this);
 ;T;	@ ;
 @ I"/stylesheet/;T{;{;I" ;T;	@$;
-@$I"/javascripts/custom_form/;T{;{;I"(function( $ ){
-  
-  var methods = {
-    init:init,
-    check:check
-  }
-  
+@$I"/javascripts/custom_form/;T{;{;I"ç(function( $ ){
+    
   $._mixin = {
     include:function(mixin,target){
       mixin.call(target.prototype);
@@ -1915,10 +1910,9 @@ QUnit.diff = (function() {
     function init(options){
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
-      
       this.replacement = (options.select_replacement || this.get_replacement).apply(this)
       this.replace_elements();
-      if(this["init_replacement"]) this.init_replacement();
+      this.init_replacement();
       this.init_mouse_events();
     }
     
@@ -1970,7 +1964,7 @@ QUnit.diff = (function() {
   })()
   
   // style='height:"+Select.select_height+"px;'
-  function Select(element){ this.element = element; this.element_type = "select"; }
+  function Select(element){ this.element = element; this.element_type = "select";  }
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
@@ -2028,6 +2022,11 @@ QUnit.diff = (function() {
     event.data.check_input();
   }
   
+  Checkbox.prototype.init_replacement = function(){
+    if(this.element.is(":checked"))
+      this.check_input(true)
+  }
+  
   Select.prototype.click_handler = function (event){
     event.data.show_options();
   }
@@ -2048,12 +2047,16 @@ QUnit.diff = (function() {
   Checkbox.prototype.check_input = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
-     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
+    if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
     }
     if(checked) input.triggerHandler("change")
     input.triggerHandler("click")
+  }
+  
+  Checkbox.prototype.update = function(){
+    this.check_input(this.element.is(":checked"))
   }
   
   Radio.prototype = new Checkbox();
@@ -2069,8 +2072,8 @@ QUnit.diff = (function() {
   $._mixin.include(FormElement,Radio);
   $._mixin.include(FormElement,Select);
   
-  FormElement.get = function(element){
-    var element = $(element);
+  FormElement.get = function(_element){
+    var element = $(_element);
     if(element.is("select")){
       return Select.create(element)
     }
@@ -2088,23 +2091,36 @@ QUnit.diff = (function() {
     return $(this).each(function(){
       var element = FormElement.get(this)
       element.init(options);
+      this.custom_form_instance = element;
     })
   }
   
   
   function check(checked){
     return $(this).each(function(){
-      check_input.apply($(this).parent()[0],[checked])
+      this.custom_form_instance.check_input(checked)
     })
+  }
+  
+  function update(){
+    return $(this).each(function(){
+      this.custom_form_instance.update();
+    })
+  }
+  
+  var METHODS = {
+    init:init,
+    check:check,
+    update:update
   }
   
   $.fn.custom_form = function( method ) {
   
     // Method calling logic
-    if ( methods[method] ) {
-      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    if ( METHODS[method] ) {
+      return METHODS[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
     } else if ( typeof method === 'object' || ! method ) {
-      return methods.init.apply( this, arguments );
+        return METHODS.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
     }    
@@ -2112,7 +2128,7 @@ QUnit.diff = (function() {
   };
 
 })( jQuery );;T;	@(;
-@(I"/stylesheets/custom_form/;T{;{;I"r.select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
+@(I"/stylesheets/custom_form/;T{;{;I" .select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
   display: -moz-inline-stack; /*Cross browser inline-block*/
   display: inline-block;
   vertical-align: middle;
@@ -2228,43 +2244,6 @@ span.select .select_label{
   background-position:0 -84px;
   margin-left:7px;
   margin-top:9px;
-}
-
-
-/* =DEMO */
-
-label {
-  font:13px Helvetica, Arial, sans-serif;
-  color:#000;
-}
-
-input[type="submit"]{
-  display: -moz-inline-stack; /*Cross browser inline-block*/
-  display: inline-block;
-  vertical-align: middle;
-  zoom: 1;
-  *display: inline;
-}
-
-input[type="submit"]{
-  background: #fefefe; /* Old browsers */
-  background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
-  background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-  background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
-  
-  border:1px solid #5B5D5E;
-  padding-top:3px;
-  padding-bottom:3px;
-  font:10px Verdana, sans-serif;
-  color:#0B333B;
-  
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
 };T;	@,;
 @,I"/benchmarking/radios/;T{;{	;I"å<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
@@ -2296,7 +2275,7 @@ input[type="submit"]{
   </body>
 </html>
 ;T;	I" ;F;
-I" ;F;@0I"/unit/checkboxes/;T{;{	;I":<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+I" ;F;@0I"/unit/checkboxes/;T{;{	;I"4<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -2317,7 +2296,7 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I":<!DOCTYPE html PUBLIC "-//W3C//D
 
 
 
-<form>
+<form autocomplete="off">
   <fieldset>
     <legend>Checkboxes</legend>    
     
@@ -2387,25 +2366,182 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I":<!DOCTYPE html PUBLIC "-//W3C//D
     <script type="text/javascript" charset="utf-8">
       
   $("input[type=checkbox]").custom_form();
-  var checked = $("#checkbox-2,#checkbox-4");
-  console.log(checked.hasClass("active_checkbox"))
-  //active_checkbox
+  
+  
+  module("On instantiation");
+
+  test("Already checked checkboxes should have the active_checkbox class", function() {
+    var checked = $("#checkbox-2,#checkbox-4");
+    checked.each(function(){
+      ok( $(this).parent().hasClass("active_checkbox"), "The replacement <span> doesn't have the active_checkbox class" );
+    })
+  });
+  
+  module("On click");
+  
+  test("The checkbox should be checked if it wasn't", function(){
+    $("#checkbox-1").parent().trigger("click");
+    ok($("#checkbox-1").is(":checked"),"After clicking on the replacement <span>, the associated checbox is not checked")
+    ok($("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span> it doesn't have the active_checkbox class")
+  })
+  
+  test("The checkbox should be unchecked if it was checked", function(){
+    $("#checkbox-1").parent().trigger("click");
+    ok(!$("#checkbox-1").is(":checked"),"After clicking the replacement <span>, the associated checkbox is not unchecked")
+    ok(!$("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span>, it still has the active_checkbox class")
+  })
+  
+  module("When clicking the label");
+  
+  test("The checkbox should be checked if it wasn't", function(){
+    $("label[for=checkbox-3]").trigger("click");
+    ok($("#checkbox-3").is(":checked"),"After clicking the label, the associated checbox is not checked")
+    ok($("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it doesn't have the active_checkbox class")
+  })
+  
+  test("The checkbox should be unchecked if it was checked", function(){
+    $("label[for=checkbox-3]").trigger("click");
+    ok(!$("#checkbox-3").is(":checked"),"After clicking the label, the associated checkbox is not unchecked")
+    ok(!$("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it still has the active_checkbox class")
+  })
+  
+  module("Calling the 'check' method ")
+  
+  test("without arguments should toggle-check the checkbox",function(){
+    var was_checked = $("#checkbox-8").is(":checked")
+    $("#checkbox-8").custom_form("check")
+    ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    $("#checkbox-8").custom_form("check")
+    ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+  })
+  
+  test("with TRUE should check the checkbox",function(){
+    $("#checkbox-9").custom_form("check",true)
+    ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
+  })
+  
+  test("with TRUE on an already checked checkbox should not check it",function(){
+    $("#checkbox-9").custom_form("check",true)
+    ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
+  })
+  
+  test("with FALSE should uncheck the checkbox",function(){
+    $("#checkbox-4").custom_form("check",false)
+    ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
+  })
+  
+  test("with FALSE on an unchecked checkbox, should not check it",function(){
+    $("#checkbox-4").custom_form("check",false)
+    ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
+  })
+  
+  module("Calling the 'update' method");
+  
+  test("should reflect the current state of the checkbox",function(){
+    $("#checkbox-5").attr("checked",true)
+    $("#checkbox-5").custom_form("update")
+    ok($("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically checked input it doesn't get the active_checkbox class")
+    
+    $("#checkbox-5").attr("checked",false)
+    $("#checkbox-5").custom_form("update")
+    ok(!$("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically uncheckedchecked input it doesn't remove the active_checkbox class")
+  })
+  
 
     </script>
   </body>
 </html>
-;T;	I"<% 
+;T;	I"
+<% 
   checked = [2,4]
 %>
 
 <% content_for :js do %>
   $("input[type=checkbox]").custom_form();
-  var checked = $(<%=mapped_selectors "#checkbox-", checked%>);
-  console.log(checked.hasClass("active_checkbox"))
-  //active_checkbox
+  
+  
+  module("On instantiation");
+
+  test("Already checked checkboxes should have the active_checkbox class", function() {
+    var checked = $(<%=mapped_selectors "#checkbox-", checked%>);
+    checked.each(function(){
+      ok( $(this).parent().hasClass("active_checkbox"), "The replacement <span> doesn't have the active_checkbox class" );
+    })
+  });
+  
+  module("On click");
+  
+  test("The checkbox should be checked if it wasn't", function(){
+    $("#checkbox-1").parent().trigger("click");
+    ok($("#checkbox-1").is(":checked"),"After clicking on the replacement <span>, the associated checbox is not checked")
+    ok($("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span> it doesn't have the active_checkbox class")
+  })
+  
+  test("The checkbox should be unchecked if it was checked", function(){
+    $("#checkbox-1").parent().trigger("click");
+    ok(!$("#checkbox-1").is(":checked"),"After clicking the replacement <span>, the associated checkbox is not unchecked")
+    ok(!$("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span>, it still has the active_checkbox class")
+  })
+  
+  module("When clicking the label");
+  
+  test("The checkbox should be checked if it wasn't", function(){
+    $("label[for=checkbox-3]").trigger("click");
+    ok($("#checkbox-3").is(":checked"),"After clicking the label, the associated checbox is not checked")
+    ok($("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it doesn't have the active_checkbox class")
+  })
+  
+  test("The checkbox should be unchecked if it was checked", function(){
+    $("label[for=checkbox-3]").trigger("click");
+    ok(!$("#checkbox-3").is(":checked"),"After clicking the label, the associated checkbox is not unchecked")
+    ok(!$("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it still has the active_checkbox class")
+  })
+  
+  module("Calling the 'check' method ")
+  
+  test("without arguments should toggle-check the checkbox",function(){
+    var was_checked = $("#checkbox-8").is(":checked")
+    $("#checkbox-8").custom_form("check")
+    ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    $("#checkbox-8").custom_form("check")
+    ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+  })
+  
+  test("with TRUE should check the checkbox",function(){
+    $("#checkbox-9").custom_form("check",true)
+    ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
+  })
+  
+  test("with TRUE on an already checked checkbox should not check it",function(){
+    $("#checkbox-9").custom_form("check",true)
+    ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
+  })
+  
+  test("with FALSE should uncheck the checkbox",function(){
+    $("#checkbox-4").custom_form("check",false)
+    ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
+  })
+  
+  test("with FALSE on an unchecked checkbox, should not check it",function(){
+    $("#checkbox-4").custom_form("check",false)
+    ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
+  })
+  
+  module("Calling the 'update' method");
+  
+  test("should reflect the current state of the checkbox",function(){
+    $("#checkbox-5").attr("checked",true)
+    $("#checkbox-5").custom_form("update")
+    ok($("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically checked input it doesn't get the active_checkbox class")
+    
+    $("#checkbox-5").attr("checked",false)
+    $("#checkbox-5").custom_form("update")
+    ok(!$("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically uncheckedchecked input it doesn't remove the active_checkbox class")
+  })
+  
 <% end %>
 
-<form>
+<form autocomplete="off">
   <fieldset>
     <legend>Checkboxes</legend>    
     <% 10.times do |i| %>
@@ -2415,11 +2551,11 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I":<!DOCTYPE html PUBLIC "-//W3C//D
     <% end %>
   </fieldset>
 </form>;T;
-I"‚
+I"ı
 
 
 
-<form>
+<form autocomplete="off">
   <fieldset>
     <legend>Checkboxes</legend>    
     
@@ -2464,8 +2600,8 @@ I"‚
       <br/>
     
   </fieldset>
-</form>;T;@6I"/stylesheets/test/;T{;{;I"Ω.wrap{
-  
+</form>;T;@6I"/stylesheets/test/;T{;{;I"|.wrap{
+  font:13px Arial, sans-serif;
 }
 
 .two-block{
@@ -2479,6 +2615,40 @@ I"‚
 }
 
 .two-block .content{
-  width:300px;
+  width:200px;
+}
+
+.content label {
+  font:13px Helvetica, Arial, sans-serif;
+  color:#000;
+}
+
+input[type="submit"]{
+  display: -moz-inline-stack; /*Cross browser inline-block*/
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+}
+
+input[type="submit"]{
+  background: #fefefe; /* Old browsers */
+  background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
+  background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
+  
+  border:1px solid #5B5D5E;
+  padding-top:3px;
+  padding-bottom:3px;
+  font:10px Verdana, sans-serif;
+  color:#0B333B;
+  
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
 };T;	@<;
 @<I"!/images/custom_forms_sprite/;T{;{ :versioni

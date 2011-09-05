@@ -1,10 +1,5 @@
 (function( $ ){
-  
-  var methods = {
-    init:init,
-    check:check
-  }
-  
+    
   $._mixin = {
     include:function(mixin,target){
       mixin.call(target.prototype);
@@ -15,10 +10,9 @@
     function init(options){
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
-      
       this.replacement = (options.select_replacement || this.get_replacement).apply(this)
       this.replace_elements();
-      if(this["init_replacement"]) this.init_replacement();
+      this.init_replacement();
       this.init_mouse_events();
     }
     
@@ -70,7 +64,7 @@
   })()
   
   // style='height:"+Select.select_height+"px;'
-  function Select(element){ this.element = element; this.element_type = "select"; }
+  function Select(element){ this.element = element; this.element_type = "select";  }
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
@@ -128,6 +122,11 @@
     event.data.check_input();
   }
   
+  Checkbox.prototype.init_replacement = function(){
+    if(this.element.is(":checked"))
+      this.check_input(true)
+  }
+  
   Select.prototype.click_handler = function (event){
     event.data.show_options();
   }
@@ -148,12 +147,16 @@
   Checkbox.prototype.check_input = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
-     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
+    if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
     }
     if(checked) input.triggerHandler("change")
     input.triggerHandler("click")
+  }
+  
+  Checkbox.prototype.update = function(){
+    this.check_input(this.element.is(":checked"))
   }
   
   Radio.prototype = new Checkbox();
@@ -169,8 +172,8 @@
   $._mixin.include(FormElement,Radio);
   $._mixin.include(FormElement,Select);
   
-  FormElement.get = function(element){
-    var element = $(element);
+  FormElement.get = function(_element){
+    var element = $(_element);
     if(element.is("select")){
       return Select.create(element)
     }
@@ -188,23 +191,36 @@
     return $(this).each(function(){
       var element = FormElement.get(this)
       element.init(options);
+      this.custom_form_instance = element;
     })
   }
   
   
   function check(checked){
     return $(this).each(function(){
-      check_input.apply($(this).parent()[0],[checked])
+      this.custom_form_instance.check_input(checked)
     })
+  }
+  
+  function update(){
+    return $(this).each(function(){
+      this.custom_form_instance.update();
+    })
+  }
+  
+  var METHODS = {
+    init:init,
+    check:check,
+    update:update
   }
   
   $.fn.custom_form = function( method ) {
   
     // Method calling logic
-    if ( methods[method] ) {
-      return methods[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    if ( METHODS[method] ) {
+      return METHODS[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
     } else if ( typeof method === 'object' || ! method ) {
-      return methods.init.apply( this, arguments );
+        return METHODS.init.apply( this, arguments );
     } else {
       $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
     }    
