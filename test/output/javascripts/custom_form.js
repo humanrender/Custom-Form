@@ -161,10 +161,9 @@
   
   Radio.prototype = new Checkbox();
   Radio.prototype.check_input = function(checked){
-    console.log(checked,"yeah")
     if(checked != undefined && !checked) return;
     var input = this.element;
-    checked_radios = $("[name="+this.element_name+"]:checked").not(input)
+    checked_radios = $("[name="+this.element_name+"]:checked, .active_"+this.element_type+" input").not(input)
     if(checked_radios.length != 0)
         checked_radios.parent().removeClass("active_"+this.element_type)
     Checkbox.prototype.check_input.call(this,checked == undefined ? undefined : checked);
