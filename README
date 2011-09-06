@@ -80,8 +80,8 @@ Feel free to use it or send feedback.
 # = Roadmap =
 # ===========
 
-  - Custom methods to check/select elements programatically, no more calls to an "update" method. (tough an update method will be available)
-  - Update method :P.
+  - Custom methods to select elements programatically, no more calls to an "update" method. (tough an update method will be available)
+  - Update method for selects :P.
   - Style refactoring to remove duplicates
   - JS refactoring to reduce file size
   - Tests
