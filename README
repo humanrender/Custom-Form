@@ -2,87 +2,11 @@
 # = Custom Forms v0.1 =
 # =====================
 
-I wrote this after trying a lot of form beautifiers. 
+Welcome to the test branch of Custom-Forms.
 
-Don't get me wrong, plugins like Uniform.js are great. However, I'm lazy and I don't like building complicated sprites or giving fixed widths to every element.
+The test folder contains a nanoc project with the whole test suite.
+If you are a front-end developer and haven't heard about nanoc yet be sure to check it out at http://nanoc.stoneship.org/; it's a very cool and handy tool for generating static HTML files written in Ruby.
 
-I know it's not the most lightweight plugin out there;  it requires a full 20kb between js, styles and a png. But it does the job for me :D 
+You don't need nanoc to run the test suite, just grab the output folder and have fun.
 
-I'm not a very good designer so I took the designs from the Yahoo! developer network.
-http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html
-
-More method and customization options are on the way.
-
-Feel free to use it or send feedback.
-
-# ============
-# = Features =
-# ============
-  
-  - Checkbox & Radios
-    - Painless styling, no arcane mark-up or anything. Your checkbox gets subtituted for an inline-block span.
-    
-  - Selects
-    - Full CSS styling, no more complicated sprites. 
-    - Seamless subtitution, the replacement mark-up will have the same size as your original selects.
-    - Native select behavior
-
-# =========
-# = Usage =
-# =========
-  
-  <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
-  <label for="custom_checkbox_0">Checkbox 0</label>
-  
-  <input type="radio" id="name_0" name="name" value="0"/>
-  <label for="name_0">Radio 0</label>
-  
-  <select id='select_1' name="select_1" class="custom_select">
-    ...
-  </select>
-  
-  <script type="text/javascript" charset="utf-8">
-    var inputs = $("input[type=checkbox],input[type=radio], select").custom_form();
-  </script>
-  
-  # Replacement mark-up
-  
-  <span class="checkbox"><input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"></span>
-  <label for="custom_checkbox_0">Checkbox 0</label>
-  
-  <span class="radio"><input type="radio" id="name_0" name="name" value="0"></span>
-  <label for="name_0">Radio 0</label>
-  
-  <span class="select" style="width: 76px; ">      
-    <span class="select_content">
-      <span class="select_button">
-        <span class="select_button_icon"></span>        
-      </span>        
-      <p class="select_label" style="width: 50px; padding-right: 0px; ">Option 1</p>
-    </span>    
-    <select id="select_1" name="select_1" class="checkboxes" style="width: 76px; ">
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
-      <option value="4">Option 4</option>
-      <option value="5">Option 5</option>
-      <option value="6">Option 6</option>
-    </select>
-  </span>
-
-# ============
-# = Browsers =
-# ============
-  
-  IE7+, FF5, Chrome 13.0.782.220, Safari 5
-  
-# ===========
-# = Roadmap =
-# ===========
-
-  - Custom methods to check/select elements programatically, no more calls to an "update" method. (tough an update method will be available)
-  - Update method :P.
-  - Style refactoring to remove duplicates
-  - JS refactoring to reduce file size
-  - Tests
-  - Profiling
+For the tests I'm using QUnit for unit testing (http://docs.jquery.com/Qunit) and Benchmark.js for benchmarking (http://benchmarkjs.com/).
