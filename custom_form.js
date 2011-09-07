@@ -144,15 +144,31 @@
     
   }
   
+  Select.prototype.update = function(){
+    this.element.trigger("change")
+  }
+  
+  Select.prototype.select = function(selected){
+    var selected_type = typeof selected;
+    switch(selected_type){
+      case "number": this.element.val(selected); break;
+      case "function": selected.apply(this.element); break;
+      default:
+        (selected_type == "string") || (selected = selected.to_s);
+        this.element.find("option:contains('"+selected+"')").attr("selected",true);
+    }
+    this.update()
+  }
+  
   Checkbox.prototype.check_input = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
+      if(checked) input.triggerHandler("change")
+      input.triggerHandler("click")
     }
-    if(checked) input.triggerHandler("change")
-    input.triggerHandler("click")
   }
   
   Checkbox.prototype.update = function(){
@@ -160,12 +176,18 @@
   }
   
   Radio.prototype = new Checkbox();
-  Radio.prototype.check_input = function(checked){
-    if(checked != undefined && !checked) return;
-    var input = this.element;
-    checked_radios = $("[name="+this.element_name+"]:checked, .active_"+this.element_type+" input").not(input)
-    if(checked_radios.length != 0)
-        checked_radios.parent().removeClass("active_"+this.element_type)
+  Radio.prototype.update = function(){
+    this.check_input(this.element.is(":checked"),true)
+  }
+  
+  Radio.prototype.check_input = function(checked,updating){
+    (checked != undefined) || (checked = true)
+    if(checked || updating){
+      var input = this.element;
+      checked_radios = $(".active_radio:has([type=radio]:not([id="+this.element_id+"]))");
+      if(checked_radios.length != 0)
+          checked_radios.removeClass("active_"+this.element_type)
+    }
     Checkbox.prototype.check_input.call(this,checked == undefined ? undefined : checked);
   }
   
@@ -209,10 +231,17 @@
     })
   }
   
+  function select(option){
+    return $(this).each(function(){
+      this.custom_form_instance.select(option)
+    })
+  }
+  
   var METHODS = {
     init:init,
     check:check,
-    update:update
+    update:update,
+    select:select
   }
   
   $.fn.custom_form = function( method ) {
