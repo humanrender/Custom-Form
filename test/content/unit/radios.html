@@ -9,6 +9,19 @@ qunit: true
 <% content_for :js do %>
   $("input[type=radio]").custom_form();
   
+  function verify_if_checked_and_parent_class(checked){
+    $("input[type=radio]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      var has_active_class = $(this).parent().hasClass("active_radio")
+      if(is_checked)
+        ok(has_active_class,"Radio button - "+$(this).val()+" - checking class")
+      else
+        ok(!has_active_class,"Radio button - "+$(this).val()+" - checking it doesn't have the active_radio class")
+      
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked),"The radio button  "+$(this).val()+" is checked/unchecked correctly")
+    })
+  }
   
   module("On instantiation");
 
@@ -17,83 +30,125 @@ qunit: true
     checked.each(function(){
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
+    verify_if_checked_and_parent_class([2])
+    run();
   });
   
-  module("On click");
+  function run(){
+    module("On click");
   
-  test("The radio should be checked if it wasn't", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
-  })
-  //
-  test("The radio should not be unchecked if it was checked", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
-  })
-  
-  module("When clicking the label");
-  
-  test("The radio should be checked if it wasn't", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  test("The radio button should not be unchecked if it was checked", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  
-  module("Calling the 'check' method ")
-  
-  test("without arguments should not toggle-check the radio",function(){
-    var was_checked = $("#radio-8").is(":checked")
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+    test("The radio should be checked if it wasn't", function(){
+      $("#radio-1").parent().trigger("click");
+      ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
+      ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
+      verify_if_checked_and_parent_class([1])
+      next();
+    })
     
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
-  })
+    function next(){
+      test("The radio should not be unchecked if it was checked", function(){
+        $("#radio-1").parent().trigger("click");
+        ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
+        ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
+        verify_if_checked_and_parent_class([1])
+        
+        next();
+      })
+      
+      function next(){
+        module("When clicking the label");
   
-  test("with TRUE should check the radio",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
-  })
+        test("The radio should be checked if it wasn't", function(){
+          $("label[for=radio-3]").trigger("click");
+          ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
+          ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+          verify_if_checked_and_parent_class([3])
+          next();
+        })
+        
+        function next(){
+          test("The radio button should not be unchecked if it was checked", function(){
+            $("label[for=radio-3]").trigger("click");
+            ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
+            ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+            verify_if_checked_and_parent_class([3])
+          })
   
-  test("with TRUE on an already checked radio button should not uncheck it",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
-  })
   
-  module('Calling the "check" method ')
+          module("Calling the 'check' method ")
   
-  test("with FALSE should not uncheck the radio",function(){
-    $("#radio-9").custom_form("check",false)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
-    ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
-  })
+          test("without arguments should not toggle-check the radio ",function(){
+            var was_checked = $("#radio-8").is(":checked")
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            next();
+          })
+          
+          function next(){
+            test("with TRUE should check the radio ",function(){
+              $("#radio-9").custom_form("check",true)
+              ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
+              verify_if_checked_and_parent_class([9]);
+              next();
+            })
+            
+            function next(){
+              test("with TRUE on an already checked radio button should not uncheck it ",function(){
+                $("#radio-9").custom_form("check",true)
+                ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
+                verify_if_checked_and_parent_class([9]);
+                next();
+              })
+              
+              function next(){
+                module('Calling the "check" method ')
   
-  module('Calling the "check" method with FALSE')
+                test("with FALSE should not uncheck the radio ",function(){
+                  $("#radio-9").custom_form("check",false)
+                  ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
+                  ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
+                  verify_if_checked_and_parent_class([9])
+                  next();
+                })
+                
+                function next(){
+                  module('Calling the "check" method with FALSE ')
   
-  test("on an unchecked radio button, should not check it",function(){
-    $("#radio-4").custom_form("check",false)
-    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
-  })
-  
-  module("Calling the 'update' method");
-  
-  test("should reflect the current state of the radio button",function(){
-    $("#radio-5").attr("checked",true)
-    $("#radio-5").custom_form("update")
-    ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-    $("#radio-6").attr("checked",true)
-    $("#radio-6").custom_form("update")
-    ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-  })
+                  test("on an unchecked radio button, should not check it ",function(){
+                    $("#radio-4").custom_form("check",false)
+                    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
+                    verify_if_checked_and_parent_class([9])
+                    next();
+                  })
+                  function next(){
+                    module("Calling the 'update' method ");
+          
+                    test("should reflect the current state of the radio button",function(){
+                      $("#radio-5").attr("checked",true)
+                      $("#radio-5").custom_form("update")
+                      ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      
+                      //verify_if_checked_and_parent_class([5])
+                      //
+                      //$("#radio-6").attr("checked",true)
+                      //$("#radio-6").custom_form("update")
+                      //ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      //verify_if_checked_and_parent_class([6])
+                    })
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   
 <% end %>
 
@@ -101,7 +156,7 @@ qunit: true
   <fieldset>
     <legend>Radios</legend>    
     <% 10.times do |i| %>
-      <input type="radio" <%= "checked='checked'" if checked.include?(i)%> id="radio-<%=i%>" name="radio_group_1">
+      <input type="radio" value="<%=i%>" <%= "checked='checked'" if checked.include?(i)%> id="radio-<%=i%>" name="radio_group_1">
       <label for="radio-<%=i%>">Radio <%=i%></label>
       <br/>
     <% end %>

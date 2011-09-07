@@ -9,14 +9,22 @@ qunit: true
 <% content_for :js do %>
   $("input[type=checkbox]").custom_form();
   
+  function check_options_integrity(checked){
+    $("input[type=checkbox]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked))
+    })
+  }
   
   module("On instantiation");
-
+  
   test("Already checked checkboxes should have the active_checkbox class", function() {
     var checked = $(<%=mapped_selectors "#checkbox-", checked%>);
     checked.each(function(){
       ok( $(this).parent().hasClass("active_checkbox"), "The replacement <span> doesn't have the active_checkbox class" );
     })
+    check_options_integrity([2,4])
   });
   
   module("On click");
@@ -25,12 +33,15 @@ qunit: true
     $("#checkbox-1").parent().trigger("click");
     ok($("#checkbox-1").is(":checked"),"After clicking on the replacement <span>, the associated checbox is not checked")
     ok($("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span> it doesn't have the active_checkbox class")
+    check_options_integrity([1,2,4])
   })
+  
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("#checkbox-1").parent().trigger("click");
     ok(!$("#checkbox-1").is(":checked"),"After clicking the replacement <span>, the associated checkbox is not unchecked")
     ok(!$("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span>, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("When clicking the label");
@@ -39,12 +50,14 @@ qunit: true
     $("label[for=checkbox-3]").trigger("click");
     ok($("#checkbox-3").is(":checked"),"After clicking the label, the associated checbox is not checked")
     ok($("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it doesn't have the active_checkbox class")
+    check_options_integrity([2,4,3])
   })
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("label[for=checkbox-3]").trigger("click");
     ok(!$("#checkbox-3").is(":checked"),"After clicking the label, the associated checkbox is not unchecked")
     ok(!$("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("Calling the 'check' method ")
@@ -53,28 +66,35 @@ qunit: true
     var was_checked = $("#checkbox-8").is(":checked")
     $("#checkbox-8").custom_form("check")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4,8])
     $("#checkbox-8").custom_form("check")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4])
+    
   })
   
   test("with TRUE should check the checkbox",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
+    check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
+    check_options_integrity([2,9])
   })
   
   module("Calling the 'update' method");
@@ -83,10 +103,21 @@ qunit: true
     $("#checkbox-5").attr("checked",true)
     $("#checkbox-5").custom_form("update")
     ok($("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically checked input it doesn't get the active_checkbox class")
+    check_options_integrity([2,9,5])
     
     $("#checkbox-5").attr("checked",false)
     $("#checkbox-5").custom_form("update")
     ok(!$("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically uncheckedchecked input it doesn't remove the active_checkbox class")
+    check_options_integrity([2,9])
+  })
+  
+  module("On send ");
+  test("the correct values should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
+    })
+    $("form").submit();
   })
   
 <% end %>
@@ -95,7 +126,7 @@ qunit: true
   <fieldset>
     <legend>Checkboxes</legend>    
     <% 10.times do |i| %>
-      <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>">
+      <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>" value="<%=i%>" name="checkbox-<%=i%>">
       <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>

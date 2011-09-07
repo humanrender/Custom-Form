@@ -1,4 +1,4 @@
-{:	data{I"/:ET{:default{	:	lastI"c<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+{:	data{I"/:ET{:default{	:	lastI"c<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -1898,7 +1898,7 @@ QUnit.diff = (function() {
 })(this);
 ;T;	@ ;
 @ I"/stylesheet/;T{;{;I" ;T;	@$;
-@$I"/javascripts/custom_form/;T{;{;I"Þ(function( $ ){
+@$I"/javascripts/custom_form/;T{;{;I"í(function( $ ){
     
   $._mixin = {
     include:function(mixin,target){
@@ -2044,15 +2044,31 @@ QUnit.diff = (function() {
     
   }
   
+  Select.prototype.update = function(){
+    this.element.trigger("change")
+  }
+  
+  Select.prototype.select = function(selected){
+    var selected_type = typeof selected;
+    switch(selected_type){
+      case "number": this.element.val(selected); break;
+      case "function": selected.apply(this.element); break;
+      default:
+        (selected_type == "string") || (selected = selected.to_s);
+        this.element.find("option:contains('"+selected+"')").attr("selected",true);
+    }
+    this.update()
+  }
+  
   Checkbox.prototype.check_input = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
+      if(checked) input.triggerHandler("change")
+      input.triggerHandler("click")
     }
-    if(checked) input.triggerHandler("change")
-    input.triggerHandler("click")
   }
   
   Checkbox.prototype.update = function(){
@@ -2060,13 +2076,18 @@ QUnit.diff = (function() {
   }
   
   Radio.prototype = new Checkbox();
-  Radio.prototype.check_input = function(checked){
-    console.log(checked,"yeah")
-    if(checked != undefined && !checked) return;
-    var input = this.element;
-    checked_radios = $("[name="+this.element_name+"]:checked").not(input)
-    if(checked_radios.length != 0)
-        checked_radios.parent().removeClass("active_"+this.element_type)
+  Radio.prototype.update = function(){
+    this.check_input(this.element.is(":checked"),true)
+  }
+  
+  Radio.prototype.check_input = function(checked,updating){
+    (checked != undefined) || (checked = true)
+    if(checked || updating){
+      var input = this.element;
+      checked_radios = $(".active_radio:has([type=radio]:not([id="+this.element_id+"]))");
+      if(checked_radios.length != 0)
+          checked_radios.removeClass("active_"+this.element_type)
+    }
     Checkbox.prototype.check_input.call(this,checked == undefined ? undefined : checked);
   }
   
@@ -2110,10 +2131,17 @@ QUnit.diff = (function() {
     })
   }
   
+  function select(option){
+    return $(this).each(function(){
+      this.custom_form_instance.select(option)
+    })
+  }
+  
   var METHODS = {
     init:init,
     check:check,
-    update:update
+    update:update,
+    select:select
   }
   
   $.fn.custom_form = function( method ) {
@@ -2277,7 +2305,7 @@ span.select .select_label{
   </body>
 </html>
 ;T;	I" ;F;
-I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+I" ;F;@0I"/unit/checkboxes/;T{;{	;I"` <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -2302,43 +2330,43 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
   <fieldset>
     <legend>Checkboxes</legend>    
     
-      <input type="checkbox"  id="checkbox-0">
+      <input type="checkbox"  id="checkbox-0" value="0" name="checkbox-0">
       <label for="checkbox-0">Checkbox 0</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-1">
+      <input type="checkbox"  id="checkbox-1" value="1" name="checkbox-1">
       <label for="checkbox-1">Checkbox 1</label>
       <br/>
     
-      <input type="checkbox" checked='checked' id="checkbox-2">
+      <input type="checkbox" checked='checked' id="checkbox-2" value="2" name="checkbox-2">
       <label for="checkbox-2">Checkbox 2</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-3">
+      <input type="checkbox"  id="checkbox-3" value="3" name="checkbox-3">
       <label for="checkbox-3">Checkbox 3</label>
       <br/>
     
-      <input type="checkbox" checked='checked' id="checkbox-4">
+      <input type="checkbox" checked='checked' id="checkbox-4" value="4" name="checkbox-4">
       <label for="checkbox-4">Checkbox 4</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-5">
+      <input type="checkbox"  id="checkbox-5" value="5" name="checkbox-5">
       <label for="checkbox-5">Checkbox 5</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-6">
+      <input type="checkbox"  id="checkbox-6" value="6" name="checkbox-6">
       <label for="checkbox-6">Checkbox 6</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-7">
+      <input type="checkbox"  id="checkbox-7" value="7" name="checkbox-7">
       <label for="checkbox-7">Checkbox 7</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-8">
+      <input type="checkbox"  id="checkbox-8" value="8" name="checkbox-8">
       <label for="checkbox-8">Checkbox 8</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-9">
+      <input type="checkbox"  id="checkbox-9" value="9" name="checkbox-9">
       <label for="checkbox-9">Checkbox 9</label>
       <br/>
     
@@ -2369,14 +2397,22 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
       
   $("input[type=checkbox]").custom_form();
   
+  function check_options_integrity(checked){
+    $("input[type=checkbox]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked))
+    })
+  }
   
   module("On instantiation");
-
+  
   test("Already checked checkboxes should have the active_checkbox class", function() {
     var checked = $("#checkbox-2,#checkbox-4");
     checked.each(function(){
       ok( $(this).parent().hasClass("active_checkbox"), "The replacement <span> doesn't have the active_checkbox class" );
     })
+    check_options_integrity([2,4])
   });
   
   module("On click");
@@ -2385,12 +2421,15 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("#checkbox-1").parent().trigger("click");
     ok($("#checkbox-1").is(":checked"),"After clicking on the replacement <span>, the associated checbox is not checked")
     ok($("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span> it doesn't have the active_checkbox class")
+    check_options_integrity([1,2,4])
   })
+  
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("#checkbox-1").parent().trigger("click");
     ok(!$("#checkbox-1").is(":checked"),"After clicking the replacement <span>, the associated checkbox is not unchecked")
     ok(!$("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span>, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("When clicking the label");
@@ -2399,12 +2438,14 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("label[for=checkbox-3]").trigger("click");
     ok($("#checkbox-3").is(":checked"),"After clicking the label, the associated checbox is not checked")
     ok($("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it doesn't have the active_checkbox class")
+    check_options_integrity([2,4,3])
   })
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("label[for=checkbox-3]").trigger("click");
     ok(!$("#checkbox-3").is(":checked"),"After clicking the label, the associated checkbox is not unchecked")
     ok(!$("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("Calling the 'check' method ")
@@ -2413,28 +2454,35 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     var was_checked = $("#checkbox-8").is(":checked")
     $("#checkbox-8").custom_form("check")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4,8])
     $("#checkbox-8").custom_form("check")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4])
+    
   })
   
   test("with TRUE should check the checkbox",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
+    check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
+    check_options_integrity([2,9])
   })
   
   module("Calling the 'update' method");
@@ -2443,32 +2491,50 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("#checkbox-5").attr("checked",true)
     $("#checkbox-5").custom_form("update")
     ok($("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically checked input it doesn't get the active_checkbox class")
+    check_options_integrity([2,9,5])
     
     $("#checkbox-5").attr("checked",false)
     $("#checkbox-5").custom_form("update")
     ok(!$("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically uncheckedchecked input it doesn't remove the active_checkbox class")
+    check_options_integrity([2,9])
+  })
+  
+  module("On send ");
+  test("the correct values should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
+    })
+    $("form").submit();
   })
   
 
     </script>
   </body>
 </html>
-;T;	I"
-<% 
+;T;	I"<<% 
   checked = [2,4]
 %>
 
 <% content_for :js do %>
   $("input[type=checkbox]").custom_form();
   
+  function check_options_integrity(checked){
+    $("input[type=checkbox]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked))
+    })
+  }
   
   module("On instantiation");
-
+  
   test("Already checked checkboxes should have the active_checkbox class", function() {
     var checked = $(<%=mapped_selectors "#checkbox-", checked%>);
     checked.each(function(){
       ok( $(this).parent().hasClass("active_checkbox"), "The replacement <span> doesn't have the active_checkbox class" );
     })
+    check_options_integrity([2,4])
   });
   
   module("On click");
@@ -2477,12 +2543,15 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("#checkbox-1").parent().trigger("click");
     ok($("#checkbox-1").is(":checked"),"After clicking on the replacement <span>, the associated checbox is not checked")
     ok($("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span> it doesn't have the active_checkbox class")
+    check_options_integrity([1,2,4])
   })
+  
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("#checkbox-1").parent().trigger("click");
     ok(!$("#checkbox-1").is(":checked"),"After clicking the replacement <span>, the associated checkbox is not unchecked")
     ok(!$("#checkbox-1").parent().hasClass("active_checkbox"),"After clicking on the replacement <span>, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("When clicking the label");
@@ -2491,12 +2560,14 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("label[for=checkbox-3]").trigger("click");
     ok($("#checkbox-3").is(":checked"),"After clicking the label, the associated checbox is not checked")
     ok($("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it doesn't have the active_checkbox class")
+    check_options_integrity([2,4,3])
   })
   
   test("The checkbox should be unchecked if it was checked", function(){
     $("label[for=checkbox-3]").trigger("click");
     ok(!$("#checkbox-3").is(":checked"),"After clicking the label, the associated checkbox is not unchecked")
     ok(!$("#checkbox-3").parent().hasClass("active_checkbox"),"After clicking the label, it still has the active_checkbox class")
+    check_options_integrity([2,4])
   })
   
   module("Calling the 'check' method ")
@@ -2505,28 +2576,35 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     var was_checked = $("#checkbox-8").is(":checked")
     $("#checkbox-8").custom_form("check")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4,8])
     $("#checkbox-8").custom_form("check")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
+    check_options_integrity([2,4])
+    
   })
   
   test("with TRUE should check the checkbox",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
     $("#checkbox-9").custom_form("check",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
+    check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
+    check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
     $("#checkbox-4").custom_form("check",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
+    check_options_integrity([2,9])
   })
   
   module("Calling the 'update' method");
@@ -2535,10 +2613,21 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
     $("#checkbox-5").attr("checked",true)
     $("#checkbox-5").custom_form("update")
     ok($("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically checked input it doesn't get the active_checkbox class")
+    check_options_integrity([2,9,5])
     
     $("#checkbox-5").attr("checked",false)
     $("#checkbox-5").custom_form("update")
     ok(!$("#checkbox-5").parent().hasClass("active_checkbox"),"After calling the method 'update' on a programatically uncheckedchecked input it doesn't remove the active_checkbox class")
+    check_options_integrity([2,9])
+  })
+  
+  module("On send ");
+  test("the correct values should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
+    })
+    $("form").submit();
   })
   
 <% end %>
@@ -2547,13 +2636,13 @@ I" ;F;@0I"/unit/checkboxes/;T{;{	;I"<<!DOCTYPE html PUBLIC "-//W3C//D
   <fieldset>
     <legend>Checkboxes</legend>    
     <% 10.times do |i| %>
-      <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>">
+      <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>" value="<%=i%>" name="checkbox-<%=i%>">
       <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>
   </fieldset>
 </form>;T;
-I"õ
+I"
 
 
 
@@ -2561,43 +2650,43 @@ I"õ
   <fieldset>
     <legend>Checkboxes</legend>    
     
-      <input type="checkbox"  id="checkbox-0">
+      <input type="checkbox"  id="checkbox-0" value="0" name="checkbox-0">
       <label for="checkbox-0">Checkbox 0</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-1">
+      <input type="checkbox"  id="checkbox-1" value="1" name="checkbox-1">
       <label for="checkbox-1">Checkbox 1</label>
       <br/>
     
-      <input type="checkbox" checked='checked' id="checkbox-2">
+      <input type="checkbox" checked='checked' id="checkbox-2" value="2" name="checkbox-2">
       <label for="checkbox-2">Checkbox 2</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-3">
+      <input type="checkbox"  id="checkbox-3" value="3" name="checkbox-3">
       <label for="checkbox-3">Checkbox 3</label>
       <br/>
     
-      <input type="checkbox" checked='checked' id="checkbox-4">
+      <input type="checkbox" checked='checked' id="checkbox-4" value="4" name="checkbox-4">
       <label for="checkbox-4">Checkbox 4</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-5">
+      <input type="checkbox"  id="checkbox-5" value="5" name="checkbox-5">
       <label for="checkbox-5">Checkbox 5</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-6">
+      <input type="checkbox"  id="checkbox-6" value="6" name="checkbox-6">
       <label for="checkbox-6">Checkbox 6</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-7">
+      <input type="checkbox"  id="checkbox-7" value="7" name="checkbox-7">
       <label for="checkbox-7">Checkbox 7</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-8">
+      <input type="checkbox"  id="checkbox-8" value="8" name="checkbox-8">
       <label for="checkbox-8">Checkbox 8</label>
       <br/>
     
-      <input type="checkbox"  id="checkbox-9">
+      <input type="checkbox"  id="checkbox-9" value="9" name="checkbox-9">
       <label for="checkbox-9">Checkbox 9</label>
       <br/>
     
@@ -2653,7 +2742,7 @@ input[type="submit"]{
   -moz-border-radius: 3px;
   border-radius: 3px;
 };T;	@<;
-@<I"!/images/custom_forms_sprite/;T{;{ I"/unit/radios/;T{;{	;I"÷<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+@<I"!/images/custom_forms_sprite/;T{;{ I"/unit/radios/;T{;{	;I"È&<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -2678,43 +2767,43 @@ input[type="submit"]{
   <fieldset>
     <legend>Radios</legend>    
     
-      <input type="radio"  id="radio-0" name="radio_group_1">
+      <input type="radio" value="0"  id="radio-0" name="radio_group_1">
       <label for="radio-0">Radio 0</label>
       <br/>
     
-      <input type="radio"  id="radio-1" name="radio_group_1">
+      <input type="radio" value="1"  id="radio-1" name="radio_group_1">
       <label for="radio-1">Radio 1</label>
       <br/>
     
-      <input type="radio" checked='checked' id="radio-2" name="radio_group_1">
+      <input type="radio" value="2" checked='checked' id="radio-2" name="radio_group_1">
       <label for="radio-2">Radio 2</label>
       <br/>
     
-      <input type="radio"  id="radio-3" name="radio_group_1">
+      <input type="radio" value="3"  id="radio-3" name="radio_group_1">
       <label for="radio-3">Radio 3</label>
       <br/>
     
-      <input type="radio"  id="radio-4" name="radio_group_1">
+      <input type="radio" value="4"  id="radio-4" name="radio_group_1">
       <label for="radio-4">Radio 4</label>
       <br/>
     
-      <input type="radio"  id="radio-5" name="radio_group_1">
+      <input type="radio" value="5"  id="radio-5" name="radio_group_1">
       <label for="radio-5">Radio 5</label>
       <br/>
     
-      <input type="radio"  id="radio-6" name="radio_group_1">
+      <input type="radio" value="6"  id="radio-6" name="radio_group_1">
       <label for="radio-6">Radio 6</label>
       <br/>
     
-      <input type="radio"  id="radio-7" name="radio_group_1">
+      <input type="radio" value="7"  id="radio-7" name="radio_group_1">
       <label for="radio-7">Radio 7</label>
       <br/>
     
-      <input type="radio"  id="radio-8" name="radio_group_1">
+      <input type="radio" value="8"  id="radio-8" name="radio_group_1">
       <label for="radio-8">Radio 8</label>
       <br/>
     
-      <input type="radio"  id="radio-9" name="radio_group_1">
+      <input type="radio" value="9"  id="radio-9" name="radio_group_1">
       <label for="radio-9">Radio 9</label>
       <br/>
     
@@ -2745,6 +2834,19 @@ input[type="submit"]{
       
   $("input[type=radio]").custom_form();
   
+  function verify_if_checked_and_parent_class(checked){
+    $("input[type=radio]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      var has_active_class = $(this).parent().hasClass("active_radio")
+      if(is_checked)
+        ok(has_active_class,"Radio button - "+$(this).val()+" - checking class")
+      else
+        ok(!has_active_class,"Radio button - "+$(this).val()+" - checking it doesn't have the active_radio class")
+      
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked),"The radio button  "+$(this).val()+" is checked/unchecked correctly")
+    })
+  }
   
   module("On instantiation");
 
@@ -2753,95 +2855,150 @@ input[type="submit"]{
     checked.each(function(){
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
+    verify_if_checked_and_parent_class([2])
+    run();
   });
   
-  module("On click");
+  function run(){
+    module("On click");
   
-  test("The radio should be checked if it wasn't", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
-  })
-  //
-  test("The radio should not be unchecked if it was checked", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
-  })
-  
-  module("When clicking the label");
-  
-  test("The radio should be checked if it wasn't", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  test("The radio button should not be unchecked if it was checked", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  
-  module("Calling the 'check' method ")
-  
-  test("without arguments should not toggle-check the radio",function(){
-    var was_checked = $("#radio-8").is(":checked")
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+    test("The radio should be checked if it wasn't", function(){
+      $("#radio-1").parent().trigger("click");
+      ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
+      ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
+      verify_if_checked_and_parent_class([1])
+      next();
+    })
     
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
-  })
+    function next(){
+      test("The radio should not be unchecked if it was checked", function(){
+        $("#radio-1").parent().trigger("click");
+        ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
+        ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
+        verify_if_checked_and_parent_class([1])
+        
+        next();
+      })
+      
+      function next(){
+        module("When clicking the label");
   
-  test("with TRUE should check the radio",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
-  })
+        test("The radio should be checked if it wasn't", function(){
+          $("label[for=radio-3]").trigger("click");
+          ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
+          ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+          verify_if_checked_and_parent_class([3])
+          next();
+        })
+        
+        function next(){
+          test("The radio button should not be unchecked if it was checked", function(){
+            $("label[for=radio-3]").trigger("click");
+            ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
+            ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+            verify_if_checked_and_parent_class([3])
+          })
   
-  test("with TRUE on an already checked checkbox should not uncheck it",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
-  })
   
-  module('Calling the "check" method ')
+          module("Calling the 'check' method ")
   
-  test("with FALSE should not uncheck the radio",function(){
-    $("#radio-9").custom_form("check",false)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
-    ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
-  })
+          test("without arguments should not toggle-check the radio ",function(){
+            var was_checked = $("#radio-8").is(":checked")
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            next();
+          })
+          
+          function next(){
+            test("with TRUE should check the radio ",function(){
+              $("#radio-9").custom_form("check",true)
+              ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
+              verify_if_checked_and_parent_class([9]);
+              next();
+            })
+            
+            function next(){
+              test("with TRUE on an already checked radio button should not uncheck it ",function(){
+                $("#radio-9").custom_form("check",true)
+                ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
+                verify_if_checked_and_parent_class([9]);
+                next();
+              })
+              
+              function next(){
+                module('Calling the "check" method ')
   
-  module('Calling the "check" method with FALSE')
+                test("with FALSE should not uncheck the radio ",function(){
+                  $("#radio-9").custom_form("check",false)
+                  ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
+                  ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
+                  verify_if_checked_and_parent_class([9])
+                  next();
+                })
+                
+                function next(){
+                  module('Calling the "check" method with FALSE ')
   
-  test("on an unchecked checkbox, should not check it",function(){
-    $("#radio-4").custom_form("check",false)
-    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
-  })
-  
-  module("Calling the 'update' method");
-  
-  test("should reflect the current state of the checkbox",function(){
-    $("#radio-5").attr("checked",true)
-    $("#radio-5").custom_form("update")
-    ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-    $("#radio-6").attr("checked",true)
-    $("#radio-6").custom_form("update")
-    ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-  })
+                  test("on an unchecked radio button, should not check it ",function(){
+                    $("#radio-4").custom_form("check",false)
+                    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
+                    verify_if_checked_and_parent_class([9])
+                    next();
+                  })
+                  function next(){
+                    module("Calling the 'update' method ");
+          
+                    test("should reflect the current state of the radio button",function(){
+                      $("#radio-5").attr("checked",true)
+                      $("#radio-5").custom_form("update")
+                      ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      
+                      //verify_if_checked_and_parent_class([5])
+                      //
+                      //$("#radio-6").attr("checked",true)
+                      //$("#radio-6").custom_form("update")
+                      //ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      //verify_if_checked_and_parent_class([6])
+                    })
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   
 
     </script>
   </body>
 </html>
-;T;	I"“<% 
+;T;	I"<% 
   checked = [2]
 %>
 
 <% content_for :js do %>
   $("input[type=radio]").custom_form();
   
+  function verify_if_checked_and_parent_class(checked){
+    $("input[type=radio]").each(function(){
+      var should_be_checked = checked.indexOf(Number( $(this).val() ) ) != -1;
+      var is_checked = $(this).is(":checked");
+      var has_active_class = $(this).parent().hasClass("active_radio")
+      if(is_checked)
+        ok(has_active_class,"Radio button - "+$(this).val()+" - checking class")
+      else
+        ok(!has_active_class,"Radio button - "+$(this).val()+" - checking it doesn't have the active_radio class")
+      
+      ok((should_be_checked && is_checked) || (!should_be_checked && !is_checked),"The radio button  "+$(this).val()+" is checked/unchecked correctly")
+    })
+  }
   
   module("On instantiation");
 
@@ -2850,83 +3007,125 @@ input[type="submit"]{
     checked.each(function(){
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
+    verify_if_checked_and_parent_class([2])
+    run();
   });
   
-  module("On click");
+  function run(){
+    module("On click");
   
-  test("The radio should be checked if it wasn't", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
-  })
-  //
-  test("The radio should not be unchecked if it was checked", function(){
-    $("#radio-1").parent().trigger("click");
-    ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
-    ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
-  })
-  
-  module("When clicking the label");
-  
-  test("The radio should be checked if it wasn't", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  test("The radio button should not be unchecked if it was checked", function(){
-    $("label[for=radio-3]").trigger("click");
-    ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
-    ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
-  })
-  
-  
-  module("Calling the 'check' method ")
-  
-  test("without arguments should not toggle-check the radio",function(){
-    var was_checked = $("#radio-8").is(":checked")
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+    test("The radio should be checked if it wasn't", function(){
+      $("#radio-1").parent().trigger("click");
+      ok($("#radio-1").is(":checked"),"After clicking on the replacement <span>, the associated radio is not checked")
+      ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span> , it doesn't have the active_radio class")
+      verify_if_checked_and_parent_class([1])
+      next();
+    })
     
-    $("#radio-8").custom_form("check")
-    ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
-  })
+    function next(){
+      test("The radio should not be unchecked if it was checked", function(){
+        $("#radio-1").parent().trigger("click");
+        ok($("#radio-1").is(":checked"),"After clicking the replacement <span>, the associated radio gets unchecked")
+        ok($("#radio-1").parent().hasClass("active_radio"),"After clicking on the replacement <span>, it doesn't have the active_radio class")
+        verify_if_checked_and_parent_class([1])
+        
+        next();
+      })
+      
+      function next(){
+        module("When clicking the label");
   
-  test("with TRUE should check the radio",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
-  })
+        test("The radio should be checked if it wasn't", function(){
+          $("label[for=radio-3]").trigger("click");
+          ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio is not checked")
+          ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+          verify_if_checked_and_parent_class([3])
+          next();
+        })
+        
+        function next(){
+          test("The radio button should not be unchecked if it was checked", function(){
+            $("label[for=radio-3]").trigger("click");
+            ok($("#radio-3").is(":checked"),"After clicking the label, the associated radio button gets unchecked")
+            ok($("#radio-3").parent().hasClass("active_radio"),"After clicking the label, the replacement <span> doesn't have the active_radio class")
+            verify_if_checked_and_parent_class([3])
+          })
   
-  test("with TRUE on an already checked checkbox should not uncheck it",function(){
-    $("#radio-9").custom_form("check",true)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
-  })
   
-  module('Calling the "check" method ')
+          module("Calling the 'check' method ")
   
-  test("with FALSE should not uncheck the radio",function(){
-    $("#radio-9").custom_form("check",false)
-    ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
-    ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
-  })
+          test("without arguments should not toggle-check the radio ",function(){
+            var was_checked = $("#radio-8").is(":checked")
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            
+            $("#radio-8").custom_form("check")
+            ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
+            verify_if_checked_and_parent_class([8])
+            next();
+          })
+          
+          function next(){
+            test("with TRUE should check the radio ",function(){
+              $("#radio-9").custom_form("check",true)
+              ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
+              verify_if_checked_and_parent_class([9]);
+              next();
+            })
+            
+            function next(){
+              test("with TRUE on an already checked radio button should not uncheck it ",function(){
+                $("#radio-9").custom_form("check",true)
+                ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
+                verify_if_checked_and_parent_class([9]);
+                next();
+              })
+              
+              function next(){
+                module('Calling the "check" method ')
   
-  module('Calling the "check" method with FALSE')
+                test("with FALSE should not uncheck the radio ",function(){
+                  $("#radio-9").custom_form("check",false)
+                  ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
+                  ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
+                  verify_if_checked_and_parent_class([9])
+                  next();
+                })
+                
+                function next(){
+                  module('Calling the "check" method with FALSE ')
   
-  test("on an unchecked checkbox, should not check it",function(){
-    $("#radio-4").custom_form("check",false)
-    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
-  })
-  
-  module("Calling the 'update' method");
-  
-  test("should reflect the current state of the checkbox",function(){
-    $("#radio-5").attr("checked",true)
-    $("#radio-5").custom_form("update")
-    ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-    $("#radio-6").attr("checked",true)
-    $("#radio-6").custom_form("update")
-    ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
-  })
+                  test("on an unchecked radio button, should not check it ",function(){
+                    $("#radio-4").custom_form("check",false)
+                    ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
+                    verify_if_checked_and_parent_class([9])
+                    next();
+                  })
+                  function next(){
+                    module("Calling the 'update' method ");
+          
+                    test("should reflect the current state of the radio button",function(){
+                      $("#radio-5").attr("checked",true)
+                      $("#radio-5").custom_form("update")
+                      ok($("#radio-5").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      
+                      //verify_if_checked_and_parent_class([5])
+                      //
+                      //$("#radio-6").attr("checked",true)
+                      //$("#radio-6").custom_form("update")
+                      //ok($("#radio-6").parent().hasClass("active_radio"),"After calling the method 'update' on a programatically checked input it doesn't get the active_radio class")
+                      //verify_if_checked_and_parent_class([6])
+                    })
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   
 <% end %>
 
@@ -2934,13 +3133,13 @@ input[type="submit"]{
   <fieldset>
     <legend>Radios</legend>    
     <% 10.times do |i| %>
-      <input type="radio" <%= "checked='checked'" if checked.include?(i)%> id="radio-<%=i%>" name="radio_group_1">
+      <input type="radio" value="<%=i%>" <%= "checked='checked'" if checked.include?(i)%> id="radio-<%=i%>" name="radio_group_1">
       <label for="radio-<%=i%>">Radio <%=i%></label>
       <br/>
     <% end %>
   </fieldset>
 </form>;T;
-I":
+I"ž
 
 
 
@@ -2948,45 +3147,500 @@ I":
   <fieldset>
     <legend>Radios</legend>    
     
-      <input type="radio"  id="radio-0" name="radio_group_1">
+      <input type="radio" value="0"  id="radio-0" name="radio_group_1">
       <label for="radio-0">Radio 0</label>
       <br/>
     
-      <input type="radio"  id="radio-1" name="radio_group_1">
+      <input type="radio" value="1"  id="radio-1" name="radio_group_1">
       <label for="radio-1">Radio 1</label>
       <br/>
     
-      <input type="radio" checked='checked' id="radio-2" name="radio_group_1">
+      <input type="radio" value="2" checked='checked' id="radio-2" name="radio_group_1">
       <label for="radio-2">Radio 2</label>
       <br/>
     
-      <input type="radio"  id="radio-3" name="radio_group_1">
+      <input type="radio" value="3"  id="radio-3" name="radio_group_1">
       <label for="radio-3">Radio 3</label>
       <br/>
     
-      <input type="radio"  id="radio-4" name="radio_group_1">
+      <input type="radio" value="4"  id="radio-4" name="radio_group_1">
       <label for="radio-4">Radio 4</label>
       <br/>
     
-      <input type="radio"  id="radio-5" name="radio_group_1">
+      <input type="radio" value="5"  id="radio-5" name="radio_group_1">
       <label for="radio-5">Radio 5</label>
       <br/>
     
-      <input type="radio"  id="radio-6" name="radio_group_1">
+      <input type="radio" value="6"  id="radio-6" name="radio_group_1">
       <label for="radio-6">Radio 6</label>
       <br/>
     
-      <input type="radio"  id="radio-7" name="radio_group_1">
+      <input type="radio" value="7"  id="radio-7" name="radio_group_1">
       <label for="radio-7">Radio 7</label>
       <br/>
     
-      <input type="radio"  id="radio-8" name="radio_group_1">
+      <input type="radio" value="8"  id="radio-8" name="radio_group_1">
       <label for="radio-8">Radio 8</label>
       <br/>
     
-      <input type="radio"  id="radio-9" name="radio_group_1">
+      <input type="radio" value="9"  id="radio-9" name="radio_group_1">
       <label for="radio-9">Radio 9</label>
       <br/>
     
   </fieldset>
-</form>;T;@C:versioni
+</form>;T;@CI"/unit/selects/;T{;{	;I"k<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Custom-Form tests - Unit >> Checkboxes</title>
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="../../stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    
+      <link rel="stylesheet" href="../../javascripts/qunit/qunit-styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    
+  	
+  </head>
+  <body>
+    <div class="wrap two-block">
+      <div class="content">
+        
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Selects</legend>
+    
+    
+      <label for="select-0">Select 0</label><br/>
+      <select id="select-0" name="select-0">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-1">Select 1</label><br/>
+      <select id="select-1" name="select-1">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" selected='selected'>Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-2">Select 2</label><br/>
+      <select id="select-2" name="select-2">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" selected='selected'>Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-3">Select 3</label><br/>
+      <select id="select-3" name="select-3">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" selected='selected'>Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-4">Select 4</label><br/>
+      <select id="select-4" name="select-4">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" selected='selected'>Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+  </fieldset>
+</form>
+      </div>
+      
+      
+      <div class="tools">
+        
+    <h1 id="qunit-header">QUnit Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup</div>
+  
+      </div>
+      
+    </div>
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script src="../../javascripts/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      
+  $("select").custom_form();
+  
+  function label_for($){
+    return $.siblings(".select_content").find(".select_label")
+  }
+  
+  function selected_option_for($){
+    return $.find("option:selected")
+  }
+  
+  module("On instantiation");
+  test("a select without an already selected option should display the first option",function(){
+    equal(label_for($("#select-0")).text(), $("#select-0 option:first-child").text())
+  })
+  
+  test("a select with an already selected option should display that option",function(){
+    equal(label_for($("#select-1")).text(), $("#select-1 option:selected").text())
+  })
+  
+  module("On change");
+  test("a select should display the selected option",function(){
+    $("#select-2").val(9).trigger("change")
+    equal(label_for($("#select-2")).text(), selected_option_for($("#select-2")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a number should select the option with the jQuery val() method",function(){
+    $("#select-3").custom_form("select",8)
+    equal(label_for($("#select-3")).text(), selected_option_for($("#select-3")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a string should select the option containing the string",function(){
+    $("#select-4").custom_form("select","Option 5")
+    equal(label_for($("#select-4")).text(), selected_option_for($("#select-4")).text())
+  })
+  
+  module("On send");
+  test("the correct options should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("select-0=&select-1=1&select-2=9&select-3=8&select-4=5",$(this).serialize())
+    })
+    $("form").submit();
+  })
+  
+
+    </script>
+  </body>
+</html>
+;T;	I"À<% content_for :js do %>
+  $("select").custom_form();
+  
+  function label_for($){
+    return $.siblings(".select_content").find(".select_label")
+  }
+  
+  function selected_option_for($){
+    return $.find("option:selected")
+  }
+  
+  module("On instantiation");
+  test("a select without an already selected option should display the first option",function(){
+    equal(label_for($("#select-0")).text(), $("#select-0 option:first-child").text())
+  })
+  
+  test("a select with an already selected option should display that option",function(){
+    equal(label_for($("#select-1")).text(), $("#select-1 option:selected").text())
+  })
+  
+  module("On change");
+  test("a select should display the selected option",function(){
+    $("#select-2").val(9).trigger("change")
+    equal(label_for($("#select-2")).text(), selected_option_for($("#select-2")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a number should select the option with the jQuery val() method",function(){
+    $("#select-3").custom_form("select",8)
+    equal(label_for($("#select-3")).text(), selected_option_for($("#select-3")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a string should select the option containing the string",function(){
+    $("#select-4").custom_form("select","Option 5")
+    equal(label_for($("#select-4")).text(), selected_option_for($("#select-4")).text())
+  })
+  
+  module("On send");
+  test("the correct options should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("select-0=&select-1=1&select-2=9&select-3=8&select-4=5",$(this).serialize())
+    })
+    $("form").submit();
+  })
+  
+<% end %>
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Selects</legend>
+    <% selected = [
+      nil,1,2,3,4
+    ]%>
+    <% 5.times do |i| %>
+      <label for="select-<%=i%>">Select <%=i%></label><br/>
+      <select id="select-<%=i%>" name="select-<%=i%>">
+        <option value="">---</option>
+        <% selected_option = selected[i] %>
+        <% 10.times do |j| %>
+          <option value="<%=j%>" <%="selected='selected'" if selected_option == j%>>Option <%=j%></option>
+        <% end %>
+      </select>
+      <br/>
+    <% end %>
+  </fieldset>
+</form>;T;
+I"9
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Selects</legend>
+    
+    
+      <label for="select-0">Select 0</label><br/>
+      <select id="select-0" name="select-0">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-1">Select 1</label><br/>
+      <select id="select-1" name="select-1">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" selected='selected'>Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-2">Select 2</label><br/>
+      <select id="select-2" name="select-2">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" selected='selected'>Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-3">Select 3</label><br/>
+      <select id="select-3" name="select-3">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" selected='selected'>Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-4">Select 4</label><br/>
+      <select id="select-4" name="select-4">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" selected='selected'>Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+  </fieldset>
+</form>;T;@I:versioni

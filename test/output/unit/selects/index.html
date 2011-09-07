@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Custom-Form tests - Unit >> Checkboxes</title>
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="../../stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    
+      <link rel="stylesheet" href="../../javascripts/qunit/qunit-styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    
+  	
+  </head>
+  <body>
+    <div class="wrap two-block">
+      <div class="content">
+        
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Selects</legend>
+    
+    
+      <label for="select-0">Select 0</label><br/>
+      <select id="select-0" name="select-0">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-1">Select 1</label><br/>
+      <select id="select-1" name="select-1">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" selected='selected'>Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-2">Select 2</label><br/>
+      <select id="select-2" name="select-2">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" selected='selected'>Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-3">Select 3</label><br/>
+      <select id="select-3" name="select-3">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" selected='selected'>Option 3</option>
+        
+          <option value="4" >Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+      <label for="select-4">Select 4</label><br/>
+      <select id="select-4" name="select-4">
+        <option value="">---</option>
+        
+        
+          <option value="0" >Option 0</option>
+        
+          <option value="1" >Option 1</option>
+        
+          <option value="2" >Option 2</option>
+        
+          <option value="3" >Option 3</option>
+        
+          <option value="4" selected='selected'>Option 4</option>
+        
+          <option value="5" >Option 5</option>
+        
+          <option value="6" >Option 6</option>
+        
+          <option value="7" >Option 7</option>
+        
+          <option value="8" >Option 8</option>
+        
+          <option value="9" >Option 9</option>
+        
+      </select>
+      <br/>
+    
+  </fieldset>
+</form>
+      </div>
+      
+      
+      <div class="tools">
+        
+    <h1 id="qunit-header">QUnit Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup</div>
+  
+      </div>
+      
+    </div>
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script src="../../javascripts/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      
+  $("select").custom_form();
+  
+  function label_for($){
+    return $.siblings(".select_content").find(".select_label")
+  }
+  
+  function selected_option_for($){
+    return $.find("option:selected")
+  }
+  
+  module("On instantiation");
+  test("a select without an already selected option should display the first option",function(){
+    equal(label_for($("#select-0")).text(), $("#select-0 option:first-child").text())
+  })
+  
+  test("a select with an already selected option should display that option",function(){
+    equal(label_for($("#select-1")).text(), $("#select-1 option:selected").text())
+  })
+  
+  module("On change");
+  test("a select should display the selected option",function(){
+    $("#select-2").val(9).trigger("change")
+    equal(label_for($("#select-2")).text(), selected_option_for($("#select-2")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a number should select the option with the jQuery val() method",function(){
+    $("#select-3").custom_form("select",8)
+    equal(label_for($("#select-3")).text(), selected_option_for($("#select-3")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a string should select the option containing the string",function(){
+    $("#select-4").custom_form("select","Option 5")
+    equal(label_for($("#select-4")).text(), selected_option_for($("#select-4")).text())
+  })
+  
+  module("On send");
+  test("the correct options should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("select-0=&select-1=1&select-2=9&select-3=8&select-4=5",$(this).serialize())
+    })
+    $("form").submit();
+  })
+  
+
+    </script>
+  </body>
+</html>

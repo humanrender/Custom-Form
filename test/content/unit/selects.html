@@ -1,0 +1,73 @@
+--- 
+title: Unit >> Checkboxes
+qunit: true
+---
+
+<% content_for :js do %>
+  $("select").custom_form();
+  
+  function label_for($){
+    return $.siblings(".select_content").find(".select_label")
+  }
+  
+  function selected_option_for($){
+    return $.find("option:selected")
+  }
+  
+  module("On instantiation");
+  test("a select without an already selected option should display the first option",function(){
+    equal(label_for($("#select-0")).text(), $("#select-0 option:first-child").text())
+  })
+  
+  test("a select with an already selected option should display that option",function(){
+    equal(label_for($("#select-1")).text(), $("#select-1 option:selected").text())
+  })
+  
+  module("On change");
+  test("a select should display the selected option",function(){
+    $("#select-2").val(9).trigger("change")
+    equal(label_for($("#select-2")).text(), selected_option_for($("#select-2")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a number should select the option with the jQuery val() method",function(){
+    $("#select-3").custom_form("select",8)
+    equal(label_for($("#select-3")).text(), selected_option_for($("#select-3")).text())
+  })
+  
+  module("Calling the 'select' method");
+  test("with a string should select the option containing the string",function(){
+    $("#select-4").custom_form("select","Option 5")
+    equal(label_for($("#select-4")).text(), selected_option_for($("#select-4")).text())
+  })
+  
+  module("On send");
+  test("the correct options should be sent",function(){
+    $("form").submit(function(event,b){
+      event.preventDefault();
+      equal("select-0=&select-1=1&select-2=9&select-3=8&select-4=5",$(this).serialize())
+    })
+    $("form").submit();
+  })
+  
+<% end %>
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Selects</legend>
+    <% selected = [
+      nil,1,2,3,4
+    ]%>
+    <% 5.times do |i| %>
+      <label for="select-<%=i%>">Select <%=i%></label><br/>
+      <select id="select-<%=i%>" name="select-<%=i%>">
+        <option value="">---</option>
+        <% selected_option = selected[i] %>
+        <% 10.times do |j| %>
+          <option value="<%=j%>" <%="selected='selected'" if selected_option == j%>>Option <%=j%></option>
+        <% end %>
+      </select>
+      <br/>
+    <% end %>
+  </fieldset>
+</form>
