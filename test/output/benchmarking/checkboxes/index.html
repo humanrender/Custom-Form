@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom-Form Benchmarking</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../stylesheets/benchmark.css">
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css">
+    
+    <script>document.documentElement.className='js'</script>
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <article>
+      <section id="runner">
+        <h2>Test runner</h2>
+
+        <p id="firebug"><strong>Warning! For accurate results, please disable Firebug before running the tests. <a href="http://jsperf.com/faq#firebug">(Why?)</a></strong></p>
+
+        <p id="java"><strong>Java applet disabled.</strong></p>
+
+        <p id="status">
+          <noscript>
+            <strong>
+              To run the tests, please
+              <a href="http://enable-javascript.com/">enable JavaScript</a>
+              and reload the page.
+            </strong>
+          </noscript>
+        </p>
+
+        <div id="controls">
+          <button id="run" type="button"></button>
+        </div>
+
+        <table id="test-table">
+          <caption>Testing in <span id="user-agent"></span></caption>
+          <thead>
+          <tr>
+            <th colspan="2">Test</th>
+            <th title="Operations per second (higher is better)">Ops/sec</th>
+          </tr>
+          </thead>
+          <tbody>
+            
+  <tr>
+    <th scope="row" id="title-1"><div>Custom-Form</div></th>
+    <td>
+    <pre><code>$(".custom_form input").custom_form()</code></pre>
+    </td>
+    <td id="results-1" class="results"></td>
+  </tr>
+  
+  <tr>
+    <th scope="row" id="title-2"><div>Uniform</div></th>
+    <td>
+    <pre><code>$(".uniform input").uniform()</code></pre>
+    </td>
+    <td id="results-2" class="results"></td>
+  </tr>
+  
+  <tr>
+    <th scope="row" id="title-3"><div>PrettyCheckboxes</div></th>
+    <td>
+    <pre><code>$(".pretty input").prettyCheckboxes()</code></pre>
+    </td>
+    <td id="results-3" class="results"></td>
+  </tr>
+
+          </tbody>
+        </table>
+      </section>
+
+    </article>
+    
+    <form autocomplete="off" >
+  <fieldset class="custom_form">
+    <legend>Custom Form</legend>    
+    
+      <input type="checkbox" value="1" id="checkbox-1" name="checkbox-1">
+      <label for="checkbox-1">Checkbox 1</label>
+      <br/>
+    
+      <input type="checkbox" value="2" id="checkbox-2" name="checkbox-2">
+      <label for="checkbox-2">Checkbox 2</label>
+      <br/>
+    
+      <input type="checkbox" value="3" id="checkbox-3" name="checkbox-3">
+      <label for="checkbox-3">Checkbox 3</label>
+      <br/>
+    
+      <input type="checkbox" value="4" id="checkbox-4" name="checkbox-4">
+      <label for="checkbox-4">Checkbox 4</label>
+      <br/>
+    
+      <input type="checkbox" value="5" id="checkbox-5" name="checkbox-5">
+      <label for="checkbox-5">Checkbox 5</label>
+      <br/>
+    
+      <input type="checkbox" value="6" id="checkbox-6" name="checkbox-6">
+      <label for="checkbox-6">Checkbox 6</label>
+      <br/>
+    
+      <input type="checkbox" value="7" id="checkbox-7" name="checkbox-7">
+      <label for="checkbox-7">Checkbox 7</label>
+      <br/>
+    
+      <input type="checkbox" value="8" id="checkbox-8" name="checkbox-8">
+      <label for="checkbox-8">Checkbox 8</label>
+      <br/>
+    
+      <input type="checkbox" value="9" id="checkbox-9" name="checkbox-9">
+      <label for="checkbox-9">Checkbox 9</label>
+      <br/>
+    
+      <input type="checkbox" value="10" id="checkbox-10" name="checkbox-10">
+      <label for="checkbox-10">Checkbox 10</label>
+      <br/>
+    
+      <input type="checkbox" value="11" id="checkbox-11" name="checkbox-11">
+      <label for="checkbox-11">Checkbox 11</label>
+      <br/>
+    
+      <input type="checkbox" value="12" id="checkbox-12" name="checkbox-12">
+      <label for="checkbox-12">Checkbox 12</label>
+      <br/>
+    
+      <input type="checkbox" value="13" id="checkbox-13" name="checkbox-13">
+      <label for="checkbox-13">Checkbox 13</label>
+      <br/>
+    
+      <input type="checkbox" value="14" id="checkbox-14" name="checkbox-14">
+      <label for="checkbox-14">Checkbox 14</label>
+      <br/>
+    
+      <input type="checkbox" value="15" id="checkbox-15" name="checkbox-15">
+      <label for="checkbox-15">Checkbox 15</label>
+      <br/>
+    
+      <input type="checkbox" value="16" id="checkbox-16" name="checkbox-16">
+      <label for="checkbox-16">Checkbox 16</label>
+      <br/>
+    
+      <input type="checkbox" value="17" id="checkbox-17" name="checkbox-17">
+      <label for="checkbox-17">Checkbox 17</label>
+      <br/>
+    
+      <input type="checkbox" value="18" id="checkbox-18" name="checkbox-18">
+      <label for="checkbox-18">Checkbox 18</label>
+      <br/>
+    
+      <input type="checkbox" value="19" id="checkbox-19" name="checkbox-19">
+      <label for="checkbox-19">Checkbox 19</label>
+      <br/>
+    
+      <input type="checkbox" value="20" id="checkbox-20" name="checkbox-20">
+      <label for="checkbox-20">Checkbox 20</label>
+      <br/>
+    
+      <input type="checkbox" value="21" id="checkbox-21" name="checkbox-21">
+      <label for="checkbox-21">Checkbox 21</label>
+      <br/>
+    
+      <input type="checkbox" value="22" id="checkbox-22" name="checkbox-22">
+      <label for="checkbox-22">Checkbox 22</label>
+      <br/>
+    
+      <input type="checkbox" value="23" id="checkbox-23" name="checkbox-23">
+      <label for="checkbox-23">Checkbox 23</label>
+      <br/>
+    
+      <input type="checkbox" value="24" id="checkbox-24" name="checkbox-24">
+      <label for="checkbox-24">Checkbox 24</label>
+      <br/>
+    
+      <input type="checkbox" value="25" id="checkbox-25" name="checkbox-25">
+      <label for="checkbox-25">Checkbox 25</label>
+      <br/>
+    
+      <input type="checkbox" value="26" id="checkbox-26" name="checkbox-26">
+      <label for="checkbox-26">Checkbox 26</label>
+      <br/>
+    
+      <input type="checkbox" value="27" id="checkbox-27" name="checkbox-27">
+      <label for="checkbox-27">Checkbox 27</label>
+      <br/>
+    
+      <input type="checkbox" value="28" id="checkbox-28" name="checkbox-28">
+      <label for="checkbox-28">Checkbox 28</label>
+      <br/>
+    
+      <input type="checkbox" value="29" id="checkbox-29" name="checkbox-29">
+      <label for="checkbox-29">Checkbox 29</label>
+      <br/>
+    
+      <input type="checkbox" value="30" id="checkbox-30" name="checkbox-30">
+      <label for="checkbox-30">Checkbox 30</label>
+      <br/>
+    
+      <input type="checkbox" value="31" id="checkbox-31" name="checkbox-31">
+      <label for="checkbox-31">Checkbox 31</label>
+      <br/>
+    
+      <input type="checkbox" value="32" id="checkbox-32" name="checkbox-32">
+      <label for="checkbox-32">Checkbox 32</label>
+      <br/>
+    
+      <input type="checkbox" value="33" id="checkbox-33" name="checkbox-33">
+      <label for="checkbox-33">Checkbox 33</label>
+      <br/>
+    
+      <input type="checkbox" value="34" id="checkbox-34" name="checkbox-34">
+      <label for="checkbox-34">Checkbox 34</label>
+      <br/>
+    
+      <input type="checkbox" value="35" id="checkbox-35" name="checkbox-35">
+      <label for="checkbox-35">Checkbox 35</label>
+      <br/>
+    
+      <input type="checkbox" value="36" id="checkbox-36" name="checkbox-36">
+      <label for="checkbox-36">Checkbox 36</label>
+      <br/>
+    
+      <input type="checkbox" value="37" id="checkbox-37" name="checkbox-37">
+      <label for="checkbox-37">Checkbox 37</label>
+      <br/>
+    
+      <input type="checkbox" value="38" id="checkbox-38" name="checkbox-38">
+      <label for="checkbox-38">Checkbox 38</label>
+      <br/>
+    
+      <input type="checkbox" value="39" id="checkbox-39" name="checkbox-39">
+      <label for="checkbox-39">Checkbox 39</label>
+      <br/>
+    
+      <input type="checkbox" value="40" id="checkbox-40" name="checkbox-40">
+      <label for="checkbox-40">Checkbox 40</label>
+      <br/>
+    
+      <input type="checkbox" value="41" id="checkbox-41" name="checkbox-41">
+      <label for="checkbox-41">Checkbox 41</label>
+      <br/>
+    
+      <input type="checkbox" value="42" id="checkbox-42" name="checkbox-42">
+      <label for="checkbox-42">Checkbox 42</label>
+      <br/>
+    
+      <input type="checkbox" value="43" id="checkbox-43" name="checkbox-43">
+      <label for="checkbox-43">Checkbox 43</label>
+      <br/>
+    
+      <input type="checkbox" value="44" id="checkbox-44" name="checkbox-44">
+      <label for="checkbox-44">Checkbox 44</label>
+      <br/>
+    
+      <input type="checkbox" value="45" id="checkbox-45" name="checkbox-45">
+      <label for="checkbox-45">Checkbox 45</label>
+      <br/>
+    
+      <input type="checkbox" value="46" id="checkbox-46" name="checkbox-46">
+      <label for="checkbox-46">Checkbox 46</label>
+      <br/>
+    
+      <input type="checkbox" value="47" id="checkbox-47" name="checkbox-47">
+      <label for="checkbox-47">Checkbox 47</label>
+      <br/>
+    
+      <input type="checkbox" value="48" id="checkbox-48" name="checkbox-48">
+      <label for="checkbox-48">Checkbox 48</label>
+      <br/>
+    
+      <input type="checkbox" value="49" id="checkbox-49" name="checkbox-49">
+      <label for="checkbox-49">Checkbox 49</label>
+      <br/>
+    
+      <input type="checkbox" value="50" id="checkbox-50" name="checkbox-50">
+      <label for="checkbox-50">Checkbox 50</label>
+      <br/>
+    
+      <input type="checkbox" value="51" id="checkbox-51" name="checkbox-51">
+      <label for="checkbox-51">Checkbox 51</label>
+      <br/>
+    
+      <input type="checkbox" value="52" id="checkbox-52" name="checkbox-52">
+      <label for="checkbox-52">Checkbox 52</label>
+      <br/>
+    
+      <input type="checkbox" value="53" id="checkbox-53" name="checkbox-53">
+      <label for="checkbox-53">Checkbox 53</label>
+      <br/>
+    
+      <input type="checkbox" value="54" id="checkbox-54" name="checkbox-54">
+      <label for="checkbox-54">Checkbox 54</label>
+      <br/>
+    
+      <input type="checkbox" value="55" id="checkbox-55" name="checkbox-55">
+      <label for="checkbox-55">Checkbox 55</label>
+      <br/>
+    
+      <input type="checkbox" value="56" id="checkbox-56" name="checkbox-56">
+      <label for="checkbox-56">Checkbox 56</label>
+      <br/>
+    
+      <input type="checkbox" value="57" id="checkbox-57" name="checkbox-57">
+      <label for="checkbox-57">Checkbox 57</label>
+      <br/>
+    
+      <input type="checkbox" value="58" id="checkbox-58" name="checkbox-58">
+      <label for="checkbox-58">Checkbox 58</label>
+      <br/>
+    
+      <input type="checkbox" value="59" id="checkbox-59" name="checkbox-59">
+      <label for="checkbox-59">Checkbox 59</label>
+      <br/>
+    
+      <input type="checkbox" value="60" id="checkbox-60" name="checkbox-60">
+      <label for="checkbox-60">Checkbox 60</label>
+      <br/>
+    
+      <input type="checkbox" value="61" id="checkbox-61" name="checkbox-61">
+      <label for="checkbox-61">Checkbox 61</label>
+      <br/>
+    
+      <input type="checkbox" value="62" id="checkbox-62" name="checkbox-62">
+      <label for="checkbox-62">Checkbox 62</label>
+      <br/>
+    
+      <input type="checkbox" value="63" id="checkbox-63" name="checkbox-63">
+      <label for="checkbox-63">Checkbox 63</label>
+      <br/>
+    
+      <input type="checkbox" value="64" id="checkbox-64" name="checkbox-64">
+      <label for="checkbox-64">Checkbox 64</label>
+      <br/>
+    
+      <input type="checkbox" value="65" id="checkbox-65" name="checkbox-65">
+      <label for="checkbox-65">Checkbox 65</label>
+      <br/>
+    
+      <input type="checkbox" value="66" id="checkbox-66" name="checkbox-66">
+      <label for="checkbox-66">Checkbox 66</label>
+      <br/>
+    
+      <input type="checkbox" value="67" id="checkbox-67" name="checkbox-67">
+      <label for="checkbox-67">Checkbox 67</label>
+      <br/>
+    
+      <input type="checkbox" value="68" id="checkbox-68" name="checkbox-68">
+      <label for="checkbox-68">Checkbox 68</label>
+      <br/>
+    
+      <input type="checkbox" value="69" id="checkbox-69" name="checkbox-69">
+      <label for="checkbox-69">Checkbox 69</label>
+      <br/>
+    
+      <input type="checkbox" value="70" id="checkbox-70" name="checkbox-70">
+      <label for="checkbox-70">Checkbox 70</label>
+      <br/>
+    
+      <input type="checkbox" value="71" id="checkbox-71" name="checkbox-71">
+      <label for="checkbox-71">Checkbox 71</label>
+      <br/>
+    
+      <input type="checkbox" value="72" id="checkbox-72" name="checkbox-72">
+      <label for="checkbox-72">Checkbox 72</label>
+      <br/>
+    
+      <input type="checkbox" value="73" id="checkbox-73" name="checkbox-73">
+      <label for="checkbox-73">Checkbox 73</label>
+      <br/>
+    
+      <input type="checkbox" value="74" id="checkbox-74" name="checkbox-74">
+      <label for="checkbox-74">Checkbox 74</label>
+      <br/>
+    
+      <input type="checkbox" value="75" id="checkbox-75" name="checkbox-75">
+      <label for="checkbox-75">Checkbox 75</label>
+      <br/>
+    
+      <input type="checkbox" value="76" id="checkbox-76" name="checkbox-76">
+      <label for="checkbox-76">Checkbox 76</label>
+      <br/>
+    
+      <input type="checkbox" value="77" id="checkbox-77" name="checkbox-77">
+      <label for="checkbox-77">Checkbox 77</label>
+      <br/>
+    
+      <input type="checkbox" value="78" id="checkbox-78" name="checkbox-78">
+      <label for="checkbox-78">Checkbox 78</label>
+      <br/>
+    
+      <input type="checkbox" value="79" id="checkbox-79" name="checkbox-79">
+      <label for="checkbox-79">Checkbox 79</label>
+      <br/>
+    
+      <input type="checkbox" value="80" id="checkbox-80" name="checkbox-80">
+      <label for="checkbox-80">Checkbox 80</label>
+      <br/>
+    
+      <input type="checkbox" value="81" id="checkbox-81" name="checkbox-81">
+      <label for="checkbox-81">Checkbox 81</label>
+      <br/>
+    
+      <input type="checkbox" value="82" id="checkbox-82" name="checkbox-82">
+      <label for="checkbox-82">Checkbox 82</label>
+      <br/>
+    
+      <input type="checkbox" value="83" id="checkbox-83" name="checkbox-83">
+      <label for="checkbox-83">Checkbox 83</label>
+      <br/>
+    
+      <input type="checkbox" value="84" id="checkbox-84" name="checkbox-84">
+      <label for="checkbox-84">Checkbox 84</label>
+      <br/>
+    
+      <input type="checkbox" value="85" id="checkbox-85" name="checkbox-85">
+      <label for="checkbox-85">Checkbox 85</label>
+      <br/>
+    
+      <input type="checkbox" value="86" id="checkbox-86" name="checkbox-86">
+      <label for="checkbox-86">Checkbox 86</label>
+      <br/>
+    
+      <input type="checkbox" value="87" id="checkbox-87" name="checkbox-87">
+      <label for="checkbox-87">Checkbox 87</label>
+      <br/>
+    
+      <input type="checkbox" value="88" id="checkbox-88" name="checkbox-88">
+      <label for="checkbox-88">Checkbox 88</label>
+      <br/>
+    
+      <input type="checkbox" value="89" id="checkbox-89" name="checkbox-89">
+      <label for="checkbox-89">Checkbox 89</label>
+      <br/>
+    
+      <input type="checkbox" value="90" id="checkbox-90" name="checkbox-90">
+      <label for="checkbox-90">Checkbox 90</label>
+      <br/>
+    
+      <input type="checkbox" value="91" id="checkbox-91" name="checkbox-91">
+      <label for="checkbox-91">Checkbox 91</label>
+      <br/>
+    
+      <input type="checkbox" value="92" id="checkbox-92" name="checkbox-92">
+      <label for="checkbox-92">Checkbox 92</label>
+      <br/>
+    
+      <input type="checkbox" value="93" id="checkbox-93" name="checkbox-93">
+      <label for="checkbox-93">Checkbox 93</label>
+      <br/>
+    
+      <input type="checkbox" value="94" id="checkbox-94" name="checkbox-94">
+      <label for="checkbox-94">Checkbox 94</label>
+      <br/>
+    
+      <input type="checkbox" value="95" id="checkbox-95" name="checkbox-95">
+      <label for="checkbox-95">Checkbox 95</label>
+      <br/>
+    
+      <input type="checkbox" value="96" id="checkbox-96" name="checkbox-96">
+      <label for="checkbox-96">Checkbox 96</label>
+      <br/>
+    
+      <input type="checkbox" value="97" id="checkbox-97" name="checkbox-97">
+      <label for="checkbox-97">Checkbox 97</label>
+      <br/>
+    
+      <input type="checkbox" value="98" id="checkbox-98" name="checkbox-98">
+      <label for="checkbox-98">Checkbox 98</label>
+      <br/>
+    
+      <input type="checkbox" value="99" id="checkbox-99" name="checkbox-99">
+      <label for="checkbox-99">Checkbox 99</label>
+      <br/>
+    
+      <input type="checkbox" value="100" id="checkbox-100" name="checkbox-100">
+      <label for="checkbox-100">Checkbox 100</label>
+      <br/>
+    
+  </fieldset>
+  <fieldset class="uniform">
+    <legend>Uniform</legend>    
+    
+      <input type="checkbox" value="101" id="checkbox-101" name="checkbox-101">
+      <label for="checkbox-101">Checkbox 101</label>
+      <br/>
+    
+      <input type="checkbox" value="102" id="checkbox-102" name="checkbox-102">
+      <label for="checkbox-102">Checkbox 102</label>
+      <br/>
+    
+      <input type="checkbox" value="103" id="checkbox-103" name="checkbox-103">
+      <label for="checkbox-103">Checkbox 103</label>
+      <br/>
+    
+      <input type="checkbox" value="104" id="checkbox-104" name="checkbox-104">
+      <label for="checkbox-104">Checkbox 104</label>
+      <br/>
+    
+      <input type="checkbox" value="105" id="checkbox-105" name="checkbox-105">
+      <label for="checkbox-105">Checkbox 105</label>
+      <br/>
+    
+      <input type="checkbox" value="106" id="checkbox-106" name="checkbox-106">
+      <label for="checkbox-106">Checkbox 106</label>
+      <br/>
+    
+      <input type="checkbox" value="107" id="checkbox-107" name="checkbox-107">
+      <label for="checkbox-107">Checkbox 107</label>
+      <br/>
+    
+      <input type="checkbox" value="108" id="checkbox-108" name="checkbox-108">
+      <label for="checkbox-108">Checkbox 108</label>
+      <br/>
+    
+      <input type="checkbox" value="109" id="checkbox-109" name="checkbox-109">
+      <label for="checkbox-109">Checkbox 109</label>
+      <br/>
+    
+      <input type="checkbox" value="110" id="checkbox-110" name="checkbox-110">
+      <label for="checkbox-110">Checkbox 110</label>
+      <br/>
+    
+      <input type="checkbox" value="111" id="checkbox-111" name="checkbox-111">
+      <label for="checkbox-111">Checkbox 111</label>
+      <br/>
+    
+      <input type="checkbox" value="112" id="checkbox-112" name="checkbox-112">
+      <label for="checkbox-112">Checkbox 112</label>
+      <br/>
+    
+      <input type="checkbox" value="113" id="checkbox-113" name="checkbox-113">
+      <label for="checkbox-113">Checkbox 113</label>
+      <br/>
+    
+      <input type="checkbox" value="114" id="checkbox-114" name="checkbox-114">
+      <label for="checkbox-114">Checkbox 114</label>
+      <br/>
+    
+      <input type="checkbox" value="115" id="checkbox-115" name="checkbox-115">
+      <label for="checkbox-115">Checkbox 115</label>
+      <br/>
+    
+      <input type="checkbox" value="116" id="checkbox-116" name="checkbox-116">
+      <label for="checkbox-116">Checkbox 116</label>
+      <br/>
+    
+      <input type="checkbox" value="117" id="checkbox-117" name="checkbox-117">
+      <label for="checkbox-117">Checkbox 117</label>
+      <br/>
+    
+      <input type="checkbox" value="118" id="checkbox-118" name="checkbox-118">
+      <label for="checkbox-118">Checkbox 118</label>
+      <br/>
+    
+      <input type="checkbox" value="119" id="checkbox-119" name="checkbox-119">
+      <label for="checkbox-119">Checkbox 119</label>
+      <br/>
+    
+      <input type="checkbox" value="120" id="checkbox-120" name="checkbox-120">
+      <label for="checkbox-120">Checkbox 120</label>
+      <br/>
+    
+      <input type="checkbox" value="121" id="checkbox-121" name="checkbox-121">
+      <label for="checkbox-121">Checkbox 121</label>
+      <br/>
+    
+      <input type="checkbox" value="122" id="checkbox-122" name="checkbox-122">
+      <label for="checkbox-122">Checkbox 122</label>
+      <br/>
+    
+      <input type="checkbox" value="123" id="checkbox-123" name="checkbox-123">
+      <label for="checkbox-123">Checkbox 123</label>
+      <br/>
+    
+      <input type="checkbox" value="124" id="checkbox-124" name="checkbox-124">
+      <label for="checkbox-124">Checkbox 124</label>
+      <br/>
+    
+      <input type="checkbox" value="125" id="checkbox-125" name="checkbox-125">
+      <label for="checkbox-125">Checkbox 125</label>
+      <br/>
+    
+      <input type="checkbox" value="126" id="checkbox-126" name="checkbox-126">
+      <label for="checkbox-126">Checkbox 126</label>
+      <br/>
+    
+      <input type="checkbox" value="127" id="checkbox-127" name="checkbox-127">
+      <label for="checkbox-127">Checkbox 127</label>
+      <br/>
+    
+      <input type="checkbox" value="128" id="checkbox-128" name="checkbox-128">
+      <label for="checkbox-128">Checkbox 128</label>
+      <br/>
+    
+      <input type="checkbox" value="129" id="checkbox-129" name="checkbox-129">
+      <label for="checkbox-129">Checkbox 129</label>
+      <br/>
+    
+      <input type="checkbox" value="130" id="checkbox-130" name="checkbox-130">
+      <label for="checkbox-130">Checkbox 130</label>
+      <br/>
+    
+      <input type="checkbox" value="131" id="checkbox-131" name="checkbox-131">
+      <label for="checkbox-131">Checkbox 131</label>
+      <br/>
+    
+      <input type="checkbox" value="132" id="checkbox-132" name="checkbox-132">
+      <label for="checkbox-132">Checkbox 132</label>
+      <br/>
+    
+      <input type="checkbox" value="133" id="checkbox-133" name="checkbox-133">
+      <label for="checkbox-133">Checkbox 133</label>
+      <br/>
+    
+      <input type="checkbox" value="134" id="checkbox-134" name="checkbox-134">
+      <label for="checkbox-134">Checkbox 134</label>
+      <br/>
+    
+      <input type="checkbox" value="135" id="checkbox-135" name="checkbox-135">
+      <label for="checkbox-135">Checkbox 135</label>
+      <br/>
+    
+      <input type="checkbox" value="136" id="checkbox-136" name="checkbox-136">
+      <label for="checkbox-136">Checkbox 136</label>
+      <br/>
+    
+      <input type="checkbox" value="137" id="checkbox-137" name="checkbox-137">
+      <label for="checkbox-137">Checkbox 137</label>
+      <br/>
+    
+      <input type="checkbox" value="138" id="checkbox-138" name="checkbox-138">
+      <label for="checkbox-138">Checkbox 138</label>
+      <br/>
+    
+      <input type="checkbox" value="139" id="checkbox-139" name="checkbox-139">
+      <label for="checkbox-139">Checkbox 139</label>
+      <br/>
+    
+      <input type="checkbox" value="140" id="checkbox-140" name="checkbox-140">
+      <label for="checkbox-140">Checkbox 140</label>
+      <br/>
+    
+      <input type="checkbox" value="141" id="checkbox-141" name="checkbox-141">
+      <label for="checkbox-141">Checkbox 141</label>
+      <br/>
+    
+      <input type="checkbox" value="142" id="checkbox-142" name="checkbox-142">
+      <label for="checkbox-142">Checkbox 142</label>
+      <br/>
+    
+      <input type="checkbox" value="143" id="checkbox-143" name="checkbox-143">
+      <label for="checkbox-143">Checkbox 143</label>
+      <br/>
+    
+      <input type="checkbox" value="144" id="checkbox-144" name="checkbox-144">
+      <label for="checkbox-144">Checkbox 144</label>
+      <br/>
+    
+      <input type="checkbox" value="145" id="checkbox-145" name="checkbox-145">
+      <label for="checkbox-145">Checkbox 145</label>
+      <br/>
+    
+      <input type="checkbox" value="146" id="checkbox-146" name="checkbox-146">
+      <label for="checkbox-146">Checkbox 146</label>
+      <br/>
+    
+      <input type="checkbox" value="147" id="checkbox-147" name="checkbox-147">
+      <label for="checkbox-147">Checkbox 147</label>
+      <br/>
+    
+      <input type="checkbox" value="148" id="checkbox-148" name="checkbox-148">
+      <label for="checkbox-148">Checkbox 148</label>
+      <br/>
+    
+      <input type="checkbox" value="149" id="checkbox-149" name="checkbox-149">
+      <label for="checkbox-149">Checkbox 149</label>
+      <br/>
+    
+      <input type="checkbox" value="150" id="checkbox-150" name="checkbox-150">
+      <label for="checkbox-150">Checkbox 150</label>
+      <br/>
+    
+      <input type="checkbox" value="151" id="checkbox-151" name="checkbox-151">
+      <label for="checkbox-151">Checkbox 151</label>
+      <br/>
+    
+      <input type="checkbox" value="152" id="checkbox-152" name="checkbox-152">
+      <label for="checkbox-152">Checkbox 152</label>
+      <br/>
+    
+      <input type="checkbox" value="153" id="checkbox-153" name="checkbox-153">
+      <label for="checkbox-153">Checkbox 153</label>
+      <br/>
+    
+      <input type="checkbox" value="154" id="checkbox-154" name="checkbox-154">
+      <label for="checkbox-154">Checkbox 154</label>
+      <br/>
+    
+      <input type="checkbox" value="155" id="checkbox-155" name="checkbox-155">
+      <label for="checkbox-155">Checkbox 155</label>
+      <br/>
+    
+      <input type="checkbox" value="156" id="checkbox-156" name="checkbox-156">
+      <label for="checkbox-156">Checkbox 156</label>
+      <br/>
+    
+      <input type="checkbox" value="157" id="checkbox-157" name="checkbox-157">
+      <label for="checkbox-157">Checkbox 157</label>
+      <br/>
+    
+      <input type="checkbox" value="158" id="checkbox-158" name="checkbox-158">
+      <label for="checkbox-158">Checkbox 158</label>
+      <br/>
+    
+      <input type="checkbox" value="159" id="checkbox-159" name="checkbox-159">
+      <label for="checkbox-159">Checkbox 159</label>
+      <br/>
+    
+      <input type="checkbox" value="160" id="checkbox-160" name="checkbox-160">
+      <label for="checkbox-160">Checkbox 160</label>
+      <br/>
+    
+      <input type="checkbox" value="161" id="checkbox-161" name="checkbox-161">
+      <label for="checkbox-161">Checkbox 161</label>
+      <br/>
+    
+      <input type="checkbox" value="162" id="checkbox-162" name="checkbox-162">
+      <label for="checkbox-162">Checkbox 162</label>
+      <br/>
+    
+      <input type="checkbox" value="163" id="checkbox-163" name="checkbox-163">
+      <label for="checkbox-163">Checkbox 163</label>
+      <br/>
+    
+      <input type="checkbox" value="164" id="checkbox-164" name="checkbox-164">
+      <label for="checkbox-164">Checkbox 164</label>
+      <br/>
+    
+      <input type="checkbox" value="165" id="checkbox-165" name="checkbox-165">
+      <label for="checkbox-165">Checkbox 165</label>
+      <br/>
+    
+      <input type="checkbox" value="166" id="checkbox-166" name="checkbox-166">
+      <label for="checkbox-166">Checkbox 166</label>
+      <br/>
+    
+      <input type="checkbox" value="167" id="checkbox-167" name="checkbox-167">
+      <label for="checkbox-167">Checkbox 167</label>
+      <br/>
+    
+      <input type="checkbox" value="168" id="checkbox-168" name="checkbox-168">
+      <label for="checkbox-168">Checkbox 168</label>
+      <br/>
+    
+      <input type="checkbox" value="169" id="checkbox-169" name="checkbox-169">
+      <label for="checkbox-169">Checkbox 169</label>
+      <br/>
+    
+      <input type="checkbox" value="170" id="checkbox-170" name="checkbox-170">
+      <label for="checkbox-170">Checkbox 170</label>
+      <br/>
+    
+      <input type="checkbox" value="171" id="checkbox-171" name="checkbox-171">
+      <label for="checkbox-171">Checkbox 171</label>
+      <br/>
+    
+      <input type="checkbox" value="172" id="checkbox-172" name="checkbox-172">
+      <label for="checkbox-172">Checkbox 172</label>
+      <br/>
+    
+      <input type="checkbox" value="173" id="checkbox-173" name="checkbox-173">
+      <label for="checkbox-173">Checkbox 173</label>
+      <br/>
+    
+      <input type="checkbox" value="174" id="checkbox-174" name="checkbox-174">
+      <label for="checkbox-174">Checkbox 174</label>
+      <br/>
+    
+      <input type="checkbox" value="175" id="checkbox-175" name="checkbox-175">
+      <label for="checkbox-175">Checkbox 175</label>
+      <br/>
+    
+      <input type="checkbox" value="176" id="checkbox-176" name="checkbox-176">
+      <label for="checkbox-176">Checkbox 176</label>
+      <br/>
+    
+      <input type="checkbox" value="177" id="checkbox-177" name="checkbox-177">
+      <label for="checkbox-177">Checkbox 177</label>
+      <br/>
+    
+      <input type="checkbox" value="178" id="checkbox-178" name="checkbox-178">
+      <label for="checkbox-178">Checkbox 178</label>
+      <br/>
+    
+      <input type="checkbox" value="179" id="checkbox-179" name="checkbox-179">
+      <label for="checkbox-179">Checkbox 179</label>
+      <br/>
+    
+      <input type="checkbox" value="180" id="checkbox-180" name="checkbox-180">
+      <label for="checkbox-180">Checkbox 180</label>
+      <br/>
+    
+      <input type="checkbox" value="181" id="checkbox-181" name="checkbox-181">
+      <label for="checkbox-181">Checkbox 181</label>
+      <br/>
+    
+      <input type="checkbox" value="182" id="checkbox-182" name="checkbox-182">
+      <label for="checkbox-182">Checkbox 182</label>
+      <br/>
+    
+      <input type="checkbox" value="183" id="checkbox-183" name="checkbox-183">
+      <label for="checkbox-183">Checkbox 183</label>
+      <br/>
+    
+      <input type="checkbox" value="184" id="checkbox-184" name="checkbox-184">
+      <label for="checkbox-184">Checkbox 184</label>
+      <br/>
+    
+      <input type="checkbox" value="185" id="checkbox-185" name="checkbox-185">
+      <label for="checkbox-185">Checkbox 185</label>
+      <br/>
+    
+      <input type="checkbox" value="186" id="checkbox-186" name="checkbox-186">
+      <label for="checkbox-186">Checkbox 186</label>
+      <br/>
+    
+      <input type="checkbox" value="187" id="checkbox-187" name="checkbox-187">
+      <label for="checkbox-187">Checkbox 187</label>
+      <br/>
+    
+      <input type="checkbox" value="188" id="checkbox-188" name="checkbox-188">
+      <label for="checkbox-188">Checkbox 188</label>
+      <br/>
+    
+      <input type="checkbox" value="189" id="checkbox-189" name="checkbox-189">
+      <label for="checkbox-189">Checkbox 189</label>
+      <br/>
+    
+      <input type="checkbox" value="190" id="checkbox-190" name="checkbox-190">
+      <label for="checkbox-190">Checkbox 190</label>
+      <br/>
+    
+      <input type="checkbox" value="191" id="checkbox-191" name="checkbox-191">
+      <label for="checkbox-191">Checkbox 191</label>
+      <br/>
+    
+      <input type="checkbox" value="192" id="checkbox-192" name="checkbox-192">
+      <label for="checkbox-192">Checkbox 192</label>
+      <br/>
+    
+      <input type="checkbox" value="193" id="checkbox-193" name="checkbox-193">
+      <label for="checkbox-193">Checkbox 193</label>
+      <br/>
+    
+      <input type="checkbox" value="194" id="checkbox-194" name="checkbox-194">
+      <label for="checkbox-194">Checkbox 194</label>
+      <br/>
+    
+      <input type="checkbox" value="195" id="checkbox-195" name="checkbox-195">
+      <label for="checkbox-195">Checkbox 195</label>
+      <br/>
+    
+      <input type="checkbox" value="196" id="checkbox-196" name="checkbox-196">
+      <label for="checkbox-196">Checkbox 196</label>
+      <br/>
+    
+      <input type="checkbox" value="197" id="checkbox-197" name="checkbox-197">
+      <label for="checkbox-197">Checkbox 197</label>
+      <br/>
+    
+      <input type="checkbox" value="198" id="checkbox-198" name="checkbox-198">
+      <label for="checkbox-198">Checkbox 198</label>
+      <br/>
+    
+      <input type="checkbox" value="199" id="checkbox-199" name="checkbox-199">
+      <label for="checkbox-199">Checkbox 199</label>
+      <br/>
+    
+      <input type="checkbox" value="200" id="checkbox-200" name="checkbox-200">
+      <label for="checkbox-200">Checkbox 200</label>
+      <br/>
+    
+  </fieldset>
+  <fieldset class="pretty">
+    <legend>PrettyCheckboxes</legend>    
+    
+      <input type="checkbox" value="201" id="checkbox-201" name="checkbox-201">
+      <label for="checkbox-201">Checkbox 201</label>
+      <br/>
+    
+      <input type="checkbox" value="202" id="checkbox-202" name="checkbox-202">
+      <label for="checkbox-202">Checkbox 202</label>
+      <br/>
+    
+      <input type="checkbox" value="203" id="checkbox-203" name="checkbox-203">
+      <label for="checkbox-203">Checkbox 203</label>
+      <br/>
+    
+      <input type="checkbox" value="204" id="checkbox-204" name="checkbox-204">
+      <label for="checkbox-204">Checkbox 204</label>
+      <br/>
+    
+      <input type="checkbox" value="205" id="checkbox-205" name="checkbox-205">
+      <label for="checkbox-205">Checkbox 205</label>
+      <br/>
+    
+      <input type="checkbox" value="206" id="checkbox-206" name="checkbox-206">
+      <label for="checkbox-206">Checkbox 206</label>
+      <br/>
+    
+      <input type="checkbox" value="207" id="checkbox-207" name="checkbox-207">
+      <label for="checkbox-207">Checkbox 207</label>
+      <br/>
+    
+      <input type="checkbox" value="208" id="checkbox-208" name="checkbox-208">
+      <label for="checkbox-208">Checkbox 208</label>
+      <br/>
+    
+      <input type="checkbox" value="209" id="checkbox-209" name="checkbox-209">
+      <label for="checkbox-209">Checkbox 209</label>
+      <br/>
+    
+      <input type="checkbox" value="210" id="checkbox-210" name="checkbox-210">
+      <label for="checkbox-210">Checkbox 210</label>
+      <br/>
+    
+      <input type="checkbox" value="211" id="checkbox-211" name="checkbox-211">
+      <label for="checkbox-211">Checkbox 211</label>
+      <br/>
+    
+      <input type="checkbox" value="212" id="checkbox-212" name="checkbox-212">
+      <label for="checkbox-212">Checkbox 212</label>
+      <br/>
+    
+      <input type="checkbox" value="213" id="checkbox-213" name="checkbox-213">
+      <label for="checkbox-213">Checkbox 213</label>
+      <br/>
+    
+      <input type="checkbox" value="214" id="checkbox-214" name="checkbox-214">
+      <label for="checkbox-214">Checkbox 214</label>
+      <br/>
+    
+      <input type="checkbox" value="215" id="checkbox-215" name="checkbox-215">
+      <label for="checkbox-215">Checkbox 215</label>
+      <br/>
+    
+      <input type="checkbox" value="216" id="checkbox-216" name="checkbox-216">
+      <label for="checkbox-216">Checkbox 216</label>
+      <br/>
+    
+      <input type="checkbox" value="217" id="checkbox-217" name="checkbox-217">
+      <label for="checkbox-217">Checkbox 217</label>
+      <br/>
+    
+      <input type="checkbox" value="218" id="checkbox-218" name="checkbox-218">
+      <label for="checkbox-218">Checkbox 218</label>
+      <br/>
+    
+      <input type="checkbox" value="219" id="checkbox-219" name="checkbox-219">
+      <label for="checkbox-219">Checkbox 219</label>
+      <br/>
+    
+      <input type="checkbox" value="220" id="checkbox-220" name="checkbox-220">
+      <label for="checkbox-220">Checkbox 220</label>
+      <br/>
+    
+      <input type="checkbox" value="221" id="checkbox-221" name="checkbox-221">
+      <label for="checkbox-221">Checkbox 221</label>
+      <br/>
+    
+      <input type="checkbox" value="222" id="checkbox-222" name="checkbox-222">
+      <label for="checkbox-222">Checkbox 222</label>
+      <br/>
+    
+      <input type="checkbox" value="223" id="checkbox-223" name="checkbox-223">
+      <label for="checkbox-223">Checkbox 223</label>
+      <br/>
+    
+      <input type="checkbox" value="224" id="checkbox-224" name="checkbox-224">
+      <label for="checkbox-224">Checkbox 224</label>
+      <br/>
+    
+      <input type="checkbox" value="225" id="checkbox-225" name="checkbox-225">
+      <label for="checkbox-225">Checkbox 225</label>
+      <br/>
+    
+      <input type="checkbox" value="226" id="checkbox-226" name="checkbox-226">
+      <label for="checkbox-226">Checkbox 226</label>
+      <br/>
+    
+      <input type="checkbox" value="227" id="checkbox-227" name="checkbox-227">
+      <label for="checkbox-227">Checkbox 227</label>
+      <br/>
+    
+      <input type="checkbox" value="228" id="checkbox-228" name="checkbox-228">
+      <label for="checkbox-228">Checkbox 228</label>
+      <br/>
+    
+      <input type="checkbox" value="229" id="checkbox-229" name="checkbox-229">
+      <label for="checkbox-229">Checkbox 229</label>
+      <br/>
+    
+      <input type="checkbox" value="230" id="checkbox-230" name="checkbox-230">
+      <label for="checkbox-230">Checkbox 230</label>
+      <br/>
+    
+      <input type="checkbox" value="231" id="checkbox-231" name="checkbox-231">
+      <label for="checkbox-231">Checkbox 231</label>
+      <br/>
+    
+      <input type="checkbox" value="232" id="checkbox-232" name="checkbox-232">
+      <label for="checkbox-232">Checkbox 232</label>
+      <br/>
+    
+      <input type="checkbox" value="233" id="checkbox-233" name="checkbox-233">
+      <label for="checkbox-233">Checkbox 233</label>
+      <br/>
+    
+      <input type="checkbox" value="234" id="checkbox-234" name="checkbox-234">
+      <label for="checkbox-234">Checkbox 234</label>
+      <br/>
+    
+      <input type="checkbox" value="235" id="checkbox-235" name="checkbox-235">
+      <label for="checkbox-235">Checkbox 235</label>
+      <br/>
+    
+      <input type="checkbox" value="236" id="checkbox-236" name="checkbox-236">
+      <label for="checkbox-236">Checkbox 236</label>
+      <br/>
+    
+      <input type="checkbox" value="237" id="checkbox-237" name="checkbox-237">
+      <label for="checkbox-237">Checkbox 237</label>
+      <br/>
+    
+      <input type="checkbox" value="238" id="checkbox-238" name="checkbox-238">
+      <label for="checkbox-238">Checkbox 238</label>
+      <br/>
+    
+      <input type="checkbox" value="239" id="checkbox-239" name="checkbox-239">
+      <label for="checkbox-239">Checkbox 239</label>
+      <br/>
+    
+      <input type="checkbox" value="240" id="checkbox-240" name="checkbox-240">
+      <label for="checkbox-240">Checkbox 240</label>
+      <br/>
+    
+      <input type="checkbox" value="241" id="checkbox-241" name="checkbox-241">
+      <label for="checkbox-241">Checkbox 241</label>
+      <br/>
+    
+      <input type="checkbox" value="242" id="checkbox-242" name="checkbox-242">
+      <label for="checkbox-242">Checkbox 242</label>
+      <br/>
+    
+      <input type="checkbox" value="243" id="checkbox-243" name="checkbox-243">
+      <label for="checkbox-243">Checkbox 243</label>
+      <br/>
+    
+      <input type="checkbox" value="244" id="checkbox-244" name="checkbox-244">
+      <label for="checkbox-244">Checkbox 244</label>
+      <br/>
+    
+      <input type="checkbox" value="245" id="checkbox-245" name="checkbox-245">
+      <label for="checkbox-245">Checkbox 245</label>
+      <br/>
+    
+      <input type="checkbox" value="246" id="checkbox-246" name="checkbox-246">
+      <label for="checkbox-246">Checkbox 246</label>
+      <br/>
+    
+      <input type="checkbox" value="247" id="checkbox-247" name="checkbox-247">
+      <label for="checkbox-247">Checkbox 247</label>
+      <br/>
+    
+      <input type="checkbox" value="248" id="checkbox-248" name="checkbox-248">
+      <label for="checkbox-248">Checkbox 248</label>
+      <br/>
+    
+      <input type="checkbox" value="249" id="checkbox-249" name="checkbox-249">
+      <label for="checkbox-249">Checkbox 249</label>
+      <br/>
+    
+      <input type="checkbox" value="250" id="checkbox-250" name="checkbox-250">
+      <label for="checkbox-250">Checkbox 250</label>
+      <br/>
+    
+      <input type="checkbox" value="251" id="checkbox-251" name="checkbox-251">
+      <label for="checkbox-251">Checkbox 251</label>
+      <br/>
+    
+      <input type="checkbox" value="252" id="checkbox-252" name="checkbox-252">
+      <label for="checkbox-252">Checkbox 252</label>
+      <br/>
+    
+      <input type="checkbox" value="253" id="checkbox-253" name="checkbox-253">
+      <label for="checkbox-253">Checkbox 253</label>
+      <br/>
+    
+      <input type="checkbox" value="254" id="checkbox-254" name="checkbox-254">
+      <label for="checkbox-254">Checkbox 254</label>
+      <br/>
+    
+      <input type="checkbox" value="255" id="checkbox-255" name="checkbox-255">
+      <label for="checkbox-255">Checkbox 255</label>
+      <br/>
+    
+      <input type="checkbox" value="256" id="checkbox-256" name="checkbox-256">
+      <label for="checkbox-256">Checkbox 256</label>
+      <br/>
+    
+      <input type="checkbox" value="257" id="checkbox-257" name="checkbox-257">
+      <label for="checkbox-257">Checkbox 257</label>
+      <br/>
+    
+      <input type="checkbox" value="258" id="checkbox-258" name="checkbox-258">
+      <label for="checkbox-258">Checkbox 258</label>
+      <br/>
+    
+      <input type="checkbox" value="259" id="checkbox-259" name="checkbox-259">
+      <label for="checkbox-259">Checkbox 259</label>
+      <br/>
+    
+      <input type="checkbox" value="260" id="checkbox-260" name="checkbox-260">
+      <label for="checkbox-260">Checkbox 260</label>
+      <br/>
+    
+      <input type="checkbox" value="261" id="checkbox-261" name="checkbox-261">
+      <label for="checkbox-261">Checkbox 261</label>
+      <br/>
+    
+      <input type="checkbox" value="262" id="checkbox-262" name="checkbox-262">
+      <label for="checkbox-262">Checkbox 262</label>
+      <br/>
+    
+      <input type="checkbox" value="263" id="checkbox-263" name="checkbox-263">
+      <label for="checkbox-263">Checkbox 263</label>
+      <br/>
+    
+      <input type="checkbox" value="264" id="checkbox-264" name="checkbox-264">
+      <label for="checkbox-264">Checkbox 264</label>
+      <br/>
+    
+      <input type="checkbox" value="265" id="checkbox-265" name="checkbox-265">
+      <label for="checkbox-265">Checkbox 265</label>
+      <br/>
+    
+      <input type="checkbox" value="266" id="checkbox-266" name="checkbox-266">
+      <label for="checkbox-266">Checkbox 266</label>
+      <br/>
+    
+      <input type="checkbox" value="267" id="checkbox-267" name="checkbox-267">
+      <label for="checkbox-267">Checkbox 267</label>
+      <br/>
+    
+      <input type="checkbox" value="268" id="checkbox-268" name="checkbox-268">
+      <label for="checkbox-268">Checkbox 268</label>
+      <br/>
+    
+      <input type="checkbox" value="269" id="checkbox-269" name="checkbox-269">
+      <label for="checkbox-269">Checkbox 269</label>
+      <br/>
+    
+      <input type="checkbox" value="270" id="checkbox-270" name="checkbox-270">
+      <label for="checkbox-270">Checkbox 270</label>
+      <br/>
+    
+      <input type="checkbox" value="271" id="checkbox-271" name="checkbox-271">
+      <label for="checkbox-271">Checkbox 271</label>
+      <br/>
+    
+      <input type="checkbox" value="272" id="checkbox-272" name="checkbox-272">
+      <label for="checkbox-272">Checkbox 272</label>
+      <br/>
+    
+      <input type="checkbox" value="273" id="checkbox-273" name="checkbox-273">
+      <label for="checkbox-273">Checkbox 273</label>
+      <br/>
+    
+      <input type="checkbox" value="274" id="checkbox-274" name="checkbox-274">
+      <label for="checkbox-274">Checkbox 274</label>
+      <br/>
+    
+      <input type="checkbox" value="275" id="checkbox-275" name="checkbox-275">
+      <label for="checkbox-275">Checkbox 275</label>
+      <br/>
+    
+      <input type="checkbox" value="276" id="checkbox-276" name="checkbox-276">
+      <label for="checkbox-276">Checkbox 276</label>
+      <br/>
+    
+      <input type="checkbox" value="277" id="checkbox-277" name="checkbox-277">
+      <label for="checkbox-277">Checkbox 277</label>
+      <br/>
+    
+      <input type="checkbox" value="278" id="checkbox-278" name="checkbox-278">
+      <label for="checkbox-278">Checkbox 278</label>
+      <br/>
+    
+      <input type="checkbox" value="279" id="checkbox-279" name="checkbox-279">
+      <label for="checkbox-279">Checkbox 279</label>
+      <br/>
+    
+      <input type="checkbox" value="280" id="checkbox-280" name="checkbox-280">
+      <label for="checkbox-280">Checkbox 280</label>
+      <br/>
+    
+      <input type="checkbox" value="281" id="checkbox-281" name="checkbox-281">
+      <label for="checkbox-281">Checkbox 281</label>
+      <br/>
+    
+      <input type="checkbox" value="282" id="checkbox-282" name="checkbox-282">
+      <label for="checkbox-282">Checkbox 282</label>
+      <br/>
+    
+      <input type="checkbox" value="283" id="checkbox-283" name="checkbox-283">
+      <label for="checkbox-283">Checkbox 283</label>
+      <br/>
+    
+      <input type="checkbox" value="284" id="checkbox-284" name="checkbox-284">
+      <label for="checkbox-284">Checkbox 284</label>
+      <br/>
+    
+      <input type="checkbox" value="285" id="checkbox-285" name="checkbox-285">
+      <label for="checkbox-285">Checkbox 285</label>
+      <br/>
+    
+      <input type="checkbox" value="286" id="checkbox-286" name="checkbox-286">
+      <label for="checkbox-286">Checkbox 286</label>
+      <br/>
+    
+      <input type="checkbox" value="287" id="checkbox-287" name="checkbox-287">
+      <label for="checkbox-287">Checkbox 287</label>
+      <br/>
+    
+      <input type="checkbox" value="288" id="checkbox-288" name="checkbox-288">
+      <label for="checkbox-288">Checkbox 288</label>
+      <br/>
+    
+      <input type="checkbox" value="289" id="checkbox-289" name="checkbox-289">
+      <label for="checkbox-289">Checkbox 289</label>
+      <br/>
+    
+      <input type="checkbox" value="290" id="checkbox-290" name="checkbox-290">
+      <label for="checkbox-290">Checkbox 290</label>
+      <br/>
+    
+      <input type="checkbox" value="291" id="checkbox-291" name="checkbox-291">
+      <label for="checkbox-291">Checkbox 291</label>
+      <br/>
+    
+      <input type="checkbox" value="292" id="checkbox-292" name="checkbox-292">
+      <label for="checkbox-292">Checkbox 292</label>
+      <br/>
+    
+      <input type="checkbox" value="293" id="checkbox-293" name="checkbox-293">
+      <label for="checkbox-293">Checkbox 293</label>
+      <br/>
+    
+      <input type="checkbox" value="294" id="checkbox-294" name="checkbox-294">
+      <label for="checkbox-294">Checkbox 294</label>
+      <br/>
+    
+      <input type="checkbox" value="295" id="checkbox-295" name="checkbox-295">
+      <label for="checkbox-295">Checkbox 295</label>
+      <br/>
+    
+      <input type="checkbox" value="296" id="checkbox-296" name="checkbox-296">
+      <label for="checkbox-296">Checkbox 296</label>
+      <br/>
+    
+      <input type="checkbox" value="297" id="checkbox-297" name="checkbox-297">
+      <label for="checkbox-297">Checkbox 297</label>
+      <br/>
+    
+      <input type="checkbox" value="298" id="checkbox-298" name="checkbox-298">
+      <label for="checkbox-298">Checkbox 298</label>
+      <br/>
+    
+      <input type="checkbox" value="299" id="checkbox-299" name="checkbox-299">
+      <label for="checkbox-299">Checkbox 299</label>
+      <br/>
+    
+      <input type="checkbox" value="300" id="checkbox-300" name="checkbox-300">
+      <label for="checkbox-300">Checkbox 300</label>
+      <br/>
+    
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+    <script src="../../javascripts/benchmark.js/vendor/platform.js/platform.js"></script>
+    <script src="../../javascripts/benchmark.js/benchmark.js"></script>
+    <script src="../../javascripts/benchmark.js/benchmark-ui.js"></script>
+    
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+  <script src="../../javascripts/jquery.uniform.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../javascripts/prettyCheckboxes.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
+      
+  ui.add("Custom Form",function(){
+    $(".custom_form input").custom_form();
+  })
+  .add("Uniform",function(){
+    $(".uniform input").uniform();
+  })
+  .add("PrettyCheckboxes",function(){
+    $(".pretty input").prettyCheckboxes();
+  })
+  
+
+    </script>
+  </body>
+</html>

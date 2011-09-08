@@ -1,29 +1,29 @@
 --- 
-title: Radios
+title: Checkboxes
 ---
 
 <form autocomplete="off" >
   <fieldset class="custom_form">
     <legend>Custom Form</legend>    
     <% (1..100).each do |i| %>
-      <input type="radio" value="<%=i%>" id="radio-<%=i%>" name="radio_group_1">
-      <label for="radio-<%=i%>">Radio <%=i%></label>
+      <input type="checkbox" value="<%=i%>" id="checkbox-<%=i%>" name="checkbox-<%=i%>">
+      <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>
   </fieldset>
   <fieldset class="uniform">
     <legend>Uniform</legend>    
     <% (101..200).each do |i| %>
-      <input type="radio" value="<%=i%>" id="radio-<%=i%>" name="radio_group_2">
-      <label for="radio-<%=i%>">Radio <%=i%></label>
+      <input type="checkbox" value="<%=i%>" id="checkbox-<%=i%>" name="checkbox-<%=i%>">
+      <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>
   </fieldset>
   <fieldset class="pretty">
     <legend>PrettyCheckboxes</legend>    
     <% (201..300).each do |i| %>
-      <input type="radio" value="<%=i%>" id="radio-<%=i%>" name="radio_group_3">
-      <label for="radio-<%=i%>">Radio <%=i%></label>
+      <input type="checkbox" value="<%=i%>" id="checkbox-<%=i%>" name="checkbox-<%=i%>">
+      <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>
   </fieldset>

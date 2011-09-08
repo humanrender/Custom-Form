@@ -4,6 +4,12 @@ compile /\/(javascripts|stylesheets)\/*/ do
   # don’t filter or layout
 end
 
+compile '/benchmarking/*' do
+  filter :erb
+  layout 'benchmark'
+  filter :relativize_paths, :type =>:html
+end
+
 compile '*' do
   if item.binary?
     # don’t filter binary items

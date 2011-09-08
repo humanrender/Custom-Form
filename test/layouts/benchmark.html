@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom-Form Benchmarking</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/stylesheets/benchmark.css">
+    <link rel="stylesheet" href="/stylesheets/custom_form.css">
+    
+    <script>document.documentElement.className='js'</script>
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  </head>
+  <body>
+    <article>
+      <section id="runner">
+        <h2>Test runner</h2>
+
+        <p id="firebug"><strong>Warning! For accurate results, please disable Firebug before running the tests. <a href="http://jsperf.com/faq#firebug">(Why?)</a></strong></p>
+
+        <p id="java"><strong>Java applet disabled.</strong></p>
+
+        <p id="status">
+          <noscript>
+            <strong>
+              To run the tests, please
+              <a href="http://enable-javascript.com/">enable JavaScript</a>
+              and reload the page.
+            </strong>
+          </noscript>
+        </p>
+
+        <div id="controls">
+          <button id="run" type="button"></button>
+        </div>
+
+        <table id="test-table">
+          <caption>Testing in <span id="user-agent"></span></caption>
+          <thead>
+          <tr>
+            <th colspan="2">Test</th>
+            <th title="Operations per second (higher is better)">Ops/sec</th>
+          </tr>
+          </thead>
+          <tbody>
+            <%= content_for(@item,:table) %>
+          </tbody>
+        </table>
+      </section>
+
+    </article>
+    
+    <%= yield %>
+    <script src="/javascripts/benchmark.js/vendor/platform.js/platform.js"></script>
+    <script src="/javascripts/benchmark.js/benchmark.js"></script>
+    <script src="/javascripts/benchmark.js/benchmark-ui.js"></script>
+    
+    <script src="/javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    <%= content_for(@item,:extra_js)%>
+    <script>
+      <%= content_for(@item,:js) %>
+    </script>
+  </body>
+</html>

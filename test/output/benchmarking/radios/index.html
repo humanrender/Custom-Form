@@ -1,29 +1,1321 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-
-<html lang="en">
+<!DOCTYPE html>
+<html>
   <head>
-  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  	<title>Custom-Form tests - Radios</title>
-    <link rel="stylesheet" href="../../stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
-    <link rel="stylesheet" href="../../stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    <title>Custom-Form Benchmarking</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../stylesheets/benchmark.css">
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css">
     
-  	
+    <script>document.documentElement.className='js'</script>
+    <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   </head>
   <body>
-    <div class="wrap two-block">
-      <div class="content">
-        
-      </div>
-      
-      
-    </div>
-    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <article>
+      <section id="runner">
+        <h2>Test runner</h2>
+
+        <p id="firebug"><strong>Warning! For accurate results, please disable Firebug before running the tests. <a href="http://jsperf.com/faq#firebug">(Why?)</a></strong></p>
+
+        <p id="java"><strong>Java applet disabled.</strong></p>
+
+        <p id="status">
+          <noscript>
+            <strong>
+              To run the tests, please
+              <a href="http://enable-javascript.com/">enable JavaScript</a>
+              and reload the page.
+            </strong>
+          </noscript>
+        </p>
+
+        <div id="controls">
+          <button id="run" type="button"></button>
+        </div>
+
+        <table id="test-table">
+          <caption>Testing in <span id="user-agent"></span></caption>
+          <thead>
+          <tr>
+            <th colspan="2">Test</th>
+            <th title="Operations per second (higher is better)">Ops/sec</th>
+          </tr>
+          </thead>
+          <tbody>
+            
+  <tr>
+    <th scope="row" id="title-1"><div>Custom-Form</div></th>
+    <td>
+    <pre><code>$(".custom_form input").custom_form()</code></pre>
+    </td>
+    <td id="results-1" class="results"></td>
+  </tr>
+  
+  <tr>
+    <th scope="row" id="title-2"><div>Uniform</div></th>
+    <td>
+    <pre><code>$(".uniform input").uniform()</code></pre>
+    </td>
+    <td id="results-2" class="results"></td>
+  </tr>
+  
+  <tr>
+    <th scope="row" id="title-3"><div>PrettyCheckboxes</div></th>
+    <td>
+    <pre><code>$(".pretty input").prettyCheckboxes()</code></pre>
+    </td>
+    <td id="results-3" class="results"></td>
+  </tr>
+
+          </tbody>
+        </table>
+      </section>
+
+    </article>
     
+    <form autocomplete="off" >
+  <fieldset class="custom_form">
+    <legend>Custom Form</legend>    
+    
+      <input type="radio" value="1" id="radio-1" name="radio_group_1">
+      <label for="radio-1">Radio 1</label>
+      <br/>
+    
+      <input type="radio" value="2" id="radio-2" name="radio_group_1">
+      <label for="radio-2">Radio 2</label>
+      <br/>
+    
+      <input type="radio" value="3" id="radio-3" name="radio_group_1">
+      <label for="radio-3">Radio 3</label>
+      <br/>
+    
+      <input type="radio" value="4" id="radio-4" name="radio_group_1">
+      <label for="radio-4">Radio 4</label>
+      <br/>
+    
+      <input type="radio" value="5" id="radio-5" name="radio_group_1">
+      <label for="radio-5">Radio 5</label>
+      <br/>
+    
+      <input type="radio" value="6" id="radio-6" name="radio_group_1">
+      <label for="radio-6">Radio 6</label>
+      <br/>
+    
+      <input type="radio" value="7" id="radio-7" name="radio_group_1">
+      <label for="radio-7">Radio 7</label>
+      <br/>
+    
+      <input type="radio" value="8" id="radio-8" name="radio_group_1">
+      <label for="radio-8">Radio 8</label>
+      <br/>
+    
+      <input type="radio" value="9" id="radio-9" name="radio_group_1">
+      <label for="radio-9">Radio 9</label>
+      <br/>
+    
+      <input type="radio" value="10" id="radio-10" name="radio_group_1">
+      <label for="radio-10">Radio 10</label>
+      <br/>
+    
+      <input type="radio" value="11" id="radio-11" name="radio_group_1">
+      <label for="radio-11">Radio 11</label>
+      <br/>
+    
+      <input type="radio" value="12" id="radio-12" name="radio_group_1">
+      <label for="radio-12">Radio 12</label>
+      <br/>
+    
+      <input type="radio" value="13" id="radio-13" name="radio_group_1">
+      <label for="radio-13">Radio 13</label>
+      <br/>
+    
+      <input type="radio" value="14" id="radio-14" name="radio_group_1">
+      <label for="radio-14">Radio 14</label>
+      <br/>
+    
+      <input type="radio" value="15" id="radio-15" name="radio_group_1">
+      <label for="radio-15">Radio 15</label>
+      <br/>
+    
+      <input type="radio" value="16" id="radio-16" name="radio_group_1">
+      <label for="radio-16">Radio 16</label>
+      <br/>
+    
+      <input type="radio" value="17" id="radio-17" name="radio_group_1">
+      <label for="radio-17">Radio 17</label>
+      <br/>
+    
+      <input type="radio" value="18" id="radio-18" name="radio_group_1">
+      <label for="radio-18">Radio 18</label>
+      <br/>
+    
+      <input type="radio" value="19" id="radio-19" name="radio_group_1">
+      <label for="radio-19">Radio 19</label>
+      <br/>
+    
+      <input type="radio" value="20" id="radio-20" name="radio_group_1">
+      <label for="radio-20">Radio 20</label>
+      <br/>
+    
+      <input type="radio" value="21" id="radio-21" name="radio_group_1">
+      <label for="radio-21">Radio 21</label>
+      <br/>
+    
+      <input type="radio" value="22" id="radio-22" name="radio_group_1">
+      <label for="radio-22">Radio 22</label>
+      <br/>
+    
+      <input type="radio" value="23" id="radio-23" name="radio_group_1">
+      <label for="radio-23">Radio 23</label>
+      <br/>
+    
+      <input type="radio" value="24" id="radio-24" name="radio_group_1">
+      <label for="radio-24">Radio 24</label>
+      <br/>
+    
+      <input type="radio" value="25" id="radio-25" name="radio_group_1">
+      <label for="radio-25">Radio 25</label>
+      <br/>
+    
+      <input type="radio" value="26" id="radio-26" name="radio_group_1">
+      <label for="radio-26">Radio 26</label>
+      <br/>
+    
+      <input type="radio" value="27" id="radio-27" name="radio_group_1">
+      <label for="radio-27">Radio 27</label>
+      <br/>
+    
+      <input type="radio" value="28" id="radio-28" name="radio_group_1">
+      <label for="radio-28">Radio 28</label>
+      <br/>
+    
+      <input type="radio" value="29" id="radio-29" name="radio_group_1">
+      <label for="radio-29">Radio 29</label>
+      <br/>
+    
+      <input type="radio" value="30" id="radio-30" name="radio_group_1">
+      <label for="radio-30">Radio 30</label>
+      <br/>
+    
+      <input type="radio" value="31" id="radio-31" name="radio_group_1">
+      <label for="radio-31">Radio 31</label>
+      <br/>
+    
+      <input type="radio" value="32" id="radio-32" name="radio_group_1">
+      <label for="radio-32">Radio 32</label>
+      <br/>
+    
+      <input type="radio" value="33" id="radio-33" name="radio_group_1">
+      <label for="radio-33">Radio 33</label>
+      <br/>
+    
+      <input type="radio" value="34" id="radio-34" name="radio_group_1">
+      <label for="radio-34">Radio 34</label>
+      <br/>
+    
+      <input type="radio" value="35" id="radio-35" name="radio_group_1">
+      <label for="radio-35">Radio 35</label>
+      <br/>
+    
+      <input type="radio" value="36" id="radio-36" name="radio_group_1">
+      <label for="radio-36">Radio 36</label>
+      <br/>
+    
+      <input type="radio" value="37" id="radio-37" name="radio_group_1">
+      <label for="radio-37">Radio 37</label>
+      <br/>
+    
+      <input type="radio" value="38" id="radio-38" name="radio_group_1">
+      <label for="radio-38">Radio 38</label>
+      <br/>
+    
+      <input type="radio" value="39" id="radio-39" name="radio_group_1">
+      <label for="radio-39">Radio 39</label>
+      <br/>
+    
+      <input type="radio" value="40" id="radio-40" name="radio_group_1">
+      <label for="radio-40">Radio 40</label>
+      <br/>
+    
+      <input type="radio" value="41" id="radio-41" name="radio_group_1">
+      <label for="radio-41">Radio 41</label>
+      <br/>
+    
+      <input type="radio" value="42" id="radio-42" name="radio_group_1">
+      <label for="radio-42">Radio 42</label>
+      <br/>
+    
+      <input type="radio" value="43" id="radio-43" name="radio_group_1">
+      <label for="radio-43">Radio 43</label>
+      <br/>
+    
+      <input type="radio" value="44" id="radio-44" name="radio_group_1">
+      <label for="radio-44">Radio 44</label>
+      <br/>
+    
+      <input type="radio" value="45" id="radio-45" name="radio_group_1">
+      <label for="radio-45">Radio 45</label>
+      <br/>
+    
+      <input type="radio" value="46" id="radio-46" name="radio_group_1">
+      <label for="radio-46">Radio 46</label>
+      <br/>
+    
+      <input type="radio" value="47" id="radio-47" name="radio_group_1">
+      <label for="radio-47">Radio 47</label>
+      <br/>
+    
+      <input type="radio" value="48" id="radio-48" name="radio_group_1">
+      <label for="radio-48">Radio 48</label>
+      <br/>
+    
+      <input type="radio" value="49" id="radio-49" name="radio_group_1">
+      <label for="radio-49">Radio 49</label>
+      <br/>
+    
+      <input type="radio" value="50" id="radio-50" name="radio_group_1">
+      <label for="radio-50">Radio 50</label>
+      <br/>
+    
+      <input type="radio" value="51" id="radio-51" name="radio_group_1">
+      <label for="radio-51">Radio 51</label>
+      <br/>
+    
+      <input type="radio" value="52" id="radio-52" name="radio_group_1">
+      <label for="radio-52">Radio 52</label>
+      <br/>
+    
+      <input type="radio" value="53" id="radio-53" name="radio_group_1">
+      <label for="radio-53">Radio 53</label>
+      <br/>
+    
+      <input type="radio" value="54" id="radio-54" name="radio_group_1">
+      <label for="radio-54">Radio 54</label>
+      <br/>
+    
+      <input type="radio" value="55" id="radio-55" name="radio_group_1">
+      <label for="radio-55">Radio 55</label>
+      <br/>
+    
+      <input type="radio" value="56" id="radio-56" name="radio_group_1">
+      <label for="radio-56">Radio 56</label>
+      <br/>
+    
+      <input type="radio" value="57" id="radio-57" name="radio_group_1">
+      <label for="radio-57">Radio 57</label>
+      <br/>
+    
+      <input type="radio" value="58" id="radio-58" name="radio_group_1">
+      <label for="radio-58">Radio 58</label>
+      <br/>
+    
+      <input type="radio" value="59" id="radio-59" name="radio_group_1">
+      <label for="radio-59">Radio 59</label>
+      <br/>
+    
+      <input type="radio" value="60" id="radio-60" name="radio_group_1">
+      <label for="radio-60">Radio 60</label>
+      <br/>
+    
+      <input type="radio" value="61" id="radio-61" name="radio_group_1">
+      <label for="radio-61">Radio 61</label>
+      <br/>
+    
+      <input type="radio" value="62" id="radio-62" name="radio_group_1">
+      <label for="radio-62">Radio 62</label>
+      <br/>
+    
+      <input type="radio" value="63" id="radio-63" name="radio_group_1">
+      <label for="radio-63">Radio 63</label>
+      <br/>
+    
+      <input type="radio" value="64" id="radio-64" name="radio_group_1">
+      <label for="radio-64">Radio 64</label>
+      <br/>
+    
+      <input type="radio" value="65" id="radio-65" name="radio_group_1">
+      <label for="radio-65">Radio 65</label>
+      <br/>
+    
+      <input type="radio" value="66" id="radio-66" name="radio_group_1">
+      <label for="radio-66">Radio 66</label>
+      <br/>
+    
+      <input type="radio" value="67" id="radio-67" name="radio_group_1">
+      <label for="radio-67">Radio 67</label>
+      <br/>
+    
+      <input type="radio" value="68" id="radio-68" name="radio_group_1">
+      <label for="radio-68">Radio 68</label>
+      <br/>
+    
+      <input type="radio" value="69" id="radio-69" name="radio_group_1">
+      <label for="radio-69">Radio 69</label>
+      <br/>
+    
+      <input type="radio" value="70" id="radio-70" name="radio_group_1">
+      <label for="radio-70">Radio 70</label>
+      <br/>
+    
+      <input type="radio" value="71" id="radio-71" name="radio_group_1">
+      <label for="radio-71">Radio 71</label>
+      <br/>
+    
+      <input type="radio" value="72" id="radio-72" name="radio_group_1">
+      <label for="radio-72">Radio 72</label>
+      <br/>
+    
+      <input type="radio" value="73" id="radio-73" name="radio_group_1">
+      <label for="radio-73">Radio 73</label>
+      <br/>
+    
+      <input type="radio" value="74" id="radio-74" name="radio_group_1">
+      <label for="radio-74">Radio 74</label>
+      <br/>
+    
+      <input type="radio" value="75" id="radio-75" name="radio_group_1">
+      <label for="radio-75">Radio 75</label>
+      <br/>
+    
+      <input type="radio" value="76" id="radio-76" name="radio_group_1">
+      <label for="radio-76">Radio 76</label>
+      <br/>
+    
+      <input type="radio" value="77" id="radio-77" name="radio_group_1">
+      <label for="radio-77">Radio 77</label>
+      <br/>
+    
+      <input type="radio" value="78" id="radio-78" name="radio_group_1">
+      <label for="radio-78">Radio 78</label>
+      <br/>
+    
+      <input type="radio" value="79" id="radio-79" name="radio_group_1">
+      <label for="radio-79">Radio 79</label>
+      <br/>
+    
+      <input type="radio" value="80" id="radio-80" name="radio_group_1">
+      <label for="radio-80">Radio 80</label>
+      <br/>
+    
+      <input type="radio" value="81" id="radio-81" name="radio_group_1">
+      <label for="radio-81">Radio 81</label>
+      <br/>
+    
+      <input type="radio" value="82" id="radio-82" name="radio_group_1">
+      <label for="radio-82">Radio 82</label>
+      <br/>
+    
+      <input type="radio" value="83" id="radio-83" name="radio_group_1">
+      <label for="radio-83">Radio 83</label>
+      <br/>
+    
+      <input type="radio" value="84" id="radio-84" name="radio_group_1">
+      <label for="radio-84">Radio 84</label>
+      <br/>
+    
+      <input type="radio" value="85" id="radio-85" name="radio_group_1">
+      <label for="radio-85">Radio 85</label>
+      <br/>
+    
+      <input type="radio" value="86" id="radio-86" name="radio_group_1">
+      <label for="radio-86">Radio 86</label>
+      <br/>
+    
+      <input type="radio" value="87" id="radio-87" name="radio_group_1">
+      <label for="radio-87">Radio 87</label>
+      <br/>
+    
+      <input type="radio" value="88" id="radio-88" name="radio_group_1">
+      <label for="radio-88">Radio 88</label>
+      <br/>
+    
+      <input type="radio" value="89" id="radio-89" name="radio_group_1">
+      <label for="radio-89">Radio 89</label>
+      <br/>
+    
+      <input type="radio" value="90" id="radio-90" name="radio_group_1">
+      <label for="radio-90">Radio 90</label>
+      <br/>
+    
+      <input type="radio" value="91" id="radio-91" name="radio_group_1">
+      <label for="radio-91">Radio 91</label>
+      <br/>
+    
+      <input type="radio" value="92" id="radio-92" name="radio_group_1">
+      <label for="radio-92">Radio 92</label>
+      <br/>
+    
+      <input type="radio" value="93" id="radio-93" name="radio_group_1">
+      <label for="radio-93">Radio 93</label>
+      <br/>
+    
+      <input type="radio" value="94" id="radio-94" name="radio_group_1">
+      <label for="radio-94">Radio 94</label>
+      <br/>
+    
+      <input type="radio" value="95" id="radio-95" name="radio_group_1">
+      <label for="radio-95">Radio 95</label>
+      <br/>
+    
+      <input type="radio" value="96" id="radio-96" name="radio_group_1">
+      <label for="radio-96">Radio 96</label>
+      <br/>
+    
+      <input type="radio" value="97" id="radio-97" name="radio_group_1">
+      <label for="radio-97">Radio 97</label>
+      <br/>
+    
+      <input type="radio" value="98" id="radio-98" name="radio_group_1">
+      <label for="radio-98">Radio 98</label>
+      <br/>
+    
+      <input type="radio" value="99" id="radio-99" name="radio_group_1">
+      <label for="radio-99">Radio 99</label>
+      <br/>
+    
+      <input type="radio" value="100" id="radio-100" name="radio_group_1">
+      <label for="radio-100">Radio 100</label>
+      <br/>
+    
+  </fieldset>
+  <fieldset class="uniform">
+    <legend>Uniform</legend>    
+    
+      <input type="radio" value="101" id="radio-101" name="radio_group_2">
+      <label for="radio-101">Radio 101</label>
+      <br/>
+    
+      <input type="radio" value="102" id="radio-102" name="radio_group_2">
+      <label for="radio-102">Radio 102</label>
+      <br/>
+    
+      <input type="radio" value="103" id="radio-103" name="radio_group_2">
+      <label for="radio-103">Radio 103</label>
+      <br/>
+    
+      <input type="radio" value="104" id="radio-104" name="radio_group_2">
+      <label for="radio-104">Radio 104</label>
+      <br/>
+    
+      <input type="radio" value="105" id="radio-105" name="radio_group_2">
+      <label for="radio-105">Radio 105</label>
+      <br/>
+    
+      <input type="radio" value="106" id="radio-106" name="radio_group_2">
+      <label for="radio-106">Radio 106</label>
+      <br/>
+    
+      <input type="radio" value="107" id="radio-107" name="radio_group_2">
+      <label for="radio-107">Radio 107</label>
+      <br/>
+    
+      <input type="radio" value="108" id="radio-108" name="radio_group_2">
+      <label for="radio-108">Radio 108</label>
+      <br/>
+    
+      <input type="radio" value="109" id="radio-109" name="radio_group_2">
+      <label for="radio-109">Radio 109</label>
+      <br/>
+    
+      <input type="radio" value="110" id="radio-110" name="radio_group_2">
+      <label for="radio-110">Radio 110</label>
+      <br/>
+    
+      <input type="radio" value="111" id="radio-111" name="radio_group_2">
+      <label for="radio-111">Radio 111</label>
+      <br/>
+    
+      <input type="radio" value="112" id="radio-112" name="radio_group_2">
+      <label for="radio-112">Radio 112</label>
+      <br/>
+    
+      <input type="radio" value="113" id="radio-113" name="radio_group_2">
+      <label for="radio-113">Radio 113</label>
+      <br/>
+    
+      <input type="radio" value="114" id="radio-114" name="radio_group_2">
+      <label for="radio-114">Radio 114</label>
+      <br/>
+    
+      <input type="radio" value="115" id="radio-115" name="radio_group_2">
+      <label for="radio-115">Radio 115</label>
+      <br/>
+    
+      <input type="radio" value="116" id="radio-116" name="radio_group_2">
+      <label for="radio-116">Radio 116</label>
+      <br/>
+    
+      <input type="radio" value="117" id="radio-117" name="radio_group_2">
+      <label for="radio-117">Radio 117</label>
+      <br/>
+    
+      <input type="radio" value="118" id="radio-118" name="radio_group_2">
+      <label for="radio-118">Radio 118</label>
+      <br/>
+    
+      <input type="radio" value="119" id="radio-119" name="radio_group_2">
+      <label for="radio-119">Radio 119</label>
+      <br/>
+    
+      <input type="radio" value="120" id="radio-120" name="radio_group_2">
+      <label for="radio-120">Radio 120</label>
+      <br/>
+    
+      <input type="radio" value="121" id="radio-121" name="radio_group_2">
+      <label for="radio-121">Radio 121</label>
+      <br/>
+    
+      <input type="radio" value="122" id="radio-122" name="radio_group_2">
+      <label for="radio-122">Radio 122</label>
+      <br/>
+    
+      <input type="radio" value="123" id="radio-123" name="radio_group_2">
+      <label for="radio-123">Radio 123</label>
+      <br/>
+    
+      <input type="radio" value="124" id="radio-124" name="radio_group_2">
+      <label for="radio-124">Radio 124</label>
+      <br/>
+    
+      <input type="radio" value="125" id="radio-125" name="radio_group_2">
+      <label for="radio-125">Radio 125</label>
+      <br/>
+    
+      <input type="radio" value="126" id="radio-126" name="radio_group_2">
+      <label for="radio-126">Radio 126</label>
+      <br/>
+    
+      <input type="radio" value="127" id="radio-127" name="radio_group_2">
+      <label for="radio-127">Radio 127</label>
+      <br/>
+    
+      <input type="radio" value="128" id="radio-128" name="radio_group_2">
+      <label for="radio-128">Radio 128</label>
+      <br/>
+    
+      <input type="radio" value="129" id="radio-129" name="radio_group_2">
+      <label for="radio-129">Radio 129</label>
+      <br/>
+    
+      <input type="radio" value="130" id="radio-130" name="radio_group_2">
+      <label for="radio-130">Radio 130</label>
+      <br/>
+    
+      <input type="radio" value="131" id="radio-131" name="radio_group_2">
+      <label for="radio-131">Radio 131</label>
+      <br/>
+    
+      <input type="radio" value="132" id="radio-132" name="radio_group_2">
+      <label for="radio-132">Radio 132</label>
+      <br/>
+    
+      <input type="radio" value="133" id="radio-133" name="radio_group_2">
+      <label for="radio-133">Radio 133</label>
+      <br/>
+    
+      <input type="radio" value="134" id="radio-134" name="radio_group_2">
+      <label for="radio-134">Radio 134</label>
+      <br/>
+    
+      <input type="radio" value="135" id="radio-135" name="radio_group_2">
+      <label for="radio-135">Radio 135</label>
+      <br/>
+    
+      <input type="radio" value="136" id="radio-136" name="radio_group_2">
+      <label for="radio-136">Radio 136</label>
+      <br/>
+    
+      <input type="radio" value="137" id="radio-137" name="radio_group_2">
+      <label for="radio-137">Radio 137</label>
+      <br/>
+    
+      <input type="radio" value="138" id="radio-138" name="radio_group_2">
+      <label for="radio-138">Radio 138</label>
+      <br/>
+    
+      <input type="radio" value="139" id="radio-139" name="radio_group_2">
+      <label for="radio-139">Radio 139</label>
+      <br/>
+    
+      <input type="radio" value="140" id="radio-140" name="radio_group_2">
+      <label for="radio-140">Radio 140</label>
+      <br/>
+    
+      <input type="radio" value="141" id="radio-141" name="radio_group_2">
+      <label for="radio-141">Radio 141</label>
+      <br/>
+    
+      <input type="radio" value="142" id="radio-142" name="radio_group_2">
+      <label for="radio-142">Radio 142</label>
+      <br/>
+    
+      <input type="radio" value="143" id="radio-143" name="radio_group_2">
+      <label for="radio-143">Radio 143</label>
+      <br/>
+    
+      <input type="radio" value="144" id="radio-144" name="radio_group_2">
+      <label for="radio-144">Radio 144</label>
+      <br/>
+    
+      <input type="radio" value="145" id="radio-145" name="radio_group_2">
+      <label for="radio-145">Radio 145</label>
+      <br/>
+    
+      <input type="radio" value="146" id="radio-146" name="radio_group_2">
+      <label for="radio-146">Radio 146</label>
+      <br/>
+    
+      <input type="radio" value="147" id="radio-147" name="radio_group_2">
+      <label for="radio-147">Radio 147</label>
+      <br/>
+    
+      <input type="radio" value="148" id="radio-148" name="radio_group_2">
+      <label for="radio-148">Radio 148</label>
+      <br/>
+    
+      <input type="radio" value="149" id="radio-149" name="radio_group_2">
+      <label for="radio-149">Radio 149</label>
+      <br/>
+    
+      <input type="radio" value="150" id="radio-150" name="radio_group_2">
+      <label for="radio-150">Radio 150</label>
+      <br/>
+    
+      <input type="radio" value="151" id="radio-151" name="radio_group_2">
+      <label for="radio-151">Radio 151</label>
+      <br/>
+    
+      <input type="radio" value="152" id="radio-152" name="radio_group_2">
+      <label for="radio-152">Radio 152</label>
+      <br/>
+    
+      <input type="radio" value="153" id="radio-153" name="radio_group_2">
+      <label for="radio-153">Radio 153</label>
+      <br/>
+    
+      <input type="radio" value="154" id="radio-154" name="radio_group_2">
+      <label for="radio-154">Radio 154</label>
+      <br/>
+    
+      <input type="radio" value="155" id="radio-155" name="radio_group_2">
+      <label for="radio-155">Radio 155</label>
+      <br/>
+    
+      <input type="radio" value="156" id="radio-156" name="radio_group_2">
+      <label for="radio-156">Radio 156</label>
+      <br/>
+    
+      <input type="radio" value="157" id="radio-157" name="radio_group_2">
+      <label for="radio-157">Radio 157</label>
+      <br/>
+    
+      <input type="radio" value="158" id="radio-158" name="radio_group_2">
+      <label for="radio-158">Radio 158</label>
+      <br/>
+    
+      <input type="radio" value="159" id="radio-159" name="radio_group_2">
+      <label for="radio-159">Radio 159</label>
+      <br/>
+    
+      <input type="radio" value="160" id="radio-160" name="radio_group_2">
+      <label for="radio-160">Radio 160</label>
+      <br/>
+    
+      <input type="radio" value="161" id="radio-161" name="radio_group_2">
+      <label for="radio-161">Radio 161</label>
+      <br/>
+    
+      <input type="radio" value="162" id="radio-162" name="radio_group_2">
+      <label for="radio-162">Radio 162</label>
+      <br/>
+    
+      <input type="radio" value="163" id="radio-163" name="radio_group_2">
+      <label for="radio-163">Radio 163</label>
+      <br/>
+    
+      <input type="radio" value="164" id="radio-164" name="radio_group_2">
+      <label for="radio-164">Radio 164</label>
+      <br/>
+    
+      <input type="radio" value="165" id="radio-165" name="radio_group_2">
+      <label for="radio-165">Radio 165</label>
+      <br/>
+    
+      <input type="radio" value="166" id="radio-166" name="radio_group_2">
+      <label for="radio-166">Radio 166</label>
+      <br/>
+    
+      <input type="radio" value="167" id="radio-167" name="radio_group_2">
+      <label for="radio-167">Radio 167</label>
+      <br/>
+    
+      <input type="radio" value="168" id="radio-168" name="radio_group_2">
+      <label for="radio-168">Radio 168</label>
+      <br/>
+    
+      <input type="radio" value="169" id="radio-169" name="radio_group_2">
+      <label for="radio-169">Radio 169</label>
+      <br/>
+    
+      <input type="radio" value="170" id="radio-170" name="radio_group_2">
+      <label for="radio-170">Radio 170</label>
+      <br/>
+    
+      <input type="radio" value="171" id="radio-171" name="radio_group_2">
+      <label for="radio-171">Radio 171</label>
+      <br/>
+    
+      <input type="radio" value="172" id="radio-172" name="radio_group_2">
+      <label for="radio-172">Radio 172</label>
+      <br/>
+    
+      <input type="radio" value="173" id="radio-173" name="radio_group_2">
+      <label for="radio-173">Radio 173</label>
+      <br/>
+    
+      <input type="radio" value="174" id="radio-174" name="radio_group_2">
+      <label for="radio-174">Radio 174</label>
+      <br/>
+    
+      <input type="radio" value="175" id="radio-175" name="radio_group_2">
+      <label for="radio-175">Radio 175</label>
+      <br/>
+    
+      <input type="radio" value="176" id="radio-176" name="radio_group_2">
+      <label for="radio-176">Radio 176</label>
+      <br/>
+    
+      <input type="radio" value="177" id="radio-177" name="radio_group_2">
+      <label for="radio-177">Radio 177</label>
+      <br/>
+    
+      <input type="radio" value="178" id="radio-178" name="radio_group_2">
+      <label for="radio-178">Radio 178</label>
+      <br/>
+    
+      <input type="radio" value="179" id="radio-179" name="radio_group_2">
+      <label for="radio-179">Radio 179</label>
+      <br/>
+    
+      <input type="radio" value="180" id="radio-180" name="radio_group_2">
+      <label for="radio-180">Radio 180</label>
+      <br/>
+    
+      <input type="radio" value="181" id="radio-181" name="radio_group_2">
+      <label for="radio-181">Radio 181</label>
+      <br/>
+    
+      <input type="radio" value="182" id="radio-182" name="radio_group_2">
+      <label for="radio-182">Radio 182</label>
+      <br/>
+    
+      <input type="radio" value="183" id="radio-183" name="radio_group_2">
+      <label for="radio-183">Radio 183</label>
+      <br/>
+    
+      <input type="radio" value="184" id="radio-184" name="radio_group_2">
+      <label for="radio-184">Radio 184</label>
+      <br/>
+    
+      <input type="radio" value="185" id="radio-185" name="radio_group_2">
+      <label for="radio-185">Radio 185</label>
+      <br/>
+    
+      <input type="radio" value="186" id="radio-186" name="radio_group_2">
+      <label for="radio-186">Radio 186</label>
+      <br/>
+    
+      <input type="radio" value="187" id="radio-187" name="radio_group_2">
+      <label for="radio-187">Radio 187</label>
+      <br/>
+    
+      <input type="radio" value="188" id="radio-188" name="radio_group_2">
+      <label for="radio-188">Radio 188</label>
+      <br/>
+    
+      <input type="radio" value="189" id="radio-189" name="radio_group_2">
+      <label for="radio-189">Radio 189</label>
+      <br/>
+    
+      <input type="radio" value="190" id="radio-190" name="radio_group_2">
+      <label for="radio-190">Radio 190</label>
+      <br/>
+    
+      <input type="radio" value="191" id="radio-191" name="radio_group_2">
+      <label for="radio-191">Radio 191</label>
+      <br/>
+    
+      <input type="radio" value="192" id="radio-192" name="radio_group_2">
+      <label for="radio-192">Radio 192</label>
+      <br/>
+    
+      <input type="radio" value="193" id="radio-193" name="radio_group_2">
+      <label for="radio-193">Radio 193</label>
+      <br/>
+    
+      <input type="radio" value="194" id="radio-194" name="radio_group_2">
+      <label for="radio-194">Radio 194</label>
+      <br/>
+    
+      <input type="radio" value="195" id="radio-195" name="radio_group_2">
+      <label for="radio-195">Radio 195</label>
+      <br/>
+    
+      <input type="radio" value="196" id="radio-196" name="radio_group_2">
+      <label for="radio-196">Radio 196</label>
+      <br/>
+    
+      <input type="radio" value="197" id="radio-197" name="radio_group_2">
+      <label for="radio-197">Radio 197</label>
+      <br/>
+    
+      <input type="radio" value="198" id="radio-198" name="radio_group_2">
+      <label for="radio-198">Radio 198</label>
+      <br/>
+    
+      <input type="radio" value="199" id="radio-199" name="radio_group_2">
+      <label for="radio-199">Radio 199</label>
+      <br/>
+    
+      <input type="radio" value="200" id="radio-200" name="radio_group_2">
+      <label for="radio-200">Radio 200</label>
+      <br/>
+    
+  </fieldset>
+  <fieldset class="pretty">
+    <legend>PrettyCheckboxes</legend>    
+    
+      <input type="radio" value="201" id="radio-201" name="radio_group_3">
+      <label for="radio-201">Radio 201</label>
+      <br/>
+    
+      <input type="radio" value="202" id="radio-202" name="radio_group_3">
+      <label for="radio-202">Radio 202</label>
+      <br/>
+    
+      <input type="radio" value="203" id="radio-203" name="radio_group_3">
+      <label for="radio-203">Radio 203</label>
+      <br/>
+    
+      <input type="radio" value="204" id="radio-204" name="radio_group_3">
+      <label for="radio-204">Radio 204</label>
+      <br/>
+    
+      <input type="radio" value="205" id="radio-205" name="radio_group_3">
+      <label for="radio-205">Radio 205</label>
+      <br/>
+    
+      <input type="radio" value="206" id="radio-206" name="radio_group_3">
+      <label for="radio-206">Radio 206</label>
+      <br/>
+    
+      <input type="radio" value="207" id="radio-207" name="radio_group_3">
+      <label for="radio-207">Radio 207</label>
+      <br/>
+    
+      <input type="radio" value="208" id="radio-208" name="radio_group_3">
+      <label for="radio-208">Radio 208</label>
+      <br/>
+    
+      <input type="radio" value="209" id="radio-209" name="radio_group_3">
+      <label for="radio-209">Radio 209</label>
+      <br/>
+    
+      <input type="radio" value="210" id="radio-210" name="radio_group_3">
+      <label for="radio-210">Radio 210</label>
+      <br/>
+    
+      <input type="radio" value="211" id="radio-211" name="radio_group_3">
+      <label for="radio-211">Radio 211</label>
+      <br/>
+    
+      <input type="radio" value="212" id="radio-212" name="radio_group_3">
+      <label for="radio-212">Radio 212</label>
+      <br/>
+    
+      <input type="radio" value="213" id="radio-213" name="radio_group_3">
+      <label for="radio-213">Radio 213</label>
+      <br/>
+    
+      <input type="radio" value="214" id="radio-214" name="radio_group_3">
+      <label for="radio-214">Radio 214</label>
+      <br/>
+    
+      <input type="radio" value="215" id="radio-215" name="radio_group_3">
+      <label for="radio-215">Radio 215</label>
+      <br/>
+    
+      <input type="radio" value="216" id="radio-216" name="radio_group_3">
+      <label for="radio-216">Radio 216</label>
+      <br/>
+    
+      <input type="radio" value="217" id="radio-217" name="radio_group_3">
+      <label for="radio-217">Radio 217</label>
+      <br/>
+    
+      <input type="radio" value="218" id="radio-218" name="radio_group_3">
+      <label for="radio-218">Radio 218</label>
+      <br/>
+    
+      <input type="radio" value="219" id="radio-219" name="radio_group_3">
+      <label for="radio-219">Radio 219</label>
+      <br/>
+    
+      <input type="radio" value="220" id="radio-220" name="radio_group_3">
+      <label for="radio-220">Radio 220</label>
+      <br/>
+    
+      <input type="radio" value="221" id="radio-221" name="radio_group_3">
+      <label for="radio-221">Radio 221</label>
+      <br/>
+    
+      <input type="radio" value="222" id="radio-222" name="radio_group_3">
+      <label for="radio-222">Radio 222</label>
+      <br/>
+    
+      <input type="radio" value="223" id="radio-223" name="radio_group_3">
+      <label for="radio-223">Radio 223</label>
+      <br/>
+    
+      <input type="radio" value="224" id="radio-224" name="radio_group_3">
+      <label for="radio-224">Radio 224</label>
+      <br/>
+    
+      <input type="radio" value="225" id="radio-225" name="radio_group_3">
+      <label for="radio-225">Radio 225</label>
+      <br/>
+    
+      <input type="radio" value="226" id="radio-226" name="radio_group_3">
+      <label for="radio-226">Radio 226</label>
+      <br/>
+    
+      <input type="radio" value="227" id="radio-227" name="radio_group_3">
+      <label for="radio-227">Radio 227</label>
+      <br/>
+    
+      <input type="radio" value="228" id="radio-228" name="radio_group_3">
+      <label for="radio-228">Radio 228</label>
+      <br/>
+    
+      <input type="radio" value="229" id="radio-229" name="radio_group_3">
+      <label for="radio-229">Radio 229</label>
+      <br/>
+    
+      <input type="radio" value="230" id="radio-230" name="radio_group_3">
+      <label for="radio-230">Radio 230</label>
+      <br/>
+    
+      <input type="radio" value="231" id="radio-231" name="radio_group_3">
+      <label for="radio-231">Radio 231</label>
+      <br/>
+    
+      <input type="radio" value="232" id="radio-232" name="radio_group_3">
+      <label for="radio-232">Radio 232</label>
+      <br/>
+    
+      <input type="radio" value="233" id="radio-233" name="radio_group_3">
+      <label for="radio-233">Radio 233</label>
+      <br/>
+    
+      <input type="radio" value="234" id="radio-234" name="radio_group_3">
+      <label for="radio-234">Radio 234</label>
+      <br/>
+    
+      <input type="radio" value="235" id="radio-235" name="radio_group_3">
+      <label for="radio-235">Radio 235</label>
+      <br/>
+    
+      <input type="radio" value="236" id="radio-236" name="radio_group_3">
+      <label for="radio-236">Radio 236</label>
+      <br/>
+    
+      <input type="radio" value="237" id="radio-237" name="radio_group_3">
+      <label for="radio-237">Radio 237</label>
+      <br/>
+    
+      <input type="radio" value="238" id="radio-238" name="radio_group_3">
+      <label for="radio-238">Radio 238</label>
+      <br/>
+    
+      <input type="radio" value="239" id="radio-239" name="radio_group_3">
+      <label for="radio-239">Radio 239</label>
+      <br/>
+    
+      <input type="radio" value="240" id="radio-240" name="radio_group_3">
+      <label for="radio-240">Radio 240</label>
+      <br/>
+    
+      <input type="radio" value="241" id="radio-241" name="radio_group_3">
+      <label for="radio-241">Radio 241</label>
+      <br/>
+    
+      <input type="radio" value="242" id="radio-242" name="radio_group_3">
+      <label for="radio-242">Radio 242</label>
+      <br/>
+    
+      <input type="radio" value="243" id="radio-243" name="radio_group_3">
+      <label for="radio-243">Radio 243</label>
+      <br/>
+    
+      <input type="radio" value="244" id="radio-244" name="radio_group_3">
+      <label for="radio-244">Radio 244</label>
+      <br/>
+    
+      <input type="radio" value="245" id="radio-245" name="radio_group_3">
+      <label for="radio-245">Radio 245</label>
+      <br/>
+    
+      <input type="radio" value="246" id="radio-246" name="radio_group_3">
+      <label for="radio-246">Radio 246</label>
+      <br/>
+    
+      <input type="radio" value="247" id="radio-247" name="radio_group_3">
+      <label for="radio-247">Radio 247</label>
+      <br/>
+    
+      <input type="radio" value="248" id="radio-248" name="radio_group_3">
+      <label for="radio-248">Radio 248</label>
+      <br/>
+    
+      <input type="radio" value="249" id="radio-249" name="radio_group_3">
+      <label for="radio-249">Radio 249</label>
+      <br/>
+    
+      <input type="radio" value="250" id="radio-250" name="radio_group_3">
+      <label for="radio-250">Radio 250</label>
+      <br/>
+    
+      <input type="radio" value="251" id="radio-251" name="radio_group_3">
+      <label for="radio-251">Radio 251</label>
+      <br/>
+    
+      <input type="radio" value="252" id="radio-252" name="radio_group_3">
+      <label for="radio-252">Radio 252</label>
+      <br/>
+    
+      <input type="radio" value="253" id="radio-253" name="radio_group_3">
+      <label for="radio-253">Radio 253</label>
+      <br/>
+    
+      <input type="radio" value="254" id="radio-254" name="radio_group_3">
+      <label for="radio-254">Radio 254</label>
+      <br/>
+    
+      <input type="radio" value="255" id="radio-255" name="radio_group_3">
+      <label for="radio-255">Radio 255</label>
+      <br/>
+    
+      <input type="radio" value="256" id="radio-256" name="radio_group_3">
+      <label for="radio-256">Radio 256</label>
+      <br/>
+    
+      <input type="radio" value="257" id="radio-257" name="radio_group_3">
+      <label for="radio-257">Radio 257</label>
+      <br/>
+    
+      <input type="radio" value="258" id="radio-258" name="radio_group_3">
+      <label for="radio-258">Radio 258</label>
+      <br/>
+    
+      <input type="radio" value="259" id="radio-259" name="radio_group_3">
+      <label for="radio-259">Radio 259</label>
+      <br/>
+    
+      <input type="radio" value="260" id="radio-260" name="radio_group_3">
+      <label for="radio-260">Radio 260</label>
+      <br/>
+    
+      <input type="radio" value="261" id="radio-261" name="radio_group_3">
+      <label for="radio-261">Radio 261</label>
+      <br/>
+    
+      <input type="radio" value="262" id="radio-262" name="radio_group_3">
+      <label for="radio-262">Radio 262</label>
+      <br/>
+    
+      <input type="radio" value="263" id="radio-263" name="radio_group_3">
+      <label for="radio-263">Radio 263</label>
+      <br/>
+    
+      <input type="radio" value="264" id="radio-264" name="radio_group_3">
+      <label for="radio-264">Radio 264</label>
+      <br/>
+    
+      <input type="radio" value="265" id="radio-265" name="radio_group_3">
+      <label for="radio-265">Radio 265</label>
+      <br/>
+    
+      <input type="radio" value="266" id="radio-266" name="radio_group_3">
+      <label for="radio-266">Radio 266</label>
+      <br/>
+    
+      <input type="radio" value="267" id="radio-267" name="radio_group_3">
+      <label for="radio-267">Radio 267</label>
+      <br/>
+    
+      <input type="radio" value="268" id="radio-268" name="radio_group_3">
+      <label for="radio-268">Radio 268</label>
+      <br/>
+    
+      <input type="radio" value="269" id="radio-269" name="radio_group_3">
+      <label for="radio-269">Radio 269</label>
+      <br/>
+    
+      <input type="radio" value="270" id="radio-270" name="radio_group_3">
+      <label for="radio-270">Radio 270</label>
+      <br/>
+    
+      <input type="radio" value="271" id="radio-271" name="radio_group_3">
+      <label for="radio-271">Radio 271</label>
+      <br/>
+    
+      <input type="radio" value="272" id="radio-272" name="radio_group_3">
+      <label for="radio-272">Radio 272</label>
+      <br/>
+    
+      <input type="radio" value="273" id="radio-273" name="radio_group_3">
+      <label for="radio-273">Radio 273</label>
+      <br/>
+    
+      <input type="radio" value="274" id="radio-274" name="radio_group_3">
+      <label for="radio-274">Radio 274</label>
+      <br/>
+    
+      <input type="radio" value="275" id="radio-275" name="radio_group_3">
+      <label for="radio-275">Radio 275</label>
+      <br/>
+    
+      <input type="radio" value="276" id="radio-276" name="radio_group_3">
+      <label for="radio-276">Radio 276</label>
+      <br/>
+    
+      <input type="radio" value="277" id="radio-277" name="radio_group_3">
+      <label for="radio-277">Radio 277</label>
+      <br/>
+    
+      <input type="radio" value="278" id="radio-278" name="radio_group_3">
+      <label for="radio-278">Radio 278</label>
+      <br/>
+    
+      <input type="radio" value="279" id="radio-279" name="radio_group_3">
+      <label for="radio-279">Radio 279</label>
+      <br/>
+    
+      <input type="radio" value="280" id="radio-280" name="radio_group_3">
+      <label for="radio-280">Radio 280</label>
+      <br/>
+    
+      <input type="radio" value="281" id="radio-281" name="radio_group_3">
+      <label for="radio-281">Radio 281</label>
+      <br/>
+    
+      <input type="radio" value="282" id="radio-282" name="radio_group_3">
+      <label for="radio-282">Radio 282</label>
+      <br/>
+    
+      <input type="radio" value="283" id="radio-283" name="radio_group_3">
+      <label for="radio-283">Radio 283</label>
+      <br/>
+    
+      <input type="radio" value="284" id="radio-284" name="radio_group_3">
+      <label for="radio-284">Radio 284</label>
+      <br/>
+    
+      <input type="radio" value="285" id="radio-285" name="radio_group_3">
+      <label for="radio-285">Radio 285</label>
+      <br/>
+    
+      <input type="radio" value="286" id="radio-286" name="radio_group_3">
+      <label for="radio-286">Radio 286</label>
+      <br/>
+    
+      <input type="radio" value="287" id="radio-287" name="radio_group_3">
+      <label for="radio-287">Radio 287</label>
+      <br/>
+    
+      <input type="radio" value="288" id="radio-288" name="radio_group_3">
+      <label for="radio-288">Radio 288</label>
+      <br/>
+    
+      <input type="radio" value="289" id="radio-289" name="radio_group_3">
+      <label for="radio-289">Radio 289</label>
+      <br/>
+    
+      <input type="radio" value="290" id="radio-290" name="radio_group_3">
+      <label for="radio-290">Radio 290</label>
+      <br/>
+    
+      <input type="radio" value="291" id="radio-291" name="radio_group_3">
+      <label for="radio-291">Radio 291</label>
+      <br/>
+    
+      <input type="radio" value="292" id="radio-292" name="radio_group_3">
+      <label for="radio-292">Radio 292</label>
+      <br/>
+    
+      <input type="radio" value="293" id="radio-293" name="radio_group_3">
+      <label for="radio-293">Radio 293</label>
+      <br/>
+    
+      <input type="radio" value="294" id="radio-294" name="radio_group_3">
+      <label for="radio-294">Radio 294</label>
+      <br/>
+    
+      <input type="radio" value="295" id="radio-295" name="radio_group_3">
+      <label for="radio-295">Radio 295</label>
+      <br/>
+    
+      <input type="radio" value="296" id="radio-296" name="radio_group_3">
+      <label for="radio-296">Radio 296</label>
+      <br/>
+    
+      <input type="radio" value="297" id="radio-297" name="radio_group_3">
+      <label for="radio-297">Radio 297</label>
+      <br/>
+    
+      <input type="radio" value="298" id="radio-298" name="radio_group_3">
+      <label for="radio-298">Radio 298</label>
+      <br/>
+    
+      <input type="radio" value="299" id="radio-299" name="radio_group_3">
+      <label for="radio-299">Radio 299</label>
+      <br/>
+    
+      <input type="radio" value="300" id="radio-300" name="radio_group_3">
+      <label for="radio-300">Radio 300</label>
+      <br/>
+    
+  </fieldset>
+</form>
+
+
+
+
+
+
+
+    <script src="../../javascripts/benchmark.js/vendor/platform.js/platform.js"></script>
+    <script src="../../javascripts/benchmark.js/benchmark.js"></script>
+    <script src="../../javascripts/benchmark.js/benchmark-ui.js"></script>
+    
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
     <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
     
-    <script type="text/javascript" charset="utf-8">
+  <script src="../../javascripts/jquery.uniform.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../../javascripts/prettyCheckboxes.js" type="text/javascript" charset="utf-8"></script>
+
+    <script>
       
+  ui.add("Custom Form",function(){
+    $(".custom_form input").custom_form();
+  })
+  .add("Uniform",function(){
+    $(".uniform input").uniform();
+  })
+  .add("PrettyCheckboxes",function(){
+    $(".pretty input").prettyCheckboxes();
+  })
+  
+
     </script>
   </body>
 </html>

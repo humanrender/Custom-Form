@@ -1,0 +1,64 @@
+--- 
+title: Checkboxes
+---
+
+<form autocomplete="off" >
+  <fieldset class="custom_form">
+    <legend>Custom Form</legend>    
+    <% (1..40).each do |i| %>
+      <label for="select-<%=i%>">Select <%=i%></label>
+      <select id="select-<%=i%>" name="select-<%=i%>">
+        <% (1..100).each do |j| %>
+          <option value="<%=j%>">Option <%=j%></option>
+        <% end %>
+      </select>
+      <br/>
+    <% end %>
+  </fieldset>
+  <fieldset class="uniform">
+    <legend>Uniform</legend>    
+    <% (41..80).each do |i| %>
+      <label for="select-<%=i%>">Select <%=i%></label>
+      <select id="select-<%=i%>" name="select-<%=i%>">
+        <% (1..100).each do |j| %>
+          <option value="<%=j%>">Option <%=j%></option>
+        <% end %>
+      </select>
+      <br/>
+    <% end %>
+  </fieldset>
+</form>
+
+
+<% content_for :table do %>
+  <tr>
+    <th scope="row" id="title-1"><div>Custom-Form</div></th>
+    <td>
+    <pre><code>$(".custom_form select").custom_form()</code></pre>
+    </td>
+    <td id="results-1" class="results"></td>
+  </tr>
+  
+  <tr>
+    <th scope="row" id="title-2"><div>Uniform</div></th>
+    <td>
+    <pre><code>$(".uniform select").uniform()</code></pre>
+    </td>
+    <td id="results-2" class="results"></td>
+  </tr>
+<% end %>
+
+<% content_for :extra_js do %>
+  <script src="/javascripts/jquery.uniform.min.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/prettyCheckboxes.js" type="text/javascript" charset="utf-8"></script>
+<% end %>
+
+<% content_for :js do %>
+  ui.add("Custom Form",function(){
+    $(".custom_form select").custom_form();
+  })
+  .add("Uniform",function(){
+    $(".uniform select").uniform();
+  })
+  
+<% end %>
