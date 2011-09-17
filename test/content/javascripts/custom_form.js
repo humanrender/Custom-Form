@@ -10,7 +10,7 @@
     function init(options){
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
-      this.replacement = (options.select_replacement || this.get_replacement).apply(this)
+      this.replacement = this.get_replacement();
       this.replace_elements();
       this.init_replacement();
       this.init_mouse_events();
@@ -63,8 +63,9 @@
     }
   })()
   
-  // style='height:"+Select.select_height+"px;'
-  function Select(element){ this.element = element; this.element_type = "select";  }
+  function Select(element){ this.element = element;  }
+  
+  Select.prototype.element_type = "select";
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
@@ -82,18 +83,24 @@
   }
   
   Select.prototype.init_replacement = function(){
-    var styles = {width:(this.element.outerWidth()-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
-    this.element.css(styles);
-    this.replacement.css(styles);
     
-    var select_button = $(".select_button",this.replacement);
-    this.select_label = $(".select_label",this.replacement);
-    this.select_label.css({ 
-      width: (styles.width-select_button.outerWidth()-parseInt(this.select_label.css("padding-left"))-parseInt(this.select_label.css("padding-right"))),
+    this.select_label = $(".select_label",replacement);
+    
+    var replacement = this.replacement, 
+    element = this.element,
+    width = (element.outerWidth() - Number(replacement.css("border-left-width")) - Number(replacement.css("border-right-width"))),
+    button_width = $(".select_button",replacement).outerWidth(),
+    select_label = this.select_label;
+    
+    element.css("width",width);
+    replacement.css("width",width);
+    
+    select_label.css({ 
+      width: (width - button_width - Number(select_label.css("padding-left")) - Number(select_label.css("padding-right"))),
       "padding-right":0
     });
     
-    this.element.bind("change",this,this.select_change)
+    element.bind("change",this,this.select_change)
   }
   
   Select.prototype.select_change = function(event){

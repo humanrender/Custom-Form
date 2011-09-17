@@ -1898,7 +1898,7 @@ QUnit.diff = (function() {
 })(this);
 ;T;	@ ;
 @ I"/stylesheet/;T{;{;I" ;T;	@$;
-@$I"/javascripts/custom_form/;T{;{;I"í(function( $ ){
+@$I"/javascripts/custom_form/;T{;{;I"ã(function( $ ){
     
   $._mixin = {
     include:function(mixin,target){
@@ -1910,7 +1910,7 @@ QUnit.diff = (function() {
     function init(options){
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
-      this.replacement = (options.select_replacement || this.get_replacement).apply(this)
+      this.replacement = this.get_replacement();
       this.replace_elements();
       this.init_replacement();
       this.init_mouse_events();
@@ -1963,8 +1963,9 @@ QUnit.diff = (function() {
     }
   })()
   
-  // style='height:"+Select.select_height+"px;'
-  function Select(element){ this.element = element; this.element_type = "select";  }
+  function Select(element){ this.element = element;  }
+  
+  Select.prototype.element_type = "select";
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
@@ -1982,18 +1983,25 @@ QUnit.diff = (function() {
   }
   
   Select.prototype.init_replacement = function(){
-    var styles = {width:(this.element.outerWidth()-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
-    this.element.css(styles);
-    this.replacement.css(styles);
     
-    var select_button = $(".select_button",this.replacement);
-    this.select_label = $(".select_label",this.replacement);
-    this.select_label.css({ 
-      width: (styles.width-select_button.outerWidth()-parseInt(this.select_label.css("padding-left"))-parseInt(this.select_label.css("padding-right"))),
+    this.select_label = $(".select_label",replacement);
+    
+    var replacement = this.replacement, 
+    element = this.element,
+    width = (element.outerWidth() - Number(replacement.css("border-left-width")) - Number(replacement.css("border-right-width"))),
+    button_width = $(".select_button",replacement).outerWidth(),
+    select_label = this.select_label;
+    
+    element.css("width",width);
+    replacement.css("width",width);
+    
+    
+    select_label.css({ 
+      width: (width - button_width - Number(select_label.css("padding-left")) - Number(select_label.css("padding-right"))),
       "padding-right":0
     });
     
-    this.element.bind("change",this,this.select_change)
+    element.bind("change",this,this.select_change)
   }
   
   Select.prototype.select_change = function(event){
@@ -5769,7 +5777,7 @@ I"ž
       <br/>
     
   </fieldset>
-</form>;T;@CI"/unit/selects/;T{;{	;I"k<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+</form>;T;@CI"/unit/selects/;T{;{	;I"™<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -5958,8 +5966,9 @@ I"ž
     
     <script type="text/javascript" charset="utf-8">
       
+//  console.profile();
   $("select").custom_form();
-  
+//  console.profileEnd();
   function label_for($){
     return $.siblings(".select_content").find(".select_label")
   }
@@ -6008,9 +6017,10 @@ I"ž
     </script>
   </body>
 </html>
-;T;	I"À<% content_for :js do %>
+;T;	I"î<% content_for :js do %>
+//  console.profile();
   $("select").custom_form();
-  
+//  console.profileEnd();
   function label_for($){
     return $.siblings(".select_content").find(".select_label")
   }
