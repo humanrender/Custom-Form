@@ -201,17 +201,13 @@
   $._mixin.include(FormElement,Select);
   
   FormElement.get = function(_element){
-    var element = $(_element);
-    if(element.is("select")){
-      return Select.create(element)
-    }
-    else{
-      var input_type = element.attr("type");
-      switch(input_type){
+    var element = $(_element),
+        element_type = element.attr('type') || element[0].nodeName.toLowerCase();
+      switch( element_type ){
+        case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
         case "radio": return new Radio(element);
       }
-    }
   }
   
   function init(options){
