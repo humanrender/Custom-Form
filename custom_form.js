@@ -16,11 +16,6 @@
       this.init_mouse_events();
     }
     
-    function replace_elements(){
-      this.element.after(this.replacement);
-      this.replacement.append(this.element);
-    }
-    
     function hover(hover){
       hover ?
         this.replacement.addClass("hover_"+this.element_type) :
@@ -53,7 +48,6 @@
     
     return function(){
       this.init = init;
-      this.replace_elements = replace_elements;
       this.hover = hover;
       this.init_mouse_events = init_mouse_events;
       this.hover_handler = hover_handler;
@@ -82,7 +76,7 @@
   }
   
   Select.prototype.init_replacement = function(){
-    var styles = {width:(this.element.outerWidth()-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
+    var styles = {width:(this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
     this.element.css(styles);
     this.replacement.css(styles);
     
@@ -94,6 +88,12 @@
     });
     
     this.element.bind("change",this,this.select_change)
+  }
+  
+  Select.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
   }
   
   Select.prototype.select_change = function(event){
@@ -112,6 +112,11 @@
   function Checkbox(element){ this.element = element; this.element_type = "checkbox"; this.uncheckeable = false; }
   Checkbox.prototype.mouse_trigger = function(){
     return this.replacement
+  }
+  
+  Checkbox.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
   }
   
   Checkbox.prototype.get_replacement = function(){
