@@ -95,7 +95,6 @@
     element.css("width",width);
     replacement.css("width",width);
     
-    
     select_label.css({ 
       width: (width - button_width - Number(select_label.css("padding-left")) - Number(select_label.css("padding-right"))),
       "padding-right":0

@@ -1,0 +1,3 @@
+[submodule "test/output/javascripts/benchmark.js"]
+	path = test/output/javascripts/benchmark.js
+	url = https://github.com/humanrender/benchmark.js.git
