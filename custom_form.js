@@ -230,8 +230,6 @@
   function init(options){
     options = options || {}
     return this.each(function(){
-      if(!this.init_counter) this.init_counter = 0;
-      this.init_counter++
       if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
       var element = FormElement.get(this)
       element.init(options);
