@@ -66,6 +66,7 @@ span.select{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  
 }
 
 
@@ -73,7 +74,7 @@ span.select select{
   opacity: 0;
   filter: alpha(opacity=0);
   position: relative;
-  top: -19px;
+  top: -100%;
 /*  -webkit-appearance: none;*/
 }
 

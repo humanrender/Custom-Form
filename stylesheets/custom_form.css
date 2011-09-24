@@ -66,6 +66,7 @@ span.select{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  
 }
 
 
@@ -73,7 +74,7 @@ span.select select{
   opacity: 0;
   filter: alpha(opacity=0);
   position: relative;
-  top: -19px;
+  top: -100%;
 /*  -webkit-appearance: none;*/
 }
 
@@ -114,4 +115,8 @@ span.select .select_label{
   background-position:0 -84px;
   margin-left:7px;
   margin-top:9px;
+}
+
+.disabled_checkbox, .disabled_radio, .disabled_select{
+  opacity:0.5;
 }
