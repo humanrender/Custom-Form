@@ -116,3 +116,7 @@ span.select .select_label{
   margin-left:7px;
   margin-top:9px;
 }
+
+.disabled_checkbox, .disabled_radio, .disabled_select{
+  opacity:0.5;
+}
