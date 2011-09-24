@@ -55,40 +55,37 @@ span.select{
 }
 
 span.select, span.select .select_label, span.select .select_button{
-  height:21px;
+  height:201px;
+  line-height:201px;
 }
+
 
 span.select{
   border-style: solid;
   border-width: 1px;
   border-color: #6D6D6D;
-
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  
 }
-
 
 span.select select{
   opacity: 0;
   filter: alpha(opacity=0);
   position: relative;
   top: -100%;
+  height:100%;
 /*  -webkit-appearance: none;*/
 }
 
-span.select .select_content{
-  
-}
 span.select .select_label{
   float:left;
   margin:0;
   overflow:hidden;
   padding-right:1px;
   padding-left:2px;
-  
-  font:13px/21px Helvetica, Arial, sans-serif;
+  font-size:13px;
+  font-family: Helvetica, Arial, sans-serif;
   color:#000;
 }
 
@@ -112,9 +109,12 @@ span.select .select_label{
   display:block;
   width:7px;
   height:4px;
+  margin-left:-4px; /*width/2*/
+  margin-top:-2px; /*height/2*/
   background-position:0 -84px;
-  margin-left:7px;
-  margin-top:9px;
+  position:relative;
+  top:50%;
+  left:50%;
 }
 
 .disabled_checkbox, .disabled_radio, .disabled_select{
