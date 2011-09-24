@@ -141,7 +141,7 @@
   
   Checkbox.prototype.click_handler = function (event){
     event.data.checked();
-    input.trigger("click");
+    event.data.element.triggerHandler("click");
   }
   
   Checkbox.prototype.init_replacement = function(){
@@ -230,7 +230,9 @@
   function init(options){
     options = options || {}
     return this.each(function(){
-      if ($(this).is('select[size]')) return true;
+      if(!this.init_counter) this.init_counter = 0;
+      this.init_counter++
+      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
       var element = FormElement.get(this)
       element.init(options);
       this.custom_form_instance = element;
