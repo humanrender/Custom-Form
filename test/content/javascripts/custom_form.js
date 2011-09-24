@@ -74,8 +74,35 @@
   })()
   
   // style='height:"+Select.select_height+"px;'
+  
+  function File(element){
+    this.element = element; this.element_type = "file";
+  }
+  
+  File.prototype.get_replacement = function(){
+    return $("<span class='file'>\
+      <span class='file_content'>\
+        <span class='file_button'>\
+          <span class='file_button_icon'></span>\
+        </span>\
+        <p class='file_label'>"+this.element.val()+"</p>\
+      </span>\
+    </span>")
+  }
+  
+  File.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  File.prototype.init_replacement = function(){
+    var element = this.element;
+    // if(element.is(":checked")) this.checked(true);
+    // if(element.is(":disabled")) this.disabled(true);
+  }
+  
   function Select(element){ this.element = element; this.element_type = "select";  }
-  Select.prototype.mouse_trigger = function(){
+  File.prototype.mouse_trigger = Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
   Select.prototype.get_replacement = function(){
@@ -171,7 +198,7 @@
     this.element.trigger("change")
   }
   
-  Select.prototype.select = function(selected){
+  Select.prototype.zelect = function(selected){
     var selected_type = typeof selected;
     switch(selected_type){
       case "number": this.element.val(selected); break;
@@ -216,24 +243,24 @@
   $._mixin.include(FormElement,Checkbox);
   $._mixin.include(FormElement,Radio);
   $._mixin.include(FormElement,Select);
+  $._mixin.include(FormElement,File);
   
   FormElement.get = function(_element){
     var element = $(_element),
-        element_type = element.attr('type') || element[0].nodeName.toLowerCase();
+        element_type = element.is("select") ? "select" : element.attr('type');
       switch( element_type ){
         case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
         case "radio": return new Radio(element);
+        case "file": return new File(element);
       }
   }
   
   function init(options){
     options = options || {}
     return this.each(function(){
-      if(!this.init_counter) this.init_counter = 0;
-      this.init_counter++
-      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
-      var element = FormElement.get(this)
+      if ($(this).attr('size') || this.custom_form_instance) return true;
+      var element = FormElement.get(this);
       element.init(options);
       this.custom_form_instance = element;
     })
@@ -260,7 +287,7 @@
   function execute(method){
     var self = this;
     args = Array.prototype.slice.call(arguments,1);
-    if(OVERRIDES.hasOwnProperty(method)) return  OVERRIDES[method].apply(this,args);
+    if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
     return self.each(function(){
       this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
@@ -268,13 +295,23 @@
   
   $.fn.custom_form = function( method ) {
     // Method calling logic
-    if ( METHODS.indexOf(method) != -1) {
-      return execute.apply(this,arguments)
-    } else if ( typeof method === 'object' || ! method ) {
-        return init.apply( this, arguments );
-    } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
-    }    
+    if(method == "init" || ! method){
+      return init.apply( this, arguments );
+    }else{
+      try{
+        return execute.apply(this,arguments)
+      }catch(e){
+        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+      }
+    }
+    
+    //if ( METHODS.indexOf(method) != -1) {
+    //  return execute.apply(this,arguments)
+    //} else if ( typeof method === 'object' || ! method ) {
+    //    return init.apply( this, arguments );
+    //} else {
+    //  $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+    //}    
   
   };
 

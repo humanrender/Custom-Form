@@ -1,0 +1,16 @@
+--- 
+title: Unit >> Checkboxes
+qunit: true
+---
+
+<% content_for :js do %>
+  $("#file-1").custom_form();
+<% end %>
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Files</legend>
+    <input type="file" id="file-1"/>
+    <input type="file" id="file-2"/>
+  </fieldset>
+</form>

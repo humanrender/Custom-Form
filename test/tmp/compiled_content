@@ -1,4 +1,4 @@
-{:	data{I"/:ET{:default{	:	lastI"c<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+{:	data{I"/:ET{:default{	:	lastI"c<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -1898,7 +1898,7 @@ QUnit.diff = (function() {
 })(this);
 ;T;	@ ;
 @ I"/stylesheet/;T{;{;I" ;T;	@$;
-@$I"/javascripts/custom_form/;T{;{;I"8$(function( $ ){
+@$I"/javascripts/custom_form/;T{;{;I"H((function( $ ){
     
   $._mixin = {
     include:function(mixin,target){
@@ -1974,8 +1974,35 @@ QUnit.diff = (function() {
   })()
   
   // style='height:"+Select.select_height+"px;'
+  
+  function File(element){
+    this.element = element; this.element_type = "file";
+  }
+  
+  File.prototype.get_replacement = function(){
+    return $("<span class='file'>\
+      <span class='file_content'>\
+        <span class='file_button'>\
+          <span class='file_button_icon'></span>\
+        </span>\
+        <p class='file_label'>"+this.element.val()+"</p>\
+      </span>\
+    </span>")
+  }
+  
+  File.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  File.prototype.init_replacement = function(){
+    var element = this.element;
+    // if(element.is(":checked")) this.checked(true);
+    // if(element.is(":disabled")) this.disabled(true);
+  }
+  
   function Select(element){ this.element = element; this.element_type = "select";  }
-  Select.prototype.mouse_trigger = function(){
+  File.prototype.mouse_trigger = Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
   Select.prototype.get_replacement = function(){
@@ -2106,7 +2133,7 @@ QUnit.diff = (function() {
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
-      checked_radios = $(".active_radio:has([type=radio]:not([id="+this.element_id+"]))");
+      checked_radios = $(".active_radio").has("[name="+this.element_name+"]").not(this.element_id);
       if(checked_radios.length != 0)
           checked_radios.removeClass("active_"+this.element_type)
     }
@@ -2116,6 +2143,7 @@ QUnit.diff = (function() {
   $._mixin.include(FormElement,Checkbox);
   $._mixin.include(FormElement,Radio);
   $._mixin.include(FormElement,Select);
+  $._mixin.include(FormElement,File);
   
   FormElement.get = function(_element){
     var element = $(_element),
@@ -2124,15 +2152,14 @@ QUnit.diff = (function() {
         case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
         case "radio": return new Radio(element);
+        case "file": return new File(element);
       }
   }
   
   function init(options){
     options = options || {}
     return this.each(function(){
-      if(!this.init_counter) this.init_counter = 0;
-      this.init_counter++
-      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
+      if ($(this).is('select[size]') || this.custom_form_instance) return true;
       var element = FormElement.get(this)
       element.init(options);
       this.custom_form_instance = element;
@@ -2160,7 +2187,7 @@ QUnit.diff = (function() {
   function execute(method){
     var self = this;
     args = Array.prototype.slice.call(arguments,1);
-    if(OVERRIDES.hasOwnProperty(method)) return  OVERRIDES[method].apply(this,args);
+    if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
     return self.each(function(){
       this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
@@ -2168,18 +2195,28 @@ QUnit.diff = (function() {
   
   $.fn.custom_form = function( method ) {
     // Method calling logic
-    if ( METHODS.indexOf(method) != -1) {
-      return execute.apply(this,arguments)
-    } else if ( typeof method === 'object' || ! method ) {
-        return init.apply( this, arguments );
-    } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
-    }    
+    if(method == "init" || ! method){
+      return init.apply( this, arguments );
+    }else{
+      try{
+        return execute.apply(this,arguments)
+      }catch(e){
+        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+      }
+    }
+    
+    //if ( METHODS.indexOf(method) != -1) {
+    //  return execute.apply(this,arguments)
+    //} else if ( typeof method === 'object' || ! method ) {
+    //    return init.apply( this, arguments );
+    //} else {
+    //  $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+    //}    
   
   };
 
 })( jQuery );;T;	@(;
-@(I"/stylesheets/custom_form/;T{;{;I".select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
+@(I"/stylesheets/custom_form/;T{;{;I".select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
   display: -moz-inline-stack; /*Cross browser inline-block*/
   display: inline-block;
   vertical-align: middle;
@@ -2247,6 +2284,7 @@ span.select{
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+  
 }
 
 
@@ -2254,7 +2292,7 @@ span.select select{
   opacity: 0;
   filter: alpha(opacity=0);
   position: relative;
-  top: -19px;
+  top: -100%;
 /*  -webkit-appearance: none;*/
 }
 
@@ -45895,4 +45933,77 @@ I"o<form autocomplete="off" >
     }());
   }
 }(this, document));;T;	@k;
-@k:versioni
+@kI"/unit/file/;T{;{	;I"Å<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>Custom-Form tests - Unit >> Checkboxes</title>
+    <link rel="stylesheet" href="../../stylesheets/custom_form.css" type="text/css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="../../stylesheets/test.css" type="text/css" media="screen" charset="utf-8"/>
+    
+      <link rel="stylesheet" href="../../javascripts/qunit/qunit-styles.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+    
+  	
+  </head>
+  <body>
+    <div class="wrap two-block">
+      <div class="content">
+        
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Files</legend>
+    <input type="file" id="file-1"/>
+    <input type="file" id="file-2"/>
+  </fieldset>
+</form>
+      </div>
+      
+      
+      <div class="tools">
+        
+    <h1 id="qunit-header">QUnit Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup</div>
+  
+      </div>
+      
+    </div>
+    <script src="../../javascripts/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+      <script src="../../javascripts/qunit/qunit.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script src="../../javascripts/custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      
+  $("#file-1").custom_form();
+
+    </script>
+  </body>
+</html>
+;T;	I"„<% content_for :js do %>
+  $("#file-1").custom_form();
+<% end %>
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Files</legend>
+    <input type="file" id="file-1"/>
+    <input type="file" id="file-2"/>
+  </fieldset>
+</form>;T;
+I"£
+
+<form autocomplete="off">
+  <fieldset>
+    <legend>Files</legend>
+    <input type="file" id="file-1"/>
+    <input type="file" id="file-2"/>
+  </fieldset>
+</form>;T;@o:versioni
