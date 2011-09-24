@@ -171,8 +171,8 @@
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
-      if(checked) input.triggerHandler("change")
-      input.triggerHandler("click")
+      if(checked) input.trigger("change");
+      // input.trigger("click");
     }
   }
   
@@ -212,7 +212,8 @@
   
   function init(options){
     options = options || {}
-    return $(this).each(function(){
+    return this.each(function(){
+      if ($(this).is('select[size]')) return true;
       var element = FormElement.get(this)
       element.init(options);
       this.custom_form_instance = element;
