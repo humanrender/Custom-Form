@@ -141,7 +141,7 @@
   
   Checkbox.prototype.click_handler = function (event){
     event.data.checked();
-    input.trigger("click");
+    event.data.element.triggerHandler("click");
   }
   
   Checkbox.prototype.init_replacement = function(){
@@ -206,7 +206,7 @@
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
-      checked_radios = $(".active_radio:has([type=radio]:not([id="+this.element_id+"]))");
+      checked_radios = $(".active_radio").has("[name="+this.element_name+"]").not(this.element_id);
       if(checked_radios.length != 0)
           checked_radios.removeClass("active_"+this.element_type)
     }
@@ -229,7 +229,10 @@
   
   function init(options){
     options = options || {}
-    return $(this).each(function(){
+    return this.each(function(){
+      if(!this.init_counter) this.init_counter = 0;
+      this.init_counter++
+      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
       var element = FormElement.get(this)
       element.init(options);
       this.custom_form_instance = element;

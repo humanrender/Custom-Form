@@ -141,6 +141,7 @@
   
   Checkbox.prototype.click_handler = function (event){
     event.data.checked();
+    event.data.element.triggerHandler("click");
   }
   
   Checkbox.prototype.init_replacement = function(){
@@ -179,7 +180,7 @@
         (selected_type == "string") || (selected = selected.to_s);
         this.element.find("option:contains('"+selected+"')").attr("selected",true);
     }
-    this.update()
+    this.update();
   }
   
   Checkbox.prototype.checked = function (checked){
@@ -189,7 +190,6 @@
       input.attr("checked",checked);
       this.active_replacement_class(checked)
       if(checked) input.trigger("change")
-      input.trigger("click")
     }
   }
   
@@ -229,7 +229,10 @@
   
   function init(options){
     options = options || {}
-    return $(this).each(function(){
+    return this.each(function(){
+      if(!this.init_counter) this.init_counter = 0;
+      this.init_counter++
+      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
       var element = FormElement.get(this)
       element.init(options);
       this.custom_form_instance = element;
