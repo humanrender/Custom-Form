@@ -165,9 +165,9 @@
     checked = checked == undefined ? !input.is(":checked") : checked;
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
-      this.active_replacement_class(checked)
-      if(checked) input.triggerHandler("change")
-      input.triggerHandler("click")
+      this.active_replacement_class(checked);
+      if(checked) input.trigger("change");
+      // input.trigger("click");
     }
   }
   
