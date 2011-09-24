@@ -63,7 +63,31 @@
       <label for="checkbox-9">Checkbox 9</label>
       <br/>
     
+      <input type="checkbox"  id="checkbox-10" value="10" name="checkbox-10">
+      <label for="checkbox-10">Checkbox 10</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-11" value="11" name="checkbox-11">
+      <label for="checkbox-11">Checkbox 11</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-12" value="12" name="checkbox-12">
+      <label for="checkbox-12">Checkbox 12</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-13" value="13" name="checkbox-13">
+      <label for="checkbox-13">Checkbox 13</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-14" value="14" name="checkbox-14">
+      <label for="checkbox-14">Checkbox 14</label>
+      <br/>
+    
+    <input type="checkbox" id="checkbox-16" value="16" name="checkbox-16" disabled="disabled"/>
+    <label for="checkbox-16">Checkbox 16</label><br/>
   </fieldset>
+  
+  <div id="free.free"></div>
 </form>
       </div>
       
@@ -145,35 +169,35 @@
   
   test("without arguments should toggle-check the checkbox",function(){
     var was_checked = $("#checkbox-8").is(":checked")
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4,8])
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4])
     
   })
   
   test("with TRUE should check the checkbox",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
     check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
     check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
     check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
     check_options_integrity([2,9])
   })
@@ -199,8 +223,47 @@
       equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
     })
     $("form").submit();
-  })
+  });
   
+   test("Calling the disabled method",function(){
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").is(":disabled"),"with true should disable the checkbox")
+     ok($("#checkbox-11").parent().hasClass("disabled_checkbox"),"with true should add the disabled class");
+     
+     $("#checkbox-11").custom_form("disabled",false);
+     ok(!$("#checkbox-11").is(":disabled"),"with false should enable the checkbox")
+     ok(!$("#checkbox-11").parent().hasClass("disabled_checkbox"),"with false should remove the disabled class")
+     
+     ok(!$("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (false)")
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (true)")
+     ok(!$("#checkbox-11").custom_form("disabled","none"),"With 'none' should return if the checkbox is not disabled (false)")
+     ok($("#checkbox-11").custom_form("disabled","any"),"With 'any' should return if at least one checkbox is disabled (true)")
+   });
+   
+   test("Calling the disabled method on multiple elements",function(){
+     $("#checkbox-12, #checkbox-13, #checkbox-14").attr("disabled",null);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",true);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").each(function(){
+       ok($(this).custom_form("disabled"),"Should be disabled if called with true on multiple elements")
+     })
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled")
+     $("#checkbox-13").custom_form("disabled",false)
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled, if one of them is enabled it returns false")
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",false);
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"),"With none, should return true if no checkbox is disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","all"),"With 'all', should return false if all the checkboxes are not disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"),"With 'any', should return false if at least one of the checkboxes is not disabled")
+   });
+   
+   test("Already disabled elements should remain disabled",function(){
+     ok($("#checkbox-16").is(":disabled"))
+     ok($("#checkbox-16").parent().hasClass("disabled_checkbox"));
+   })
+
 
     </script>
   </body>

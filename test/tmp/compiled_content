@@ -1898,7 +1898,7 @@ QUnit.diff = (function() {
 })(this);
 ;T;	@ ;
 @ I"/stylesheet/;T{;{;I" ;T;	@$;
-@$I"/javascripts/custom_form/;T{;{;I"ﬁ(function( $ ){
+@$I"/javascripts/custom_form/;T{;{;I"w#(function( $ ){
     
   $._mixin = {
     include:function(mixin,target){
@@ -1910,15 +1910,10 @@ QUnit.diff = (function() {
     function init(options){
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
-      this.replacement = this.get_replacement();
+      this.replacement = (options.select_replacement || this.get_replacement).apply(this)
       this.replace_elements();
       this.init_replacement();
       this.init_mouse_events();
-    }
-    
-    function replace_elements(){
-      this.element.after(this.replacement);
-      this.replacement.append(this.element);
     }
     
     function hover(hover){
@@ -1951,21 +1946,35 @@ QUnit.diff = (function() {
       e.data.replacement.trigger("click");
     }
     
+    function disabled(option){
+      switch(option){
+        case true:
+        case false:
+          this.element.attr("disabled",option);
+          this.replacement[option ? "addClass" : "removeClass"]("disabled_"+this.element_type); 
+          this.is_disabled = option;
+          return option;
+        case "none":
+          return !this.element.is(":disabled");
+        default:
+          return this.element.is(":disabled");
+      }
+    }
+    
     return function(){
       this.init = init;
-      this.replace_elements = replace_elements;
       this.hover = hover;
       this.init_mouse_events = init_mouse_events;
       this.hover_handler = hover_handler;
       this.out_handler = out_handler;
       this.active_replacement_class = active_replacement_class;
       this.label_handler = label_handler;
+      this.disabled = disabled;
     }
   })()
   
-  function Select(element){ this.element = element;  }
-  
-  Select.prototype.element_type = "select";
+  // style='height:"+Select.select_height+"px;'
+  function Select(element){ this.element = element; this.element_type = "select";  }
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
   }
@@ -1983,24 +1992,24 @@ QUnit.diff = (function() {
   }
   
   Select.prototype.init_replacement = function(){
+    var styles = {width:(this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
+    this.element.css(styles);
+    this.replacement.css(styles);
     
-    this.select_label = $(".select_label",replacement);
-    
-    var replacement = this.replacement, 
-    element = this.element,
-    width = (element.outerWidth() - Number(replacement.css("border-left-width")) - Number(replacement.css("border-right-width"))),
-    button_width = $(".select_button",replacement).outerWidth(),
-    select_label = this.select_label;
-    
-    element.css("width",width);
-    replacement.css("width",width);
-    
-    select_label.css({ 
-      width: (width - button_width - Number(select_label.css("padding-left")) - Number(select_label.css("padding-right"))),
+    var select_button = $(".select_button",this.replacement);
+    this.select_label = $(".select_label",this.replacement);
+    this.select_label.css({ 
+      width: (styles.width-select_button.outerWidth()-parseInt(this.select_label.css("padding-left"))-parseInt(this.select_label.css("padding-right"))),
       "padding-right":0
     });
     
-    element.bind("change",this,this.select_change)
+    this.element.bind("change",this,this.select_change)
+  }
+  
+  Select.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
   }
   
   Select.prototype.select_change = function(event){
@@ -2021,17 +2030,23 @@ QUnit.diff = (function() {
     return this.replacement
   }
   
+  Checkbox.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
   Checkbox.prototype.get_replacement = function(){
     return $("<span class='"+this.element_type+"'></span>");
   }
   
   Checkbox.prototype.click_handler = function (event){
-    event.data.check_input();
+    event.data.checked();
   }
   
   Checkbox.prototype.init_replacement = function(){
-    if(this.element.is(":checked"))
-      this.check_input(true)
+    var element = this.element;
+    if(element.is(":checked")) this.checked(true);
+    if(element.is(":disabled")) this.disabled(true);
   }
   
   Select.prototype.click_handler = function (event){
@@ -2067,27 +2082,27 @@ QUnit.diff = (function() {
     this.update()
   }
   
-  Checkbox.prototype.check_input = function (checked){
+  Checkbox.prototype.checked = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
-      if(checked) input.triggerHandler("change")
-      input.triggerHandler("click")
+      if(checked) input.trigger("change")
+      input.trigger("click")
     }
   }
   
   Checkbox.prototype.update = function(){
-    this.check_input(this.element.is(":checked"))
+    this.checked(this.element.is(":checked"))
   }
   
   Radio.prototype = new Checkbox();
   Radio.prototype.update = function(){
-    this.check_input(this.element.is(":checked"),true)
+    this.checked(this.element.is(":checked"),true)
   }
   
-  Radio.prototype.check_input = function(checked,updating){
+  Radio.prototype.checked = function(checked,updating){
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
@@ -2095,7 +2110,7 @@ QUnit.diff = (function() {
       if(checked_radios.length != 0)
           checked_radios.removeClass("active_"+this.element_type)
     }
-    Checkbox.prototype.check_input.call(this,checked == undefined ? undefined : checked);
+    Checkbox.prototype.checked.call(this,checked == undefined ? undefined : checked);
   }
   
   $._mixin.include(FormElement,Checkbox);
@@ -2103,17 +2118,13 @@ QUnit.diff = (function() {
   $._mixin.include(FormElement,Select);
   
   FormElement.get = function(_element){
-    var element = $(_element);
-    if(element.is("select")){
-      return Select.create(element)
-    }
-    else{
-      var input_type = element.attr("type");
-      switch(input_type){
+    var element = $(_element),
+        element_type = element.attr('type') || element[0].nodeName.toLowerCase();
+      switch( element_type ){
+        case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
         case "radio": return new Radio(element);
       }
-    }
   }
   
   function init(options){
@@ -2125,47 +2136,47 @@ QUnit.diff = (function() {
     })
   }
   
-  
-  function check(checked){
-    return $(this).each(function(){
-      this.custom_form_instance.check_input(checked)
-    })
+  var METHODS = ["init","checked","update","select","disabled"];
+  var OVERRIDES = {
+    disabled:function(option){
+      (option != undefined) || (option = "all");
+      if(this.length == 1) return this[0].custom_form_instance.disabled(option);
+      var result = option == "any" ? false : true;
+      this.each(function(){
+        var tmp = this.custom_form_instance.disabled(option);
+        switch(option){
+          case "all": if(result && !tmp) {result = false; return false;}; break;
+          case "any": if(tmp){result = true; return false}; break;
+          case "none": if(!tmp){result = false; return false}; break;
+        }
+      });
+      return result
+    }
   }
   
-  function update(){
-    return $(this).each(function(){
-      this.custom_form_instance.update();
+  function execute(method){
+    var self = this;
+    args = Array.prototype.slice.call(arguments,1);
+    if(OVERRIDES.hasOwnProperty(method)) return  OVERRIDES[method].apply(this,args);
+    return self.each(function(){
+      this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
-  }
-  
-  function select(option){
-    return $(this).each(function(){
-      this.custom_form_instance.select(option)
-    })
-  }
-  
-  var METHODS = {
-    init:init,
-    check:check,
-    update:update,
-    select:select
   }
   
   $.fn.custom_form = function( method ) {
-  
     // Method calling logic
-    if ( METHODS[method] ) {
-      return METHODS[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    if ( METHODS.indexOf(method) != -1) {
+      return execute.apply(this,arguments)
     } else if ( typeof method === 'object' || ! method ) {
-        return METHODS.init.apply( this, arguments );
+        return init.apply( this, arguments );
     } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+      $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
     }    
   
   };
 
 })( jQuery );;T;	@(;
-@(I"/stylesheets/custom_form/;T{;{;I" .select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
+@(I"/stylesheets/custom_form/;T{;{;I".select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label{
   display: -moz-inline-stack; /*Cross browser inline-block*/
   display: inline-block;
   vertical-align: middle;
@@ -2281,6 +2292,10 @@ span.select .select_label{
   background-position:0 -84px;
   margin-left:7px;
   margin-top:9px;
+}
+
+.disabled_checkbox, .disabled_radio, .disabled_select{
+  opacity:0.5;
 };T;	@,;
 @,I"/benchmarking/radios/;T{;{	;I"[Æ<!DOCTYPE html>
 <html>
@@ -4893,7 +4908,7 @@ I"`¢<form autocomplete="off" >
 
 
 
-;T;@0I"/unit/checkboxes/;T{;{	;I"` <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+;T;@0I"/unit/checkboxes/;T{;{	;I"∏/<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -4958,7 +4973,31 @@ I"`¢<form autocomplete="off" >
       <label for="checkbox-9">Checkbox 9</label>
       <br/>
     
+      <input type="checkbox"  id="checkbox-10" value="10" name="checkbox-10">
+      <label for="checkbox-10">Checkbox 10</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-11" value="11" name="checkbox-11">
+      <label for="checkbox-11">Checkbox 11</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-12" value="12" name="checkbox-12">
+      <label for="checkbox-12">Checkbox 12</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-13" value="13" name="checkbox-13">
+      <label for="checkbox-13">Checkbox 13</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-14" value="14" name="checkbox-14">
+      <label for="checkbox-14">Checkbox 14</label>
+      <br/>
+    
+    <input type="checkbox" id="checkbox-16" value="16" name="checkbox-16" disabled="disabled"/>
+    <label for="checkbox-16">Checkbox 16</label><br/>
   </fieldset>
+  
+  <div id="free.free"></div>
 </form>
       </div>
       
@@ -5040,35 +5079,35 @@ I"`¢<form autocomplete="off" >
   
   test("without arguments should toggle-check the checkbox",function(){
     var was_checked = $("#checkbox-8").is(":checked")
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4,8])
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4])
     
   })
   
   test("with TRUE should check the checkbox",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
     check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
     check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
     check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
     check_options_integrity([2,9])
   })
@@ -5094,13 +5133,52 @@ I"`¢<form autocomplete="off" >
       equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
     })
     $("form").submit();
-  })
+  });
   
+   test("Calling the disabled method",function(){
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").is(":disabled"),"with true should disable the checkbox")
+     ok($("#checkbox-11").parent().hasClass("disabled_checkbox"),"with true should add the disabled class");
+     
+     $("#checkbox-11").custom_form("disabled",false);
+     ok(!$("#checkbox-11").is(":disabled"),"with false should enable the checkbox")
+     ok(!$("#checkbox-11").parent().hasClass("disabled_checkbox"),"with false should remove the disabled class")
+     
+     ok(!$("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (false)")
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (true)")
+     ok(!$("#checkbox-11").custom_form("disabled","none"),"With 'none' should return if the checkbox is not disabled (false)")
+     ok($("#checkbox-11").custom_form("disabled","any"),"With 'any' should return if at least one checkbox is disabled (true)")
+   });
+   
+   test("Calling the disabled method on multiple elements",function(){
+     $("#checkbox-12, #checkbox-13, #checkbox-14").attr("disabled",null);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",true);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").each(function(){
+       ok($(this).custom_form("disabled"),"Should be disabled if called with true on multiple elements")
+     })
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled")
+     $("#checkbox-13").custom_form("disabled",false)
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled, if one of them is enabled it returns false")
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",false);
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"),"With none, should return true if no checkbox is disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","all"),"With 'all', should return false if all the checkboxes are not disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"),"With 'any', should return false if at least one of the checkboxes is not disabled")
+   });
+   
+   test("Already disabled elements should remain disabled",function(){
+     ok($("#checkbox-16").is(":disabled"))
+     ok($("#checkbox-16").parent().hasClass("disabled_checkbox"));
+   })
+
 
     </script>
   </body>
 </html>
-;T;	I"<<% 
+;T;	I"∫"<% 
   checked = [2,4]
 %>
 
@@ -5162,35 +5240,35 @@ I"`¢<form autocomplete="off" >
   
   test("without arguments should toggle-check the checkbox",function(){
     var was_checked = $("#checkbox-8").is(":checked")
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked != $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4,8])
-    $("#checkbox-8").custom_form("check")
+    $("#checkbox-8").custom_form("checked")
     ok(was_checked == $("#checkbox-8").is(":checked"),"After calling the method 'check' the checkbox is not toggled from "+was_checked.toString()+" to "+(!was_checked).toString())
     check_options_integrity([2,4])
     
   })
   
   test("with TRUE should check the checkbox",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox is not checked")
     check_options_integrity([2,4,9])
   })
   
   test("with TRUE on an already checked checkbox should not check it",function(){
-    $("#checkbox-9").custom_form("check",true)
+    $("#checkbox-9").custom_form("checked",true)
     ok($("#checkbox-9").is(":checked"),"After calling the method 'check' the checkbox doesn't remain checked")
     check_options_integrity([2,4,9])
   })
   
   test("with FALSE should uncheck the checkbox",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false it doesn't uncheck the associated checkbox")
     check_options_integrity([2,9])
   })
   
   test("with FALSE on an unchecked checkbox, should not check it",function(){
-    $("#checkbox-4").custom_form("check",false)
+    $("#checkbox-4").custom_form("checked",false)
     ok(!$("#checkbox-4").is(":checked"),"After calling the method 'check' with false on an unchecked checkbox, the checkbox gets checked")
     check_options_integrity([2,9])
   })
@@ -5216,21 +5294,64 @@ I"`¢<form autocomplete="off" >
       equal("checkbox-2=2&checkbox-9=9",$(this).serialize())
     })
     $("form").submit();
-  })
+  });
   
+   test("Calling the disabled method",function(){
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").is(":disabled"),"with true should disable the checkbox")
+     ok($("#checkbox-11").parent().hasClass("disabled_checkbox"),"with true should add the disabled class");
+     
+     $("#checkbox-11").custom_form("disabled",false);
+     ok(!$("#checkbox-11").is(":disabled"),"with false should enable the checkbox")
+     ok(!$("#checkbox-11").parent().hasClass("disabled_checkbox"),"with false should remove the disabled class")
+     
+     ok(!$("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (false)")
+     $("#checkbox-11").custom_form("disabled",true);
+     ok($("#checkbox-11").custom_form("disabled"),"Without params should return if the checkbox is disabled (true)")
+     ok(!$("#checkbox-11").custom_form("disabled","none"),"With 'none' should return if the checkbox is not disabled (false)")
+     ok($("#checkbox-11").custom_form("disabled","any"),"With 'any' should return if at least one checkbox is disabled (true)")
+   });
+   
+   test("Calling the disabled method on multiple elements",function(){
+     $("#checkbox-12, #checkbox-13, #checkbox-14").attr("disabled",null);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",true);
+     $("#checkbox-12, #checkbox-13, #checkbox-14").each(function(){
+       ok($(this).custom_form("disabled"),"Should be disabled if called with true on multiple elements")
+     })
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled")
+     $("#checkbox-13").custom_form("disabled",false)
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled"), "Should return if all elements are disabled, if one of them is enabled it returns false")
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"), "With 'any' should return if all elements are enabled, if one of them is disabled it returns false")
+     
+     $("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled",false);
+     ok($("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","none"),"With none, should return true if no checkbox is disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","all"),"With 'all', should return false if all the checkboxes are not disabled")
+     ok(!$("#checkbox-12, #checkbox-13, #checkbox-14").custom_form("disabled","any"),"With 'any', should return false if at least one of the checkboxes is not disabled")
+   });
+   
+   test("Already disabled elements should remain disabled",function(){
+     ok($("#checkbox-16").is(":disabled"))
+     ok($("#checkbox-16").parent().hasClass("disabled_checkbox"));
+   })
+
 <% end %>
 
 <form autocomplete="off">
   <fieldset>
     <legend>Checkboxes</legend>    
-    <% 10.times do |i| %>
+    <% 15.times do |i| %>
       <input type="checkbox" <%= "checked='checked'" if checked.include?(i)%> id="checkbox-<%=i%>" value="<%=i%>" name="checkbox-<%=i%>">
       <label for="checkbox-<%=i%>">Checkbox <%=i%></label>
       <br/>
     <% end %>
+    <input type="checkbox" id="checkbox-16" value="16" name="checkbox-16" disabled="disabled"/>
+    <label for="checkbox-16">Checkbox 16</label><br/>
   </fieldset>
+  
+  <div id="free.free"></div>
 </form>;T;
-I"
+I"ù	
 
 
 
@@ -5278,7 +5399,31 @@ I"
       <label for="checkbox-9">Checkbox 9</label>
       <br/>
     
+      <input type="checkbox"  id="checkbox-10" value="10" name="checkbox-10">
+      <label for="checkbox-10">Checkbox 10</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-11" value="11" name="checkbox-11">
+      <label for="checkbox-11">Checkbox 11</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-12" value="12" name="checkbox-12">
+      <label for="checkbox-12">Checkbox 12</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-13" value="13" name="checkbox-13">
+      <label for="checkbox-13">Checkbox 13</label>
+      <br/>
+    
+      <input type="checkbox"  id="checkbox-14" value="14" name="checkbox-14">
+      <label for="checkbox-14">Checkbox 14</label>
+      <br/>
+    
+    <input type="checkbox" id="checkbox-16" value="16" name="checkbox-16" disabled="disabled"/>
+    <label for="checkbox-16">Checkbox 16</label><br/>
   </fieldset>
+  
+  <div id="free.free"></div>
 </form>;T;@6I"/stylesheets/test/;T{;{;I"|.wrap{
   font:13px Arial, sans-serif;
 }
@@ -5330,7 +5475,7 @@ input[type="submit"]{
   -moz-border-radius: 3px;
   border-radius: 3px;
 };T;	@<;
-@<I"!/images/custom_forms_sprite/;T{;{ I"/unit/radios/;T{;{	;I"»&<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+@<I"!/images/custom_forms_sprite/;T{;{ I"/unit/radios/;T{;{	;I"◊&<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
    "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
@@ -5444,7 +5589,7 @@ input[type="submit"]{
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
     verify_if_checked_and_parent_class([2])
-    run();
+    // run();
   });
   
   function run(){
@@ -5492,11 +5637,11 @@ input[type="submit"]{
   
           test("without arguments should not toggle-check the radio ",function(){
             var was_checked = $("#radio-8").is(":checked")
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             next();
@@ -5504,7 +5649,7 @@ input[type="submit"]{
           
           function next(){
             test("with TRUE should check the radio ",function(){
-              $("#radio-9").custom_form("check",true)
+              $("#radio-9").custom_form("checked",true)
               ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
               verify_if_checked_and_parent_class([9]);
               next();
@@ -5512,7 +5657,7 @@ input[type="submit"]{
             
             function next(){
               test("with TRUE on an already checked radio button should not uncheck it ",function(){
-                $("#radio-9").custom_form("check",true)
+                $("#radio-9").custom_form("checked",true)
                 ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
                 verify_if_checked_and_parent_class([9]);
                 next();
@@ -5522,7 +5667,7 @@ input[type="submit"]{
                 module('Calling the "check" method ')
   
                 test("with FALSE should not uncheck the radio ",function(){
-                  $("#radio-9").custom_form("check",false)
+                  $("#radio-9").custom_form("checked",false)
                   ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
                   ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
                   verify_if_checked_and_parent_class([9])
@@ -5533,7 +5678,7 @@ input[type="submit"]{
                   module('Calling the "check" method with FALSE ')
   
                   test("on an unchecked radio button, should not check it ",function(){
-                    $("#radio-4").custom_form("check",false)
+                    $("#radio-4").custom_form("checked",false)
                     ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
                     verify_if_checked_and_parent_class([9])
                     next();
@@ -5567,7 +5712,7 @@ input[type="submit"]{
     </script>
   </body>
 </html>
-;T;	I"<% 
+;T;	I"<% 
   checked = [2]
 %>
 
@@ -5596,7 +5741,7 @@ input[type="submit"]{
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
     verify_if_checked_and_parent_class([2])
-    run();
+    // run();
   });
   
   function run(){
@@ -5644,11 +5789,11 @@ input[type="submit"]{
   
           test("without arguments should not toggle-check the radio ",function(){
             var was_checked = $("#radio-8").is(":checked")
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             next();
@@ -5656,7 +5801,7 @@ input[type="submit"]{
           
           function next(){
             test("with TRUE should check the radio ",function(){
-              $("#radio-9").custom_form("check",true)
+              $("#radio-9").custom_form("checked",true)
               ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
               verify_if_checked_and_parent_class([9]);
               next();
@@ -5664,7 +5809,7 @@ input[type="submit"]{
             
             function next(){
               test("with TRUE on an already checked radio button should not uncheck it ",function(){
-                $("#radio-9").custom_form("check",true)
+                $("#radio-9").custom_form("checked",true)
                 ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
                 verify_if_checked_and_parent_class([9]);
                 next();
@@ -5674,7 +5819,7 @@ input[type="submit"]{
                 module('Calling the "check" method ')
   
                 test("with FALSE should not uncheck the radio ",function(){
-                  $("#radio-9").custom_form("check",false)
+                  $("#radio-9").custom_form("checked",false)
                   ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
                   ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
                   verify_if_checked_and_parent_class([9])
@@ -5685,7 +5830,7 @@ input[type="submit"]{
                   module('Calling the "check" method with FALSE ')
   
                   test("on an unchecked radio button, should not check it ",function(){
-                    $("#radio-4").custom_form("check",false)
+                    $("#radio-4").custom_form("checked",false)
                     ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
                     verify_if_checked_and_parent_class([9])
                     next();

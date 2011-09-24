@@ -46,6 +46,21 @@
       e.data.replacement.trigger("click");
     }
     
+    function disabled(option){
+      switch(option){
+        case true:
+        case false:
+          this.element.attr("disabled",option);
+          this.replacement[option ? "addClass" : "removeClass"]("disabled_"+this.element_type); 
+          this.is_disabled = option;
+          return option;
+        case "none":
+          return !this.element.is(":disabled");
+        default:
+          return this.element.is(":disabled");
+      }
+    }
+    
     return function(){
       this.init = init;
       this.hover = hover;
@@ -54,6 +69,7 @@
       this.out_handler = out_handler;
       this.active_replacement_class = active_replacement_class;
       this.label_handler = label_handler;
+      this.disabled = disabled;
     }
   })()
   
@@ -124,12 +140,13 @@
   }
   
   Checkbox.prototype.click_handler = function (event){
-    event.data.check_input();
+    event.data.checked();
   }
   
   Checkbox.prototype.init_replacement = function(){
-    if(this.element.is(":checked"))
-      this.check_input(true)
+    var element = this.element;
+    if(element.is(":checked")) this.checked(true);
+    if(element.is(":disabled")) this.disabled(true);
   }
   
   Select.prototype.click_handler = function (event){
@@ -165,27 +182,27 @@
     this.update()
   }
   
-  Checkbox.prototype.check_input = function (checked){
+  Checkbox.prototype.checked = function (checked){
     var input = this.element; 
     checked = checked == undefined ? !input.is(":checked") : checked;
     if(!this.uncheckeable || (this.uncheckeable && checked)){ 
       input.attr("checked",checked);
       this.active_replacement_class(checked)
-      if(checked) input.triggerHandler("change")
-      input.triggerHandler("click")
+      if(checked) input.trigger("change")
+      input.trigger("click")
     }
   }
   
   Checkbox.prototype.update = function(){
-    this.check_input(this.element.is(":checked"))
+    this.checked(this.element.is(":checked"))
   }
   
   Radio.prototype = new Checkbox();
   Radio.prototype.update = function(){
-    this.check_input(this.element.is(":checked"),true)
+    this.checked(this.element.is(":checked"),true)
   }
   
-  Radio.prototype.check_input = function(checked,updating){
+  Radio.prototype.checked = function(checked,updating){
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
@@ -193,7 +210,7 @@
       if(checked_radios.length != 0)
           checked_radios.removeClass("active_"+this.element_type)
     }
-    Checkbox.prototype.check_input.call(this,checked == undefined ? undefined : checked);
+    Checkbox.prototype.checked.call(this,checked == undefined ? undefined : checked);
   }
   
   $._mixin.include(FormElement,Checkbox);
@@ -219,41 +236,41 @@
     })
   }
   
-  
-  function check(checked){
-    return $(this).each(function(){
-      this.custom_form_instance.check_input(checked)
-    })
+  var METHODS = ["init","checked","update","select","disabled"];
+  var OVERRIDES = {
+    disabled:function(option){
+      (option != undefined) || (option = "all");
+      if(this.length == 1) return this[0].custom_form_instance.disabled(option);
+      var result = option == "any" ? false : true;
+      this.each(function(){
+        var tmp = this.custom_form_instance.disabled(option);
+        switch(option){
+          case "all": if(result && !tmp) {result = false; return false;}; break;
+          case "any": if(tmp){result = true; return false}; break;
+          case "none": if(!tmp){result = false; return false}; break;
+        }
+      });
+      return result
+    }
   }
   
-  function update(){
-    return $(this).each(function(){
-      this.custom_form_instance.update();
+  function execute(method){
+    var self = this;
+    args = Array.prototype.slice.call(arguments,1);
+    if(OVERRIDES.hasOwnProperty(method)) return  OVERRIDES[method].apply(this,args);
+    return self.each(function(){
+      this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
-  }
-  
-  function select(option){
-    return $(this).each(function(){
-      this.custom_form_instance.select(option)
-    })
-  }
-  
-  var METHODS = {
-    init:init,
-    check:check,
-    update:update,
-    select:select
   }
   
   $.fn.custom_form = function( method ) {
-  
     // Method calling logic
-    if ( METHODS[method] ) {
-      return METHODS[ method ].apply( this, Array.prototype.slice.call( arguments, 1 ));
+    if ( METHODS.indexOf(method) != -1) {
+      return execute.apply(this,arguments)
     } else if ( typeof method === 'object' || ! method ) {
-        return METHODS.init.apply( this, arguments );
+        return init.apply( this, arguments );
     } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.tooltip' );
+      $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
     }    
   
   };

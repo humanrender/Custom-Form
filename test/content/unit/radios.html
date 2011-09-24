@@ -31,7 +31,7 @@ qunit: true
       ok( $(this).parent().hasClass("active_radio"), "The replacement <span> doesn't have the active_radio class" );
     })
     verify_if_checked_and_parent_class([2])
-    run();
+    // run();
   });
   
   function run(){
@@ -79,11 +79,11 @@ qunit: true
   
           test("without arguments should not toggle-check the radio ",function(){
             var was_checked = $("#radio-8").is(":checked")
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check' on an unchecked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             
-            $("#radio-8").custom_form("check")
+            $("#radio-8").custom_form("checked")
             ok(was_checked != $("#radio-8").is(":checked"),"After calling the method 'check'  on a checked radio it changes from "+was_checked.toString()+" to "+(!was_checked).toString())
             verify_if_checked_and_parent_class([8])
             next();
@@ -91,7 +91,7 @@ qunit: true
           
           function next(){
             test("with TRUE should check the radio ",function(){
-              $("#radio-9").custom_form("check",true)
+              $("#radio-9").custom_form("checked",true)
               ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button is not checked")
               verify_if_checked_and_parent_class([9]);
               next();
@@ -99,7 +99,7 @@ qunit: true
             
             function next(){
               test("with TRUE on an already checked radio button should not uncheck it ",function(){
-                $("#radio-9").custom_form("check",true)
+                $("#radio-9").custom_form("checked",true)
                 ok($("#radio-9").is(":checked"),"After calling the method 'check' the radio button doesn't remain checked")
                 verify_if_checked_and_parent_class([9]);
                 next();
@@ -109,7 +109,7 @@ qunit: true
                 module('Calling the "check" method ')
   
                 test("with FALSE should not uncheck the radio ",function(){
-                  $("#radio-9").custom_form("check",false)
+                  $("#radio-9").custom_form("checked",false)
                   ok($("#radio-9").is(":checked"),"After calling the method 'check' with false the radio button gets unchecked")
                   ok($("#radio-9").parent().hasClass("active_radio"),"After calling the method 'check' with false the replacement <span> doesn't have the active_radio class")
                   verify_if_checked_and_parent_class([9])
@@ -120,7 +120,7 @@ qunit: true
                   module('Calling the "check" method with FALSE ')
   
                   test("on an unchecked radio button, should not check it ",function(){
-                    $("#radio-4").custom_form("check",false)
+                    $("#radio-4").custom_form("checked",false)
                     ok(!$("#radio-4").is(":checked"),"After calling the method 'check' with false on an unchecked radio button, the radio button gets checked")
                     verify_if_checked_and_parent_class([9])
                     next();
