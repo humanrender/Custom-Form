@@ -55,8 +55,8 @@ span.select{
 }
 
 span.select, span.select .select_label, span.select .select_button{
-  height:201px;
-  line-height:201px;
+  height:30px;
+  line-height:30px;
 }
 
 
