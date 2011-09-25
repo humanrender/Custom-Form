@@ -8,6 +8,7 @@
   
   var FormElement = (function(element){
     function init(options){
+      
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
       this.replacement = (options.select_replacement || this.get_replacement).apply(this)
@@ -73,7 +74,7 @@
     }
   })()
   
-  // style='height:"+Select.select_height+"px;'
+  
   function Select(element){ this.element = element; this.element_type = "select";  }
   Select.prototype.mouse_trigger = function(){
     return $(".select_content", this.replacement)
@@ -216,10 +217,11 @@
   $._mixin.include(FormElement,Checkbox);
   $._mixin.include(FormElement,Radio);
   $._mixin.include(FormElement,Select);
+  $._mixin.include(FormElement,File);
   
   FormElement.get = function(_element){
     var element = $(_element),
-        element_type = element.attr('type') || element[0].nodeName.toLowerCase();
+        element_type = element.is("select") ? "select" : element.attr('type');
       switch( element_type ){
         case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
@@ -229,9 +231,10 @@
   
   function init(options){
     options = options || {}
-    return this.each(function(){
-      if ($(this).is('select[size]') || this.hasOwnProperty("custom_form_instance")) return true;
-      var element = FormElement.get(this)
+    
+    return this.each(function(){      
+      var element = FormElement.get(this);
+      if ((this.nodeName == 'SELECT' && this.size > 0) || this.custom_form_instance) return true;
       element.init(options);
       this.custom_form_instance = element;
     })
@@ -256,24 +259,23 @@
   }
   
   function execute(method){
-    var self = this;
-    args = Array.prototype.slice.call(arguments,1);
-    if(OVERRIDES.hasOwnProperty(method)) return  OVERRIDES[method].apply(this,args);
+    var self = this, args = Array.prototype.slice.call(arguments,1);
+    if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
     return self.each(function(){
       this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
   }
   
   $.fn.custom_form = function( method ) {
-    // Method calling logic
-    if ( METHODS.indexOf(method) != -1) {
-      return execute.apply(this,arguments)
-    } else if ( typeof method === 'object' || ! method ) {
-        return init.apply( this, arguments );
-    } else {
-      $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
-    }    
-  
+    if(method == "init" || ! method){
+      return init.apply( this, arguments );
+    }else{
+      try{
+        return execute.apply(this,arguments)
+      }catch(e){
+        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+      }
+    }
   };
 
 })( jQuery );
