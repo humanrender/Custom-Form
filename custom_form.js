@@ -44,7 +44,7 @@
     
     function label_handler(e){ 
       e.preventDefault();  
-      e.data.replacement.trigger("click");
+      e.data.replacement.triggerHandler("click");
     }
     
     function disabled(option){
