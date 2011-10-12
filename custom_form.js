@@ -44,7 +44,7 @@
     
     function label_handler(e){ 
       e.preventDefault();  
-      e.data.replacement.trigger("click");
+      e.data.replacement.triggerHandler("click");
     }
     
     function disabled(option){
@@ -207,7 +207,7 @@
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
-      checked_radios = $(".active_radio").has("[name="+this.element_name+"]").not(this.element_id);
+      checked_radios = $(".active_radio").has("[name='"+this.element_name+"']").not(this.element_id);
       if(checked_radios.length != 0)
           checked_radios.removeClass("active_"+this.element_type)
     }
