@@ -29,9 +29,13 @@
       mouse_trigger.bind("mouseleave",this,this.out_handler)
       mouse_trigger.bind("click",this,this.click_handler)
       
-      var label = $("label[for="+this.element_id+"]");
+      var label = $("label[for="+this.element_id+"]") ;
       if(label.length != 0){
         label.bind("click",this,label_handler)
+      }else{
+        label = this.replacement.parent("label")
+        if(label.length != 0)
+          label.bind("click",this,label_handler)
       }
     }
     
@@ -43,8 +47,10 @@
     }
     
     function label_handler(e){ 
+      if(e.target != this) return;
       e.preventDefault();  
       e.data.replacement.triggerHandler("click");
+      
     }
     
     function disabled(option){
