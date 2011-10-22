@@ -6,11 +6,11 @@
     }
   }
   
-  var FormElement = (function(element){
+  var FormElement = (function(){
     function init(options){
-      
       this.element_id = this.element.attr("id");
       this.element_name = this.element.attr("name");
+      if(this.set_properties) this.set_properties(options);
       this.replacement = (options.select_replacement || this.get_replacement).apply(this)
       this.replace_elements();
       this.init_replacement();
@@ -23,11 +23,19 @@
         this.replacement.removeClass("hover_"+this.element_type)
     }
     
+    function mouse_in(down){
+      down ?
+        this.replacement.addClass("active_"+this.element_type) :
+        this.replacement.removeClass("active_"+this.element_type)
+    }
+    
     function init_mouse_events(){
       var mouse_trigger = this.mouse_trigger();
       mouse_trigger.bind("mouseenter",this,this.hover_handler)
-      mouse_trigger.bind("mouseleave",this,this.out_handler)
-      mouse_trigger.bind("click",this,this.click_handler)
+        .bind("mouseleave",this,this.out_handler)
+        .bind("click",this,this.click_handler)
+        .bind("mouseup",this,this.mouse_up_handler)
+        .bind("mousedown",this,this.mouse_down_handler)
       
       var label = $("label[for="+this.element_id+"]") ;
       if(label.length != 0){
@@ -41,6 +49,8 @@
     
     function hover_handler(event){ event.data.hover(true)  }
     function out_handler(event){ event.data.hover(false) }
+    function mouse_up_handler(event){ event.data.mouse_in(false)  }
+    function mouse_down_handler(event){ event.data.mouse_in(true) }
     
     function active_replacement_class(condition){
       this.replacement[condition ? "addClass" : "removeClass"]("active_"+this.element_type)
@@ -75,16 +85,59 @@
       this.hover_handler = hover_handler;
       this.out_handler = out_handler;
       this.active_replacement_class = active_replacement_class;
+      this.mouse_up_handler = mouse_up_handler;
+      this.mouse_down_handler = mouse_down_handler;
+      this.mouse_in = mouse_in;
       this.label_handler = label_handler;
       this.disabled = disabled;
     }
   })()
   
+  // style='height:"+Select.select_height+"px;'
+  
+  function File(element){
+    this.element = element; this.element_type = "file";
+  }
+  
+  File.prototype.set_properties = function(options){
+    this.file_label = options.file_label;
+    this.file_button = options.file_button;
+  }
+  
+  File.prototype.get_replacement = function(){
+    return $("<span class='file'>\
+      <span class='file_content'>\
+        <span class='file_button'>"+this.file_button+"</span><p class='file_label'>"+this.file_label+"</p>\
+      </span>\
+    </span>")
+  }
+  
+  File.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element_margin = this.element.css("margin-left");
+    this.element_padding = this.element.css("padding-left");
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  File.prototype.init_replacement = function(){
+    var element = this.element, styles = {width:this.element_width};
+    element.css(styles);
+    this.replacement.css(styles);
+    this.file_label = $(".file_label",this.replacement);
+    this.element.bind("change",this,this.file_change)
+  }
+  
+  File.prototype.file_change = function(event){
+    event.data.update_label();
+  }
+  
+  File.prototype.update_label = function(){
+    this.file_label.text(this.element.val());
+  }
   
   function Select(element){ this.element = element; this.element_type = "select";  }
-  Select.prototype.mouse_trigger = function(){
-    return $(".select_content", this.replacement)
-  }
+  File.prototype.mouse_trigger = Select.prototype.mouse_trigger = function(){return this.element;}
   Select.prototype.get_replacement = function(){
     var def_option = $("option:selected",this.element);
     (def_option.length != 0) ||(def_option = $("option:first-child",this.element))
@@ -232,11 +285,17 @@
         case "select": return Select.create(element);
         case "checkbox": return new Checkbox(element);
         case "radio": return new Radio(element);
+        case "file": return new File(element);
       }
   }
   
   function init(options){
-    options = options || {}
+    options = $.extend({
+      file_button:"Browse",
+      file_label:"No file chosen"
+    },(options || {}))
+    
+    
     
     return this.each(function(){      
       var element = FormElement.get(this);
@@ -273,13 +332,13 @@
   }
   
   $.fn.custom_form = function( method ) {
-    if(method == "init" || ! method){
+    if(method == "init" || (typeof method != "string") || !method){
       return init.apply( this, arguments );
     }else{
       try{
         return execute.apply(this,arguments)
       }catch(e){
-        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form' );
+        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form');
       }
     }
   };
