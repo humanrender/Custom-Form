@@ -53,7 +53,7 @@
     function mouse_down_handler(event){ event.data.mouse_in(true) }
     
     function active_replacement_class(condition){
-      this.replacement[condition ? "addClass" : "removeClass"]("active_"+this.element_type)
+      this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
     }
     
     function label_handler(e){ 
@@ -100,16 +100,17 @@
   }
   
   File.prototype.set_properties = function(options){
-    this.file_label = options.file_label;
-    this.file_button = options.file_button;
+    this.label = options.file_label;
+    this.button_label = options.file_button;
+    this.responsive = options.responsive_file
+  }
+  
+  Select.prototype.set_properties = function(options){
+    this.responsive = options.responsive_select;
   }
   
   File.prototype.get_replacement = function(){
-    return $("<span class='file'>\
-      <span class='file_content'>\
-        <span class='file_button'>"+this.file_button+"</span><p class='file_label'>"+this.file_label+"</p>\
-      </span>\
-    </span>")
+    return $("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")
   }
   
   File.prototype.replace_elements = function(){
@@ -121,11 +122,19 @@
   }
   
   File.prototype.init_replacement = function(){
-    var element = this.element, styles = {width:this.element_width};
-    element.css(styles);
-    this.replacement.css(styles);
+    console.log(this.element_width)
+    var element = this.element, styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
     this.file_label = $(".file_label",this.replacement);
-    this.element.bind("change",this,this.file_change)
+    this.element.bind("change",this,this.file_change);
+    console.log(this.responsive,"888")
+    if(!this.responsive){
+      
+      element.css(styles);
+      this.replacement.css(styles);
+      this.file_label.css("width",styles.width-$(".file_button",this.replacement).outerWidth())
+    }else{
+      this.replacement.addClass("responsive_file")
+    }
   }
   
   File.prototype.file_change = function(event){
@@ -133,7 +142,9 @@
   }
   
   File.prototype.update_label = function(){
-    this.file_label.text(this.element.val());
+    var text = this.element.val()
+    if(!text.match(/\S/)) text = this.label;
+    this.file_label.html("<span>"+text+"</span>");
   }
   
   function Select(element){ this.element = element; this.element_type = "select";  }
@@ -141,27 +152,23 @@
   Select.prototype.get_replacement = function(){
     var def_option = $("option:selected",this.element);
     (def_option.length != 0) ||(def_option = $("option:first-child",this.element))
-    return $("<span class='select'>\
-      <span class='select_content' >\
-        <span class='select_button'>\
-          <span class='select_button_icon'></span>\
-        </span>\
-        <p class='select_label'>"+def_option.text()+"</p>\
-      </span>\
-    </span>")
+    return $("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+def_option.text()+"</span></p></span></span>")
   }
   
   Select.prototype.init_replacement = function(){
-    var styles = {width:(this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width")))};
-    this.element.css(styles);
-    this.replacement.css(styles);
-    
-    var select_button = $(".select_button",this.replacement);
     this.select_label = $(".select_label",this.replacement);
-    this.select_label.css({ 
-      width: (styles.width-select_button.outerWidth()-parseInt(this.select_label.css("padding-left"))-parseInt(this.select_label.css("padding-right"))),
-      "padding-right":0
-    });
+    
+    if(!this.responsive){
+      var styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
+      this.element.css(styles);
+      this.replacement.css(styles);
+      var select_button = $(".select_button",this.replacement);  
+      this.select_label.css({ 
+        width: styles.width-select_button.outerWidth()
+      });
+    }else{
+      this.replacement.addClass("responsive_select")
+    }
     
     this.element.bind("change",this,this.select_change)
   }
@@ -177,11 +184,7 @@
   }
   
   Select.prototype.update_label = function(){
-    this.select_label.text($("option:selected",this.element).text());
-  }
-  
-  Select.prototype.show_options = function(){
-    this.element.trigger("click")
+    this.select_label.html("<span>"+$("option:selected",this.element).text()+"</span>");
   }
   
   function Radio(element){ this.element = element; this.element_type = "radio"; this.uncheckeable = true; }
@@ -210,8 +213,7 @@
     if(element.is(":disabled")) this.disabled(true);
   }
   
-  Select.prototype.click_handler = function (event){
-    event.data.show_options();
+  File.prototype.click_handler = Select.prototype.click_handler = function (event){
   }
   
   Select.initialized = false;
@@ -227,7 +229,7 @@
     
   }
   
-  Select.prototype.update = function(){
+  File.prototype.update = Select.prototype.update = function(){
     this.element.trigger("change")
   }
   
@@ -266,9 +268,9 @@
     (checked != undefined) || (checked = true)
     if(checked || updating){
       var input = this.element;
-      checked_radios = $(".active_radio").has("[name='"+this.element_name+"']").not(this.element_id);
+      checked_radios = $(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);
       if(checked_radios.length != 0)
-          checked_radios.removeClass("active_"+this.element_type)
+          checked_radios.removeClass("checked_"+this.element_type)
     }
     Checkbox.prototype.checked.call(this,checked == undefined ? undefined : checked);
   }
@@ -291,8 +293,10 @@
   
   function init(options){
     options = $.extend({
-      file_button:"Browse",
-      file_label:"No file chosen"
+      file_button:"Choose file",
+      file_label:"No file chosen",
+      responsive_select:false,
+      responsive_file:false
     },(options || {}))
     
     
@@ -302,6 +306,7 @@
       if ((this.nodeName == 'SELECT' && this.size > 0) || this.custom_form_instance) return true;
       element.init(options);
       this.custom_form_instance = element;
+      console.log(this.custom_form_instance,this)
     })
   }
   
@@ -327,7 +332,8 @@
     var self = this, args = Array.prototype.slice.call(arguments,1);
     if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
     return self.each(function(){
-      this.custom_form_instance[method].apply(this.custom_form_instance,args)
+      if(this.custom_form_instance)
+        this.custom_form_instance[method].apply(this.custom_form_instance,args)
     })
   }
   
@@ -335,11 +341,11 @@
     if(method == "init" || (typeof method != "string") || !method){
       return init.apply( this, arguments );
     }else{
-      try{
+      // try{
         return execute.apply(this,arguments)
-      }catch(e){
-        $.error( 'Method ' +  method + ' does not exist on jQuery.custom_form');
-      }
+      // }catch(e){
+        // $.error(e);
+      // }
     }
   };
 
