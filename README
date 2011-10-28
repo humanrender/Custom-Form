@@ -70,6 +70,15 @@ Feel free to use it or send feedback.
     </select>
   </span>
 
+# ===========
+# = Options =
+# ===========
+
+responsive_select: If true selects will be given the class .responsive_select which width is 100%
+responsive_select: If true inputs with type file will be given the class .responsive_file which width is 100%
+file_label: The label for inputs with type file (default: No fie chosen)
+file_label: The button text for inputs with type file (default: Choose file)
+
 # ============
 # = Browsers =
 # ============
@@ -82,3 +91,9 @@ Feel free to use it or send feedback.
 
   - Style refactoring to remove duplicates
   - JS refactoring to reduce file size
+  
+# =============
+# = Changelog =
+# =============
+
+29-10-2011  Active classes such as .active_checkbox and .active_radio now reference the :active state. Checked states are now given classes like .checked_checkbox and .checked_radio
