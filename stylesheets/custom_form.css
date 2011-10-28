@@ -5,7 +5,8 @@
 /*.select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label, .file, .file_button*/
 
 .checkbox, .radio, input[type="checkbox"], input[type="radio"],
-.select, .select .select_button, .file, .file_button, .file .file_button span {
+.select, .select .select_button, .select .select_label,
+.file, .file_button, .file .file_button span {
   display: -moz-inline-stack; /*Cross browser inline-block*/
   display: inline-block;
   vertical-align: middle;
@@ -63,8 +64,12 @@ input[type=checkbox], input[type=radio]{
 /* = Selects & Files = */
 /* =================== */
 
-select{
+select, .select{
   min-width:100px;
+}
+
+.file{
+  min-width:180px;
 }
 
 .select, .file{
@@ -105,7 +110,7 @@ select{
 }
 
 .select .select_label span , .file .file_label span {
-  padding-right:10px;
+  padding-right:35px;
   padding-left:10px;
 }
 
@@ -121,8 +126,8 @@ select{
 .select .select_button, .file .file_button {
   height:30px;
   position:relative;
-  right:0;
   top:1px;
+  float:right;
   border-left:1px solid #ddd;
   border-right:1px solid #fff;
   -moz-border-radius-topleft: 0px;

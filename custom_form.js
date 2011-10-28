@@ -122,11 +122,9 @@
   }
   
   File.prototype.init_replacement = function(){
-    console.log(this.element_width)
     var element = this.element, styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
     this.file_label = $(".file_label",this.replacement);
     this.element.bind("change",this,this.file_change);
-    console.log(this.responsive,"888")
     if(!this.responsive){
       
       element.css(styles);
@@ -306,7 +304,6 @@
       if ((this.nodeName == 'SELECT' && this.size > 0) || this.custom_form_instance) return true;
       element.init(options);
       this.custom_form_instance = element;
-      console.log(this.custom_form_instance,this)
     })
   }
   

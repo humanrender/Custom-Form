@@ -9,11 +9,6 @@
   	<style type="text/css" media="screen">
   	 /* =DEMO */
 
-     label {
-       font:13px Helvetica, Arial, sans-serif;
-       color:#000;
-     }
-
      input[type="submit"]{
        display: -moz-inline-stack; /*Cross browser inline-block*/
        display: inline-block;
@@ -42,9 +37,39 @@
        -moz-border-radius: 3px;
        border-radius: 3px;
      }
+     /*
+          .notes div{
+            display: -moz-inline-stack;
+            display: inline-block;
+            vertical-align: middle;
+            zoom: 1;
+            *display: inline;
+          }*/
      
-     select.custom_select{
-       width:100px;
+     label , .notes{
+       font:13px Helvetica, Arial, sans-serif;
+       color:#000;
+     }
+     
+     .notes{
+       margin-top:20px;
+       width:100%;
+       margin-bottom:10px;
+     }
+     
+     .notes .section{
+       border: 1px dashed #999;
+       padding:10px;
+     }
+     
+     .notes .section:first-child{
+       margin-bottom:5px;
+     }
+     
+     .notes pre{
+       font-size:10px;
+       padding:0;
+       margin:0;
      }
      
   	</style>
@@ -59,6 +84,8 @@
             <label for="custom_checkbox_#{i}">Checkbox #{i}</label>
           </div>~
         end
+        
+        
         5.times do |i|
           output += %~<div>
             <input type="radio" id="name_#{i}" name="name" value="#{i}"/>
@@ -68,231 +95,277 @@
           </div>~
         end
         
-        puts output  
+        
+        puts output   
+
  
         -->
+      <fieldset>
+        <legend><span>Checkboxes</span></legend>
         
-      <div>
-          <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0" class="custom_form"/>
-          <label for="custom_checkbox_0">Checkbox 0</label>
-          <input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/>
-          <label for="custom_checkbox_5">Checkbox 0</label><br/>
-          <input type="checkbox" id="custom_checkbox_10" name="ids[]" value="0"/>
-          <label for="custom_checkbox_10">Checkbox 0</label>
-      </div><div>
-        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1" class="custom_form"/>
+        <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
+        <label for="custom_checkbox_0">Checkbox 0</label>
+        
+        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1"/>
         <label for="custom_checkbox_1">Checkbox 1</label>
-        <input type="checkbox" id="custom_checkbox_6" name="ids[]" value="0"/>
-        <label for="custom_checkbox_6">Checkbox 0</label><br/>
-        <input type="checkbox" id="custom_checkbox_11" name="ids[]" value="0"/>
-        <label for="custom_checkbox_11">Checkbox 0</label>
-      </div><div>
-        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2" class="custom_form"/>
+        
+        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2"/>
         <label for="custom_checkbox_2">Checkbox 2</label>
-        <input type="checkbox" id="custom_checkbox_7" name="ids[]" value="0"/>
-        <label for="custom_checkbox_7">Checkbox 0</label><br/>
-        <input type="checkbox" id="custom_checkbox_12" name="ids[]" value="0"/>
-        <label for="custom_checkbox_12">Checkbox 0</label>
-      </div><div>
-        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3" class="custom_form"/>
+        
+        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3"/>
         <label for="custom_checkbox_3">Checkbox 3</label>
-        <input type="checkbox" id="custom_checkbox_8" name="ids[]" value="0"/>
-        <label for="custom_checkbox_8">Checkbox 0</label><br/>
-        <input type="checkbox" id="custom_checkbox_13" name="ids[]" value="0"/>
-        <label for="custom_checkbox_13">Checkbox 0</label>
-      </div><div>
-        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4" class="custom_form"/>
+        
+        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4"/>
         <label for="custom_checkbox_4">Checkbox 4</label>
-        <input type="checkbox" id="custom_checkbox_9" name="ids[]" value="0"/>
-        <label for="custom_checkbox_9">Checkbox 0</label><br/>
-        <input type="checkbox" id="custom_checkbox_14" name="ids[]" value="0"/>
-        <label for="custom_checkbox_14">Checkbox 0</label>
-      </div>
-      
-      
-      <div>
-        <input type="radio" id="name_0" name="name" value="0" class="custom_form"/>
-        <label for="name_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0" class="custom_form"/>
-        <label for="address_0">Radio 0</label>
         
-        <input type="radio" id="name_0" name="name" value="0"/>
-        <label for="name_0">Radio 0</label><br/>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-      </div><div>
-        <input type="radio" id="name_1" name="name" value="1" class="custom_form"/>
-        <label for="name_1">Radio 1</label>
-        <input type="radio" id="address_1" name="address" value="1" class="custom_form"/>
-        <label for="address_1">Radio 2 - 1</label>
-        
-        <input type="radio" id="name_0" name="name" value="0"/>
-        <label for="name_0">Radio 0</label><br/>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-      </div><div>
-        <input type="radio" id="name_2" name="name" value="2" class="custom_form"/>
-        <label for="name_2">Radio 2</label>
-        <input type="radio" id="address_2" name="address" value="2" class="custom_form"/>
-        <label for="address_2">Radio 2 - 2</label>
-        
-        <input type="radio" id="name_0" name="name" value="0"/>
-        <label for="name_0">Radio 0</label><br/>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-      </div><div>
-        <input type="radio" id="name_3" name="name" value="3" class="custom_form"/>
-        <label for="name_3">Radio 3</label>
-        <input type="radio" id="address_3" name="address" value="3" class="custom_form"/>
-        <label for="address_3">Radio 2 - 3</label>
-        
-        <input type="radio" id="name_0" name="name" value="0"/>
-        <label for="name_0">Radio 0</label><br/>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-      </div><div>
-        <input type="radio" id="name_4" name="name" value="4" class="custom_form"/>
-        <label for="name_4">Radio 4</label>
-        <input type="radio" id="address_4" name="address" value="4" class="custom_form"/>
-        <label for="address_4">Radio 2 - 4</label>
-        
-        <input type="radio" id="name_0" name="name" value="0"/>
-        <label for="name_0">Radio 0</label><br/>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-        <input type="radio" id="address_0" name="address" value="0"/>
-        <label for="address_0">Radio 0</label>
-      </div>
-      
-      <select id='select_1' name="select_1" class="custom_select">
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 4</option>
-        <option value="5">Option 5</option>
-        <option value="6">Option 6</option>
-      </select><select id='select_2' name="select_2" class="custom_select">
-        <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-        <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-        <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-        <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-        <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-        <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-      </select>       
-      <div>
-        <select id='select_1' name="select_1" style="width:100px">
-          <option value="1">Option 1</option>
-          <option value="2">Option 2</option>
-          <option value="3">Option 3</option>
-          <option value="4">Option 4</option>
-          <option value="5">Option 5</option>
-          <option value="6">Option 6</option>
-        </select><select id='select_2' name="select_2" style="width:100px">
-          <option value="1">Very valid option</option>
-          <option value="2">Very valid option</option>
-          <option value="3">Very valid option</option>
-          <option value="4">Very valid option</option>
-          <option value="5">Very valid option</option>
-          <option value="6">Very valid option</option>
-        </select>
-      </div>
-      
-      <!-- 100% width selects -->
-      <div style="width:400px; background:#ce0">
-        <select id='select_3' name="select_3" style="width:100%; display:inline-block" class="custom_select">
-          <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-          <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-          <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-          <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-          <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-          <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-        </select>
-      </div>
-      
-      <div style="width:400px; background:#ce0">
-        <select id='select_4' name="select_4" style="width:100%; display:inline-block" class="">
-          <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-          <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-          <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-          <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-          <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-          <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-        </select>
-      </div>
-      <div style="width:100%">
-        <div style="width:49%; background:#ce0; margin-right:2%; display:inline-block">
-          <select id='select_3' name="select_3" style="width:100%; display:inline-block" class="responsive_select">
-            <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-            <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-            <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-            <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-            <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-            <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-          </select>
-        </div><div style="width:49%; background:#ce0; display:inline-block">
-          <select id='select_3' name="select_3" style="width:100%; display:inline-block" class="responsive_select">
-            <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-            <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-            <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-            <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-            <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-            <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-          </select>
-        </div><div style="width:100%">
-        <div style="width:49%; background:#ce0; margin-right:2%; display:inline-block">
-          <select id='select_3' name="select_3" style="width:100%; display:inline-block" class="">
-            <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-            <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-            <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-            <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-            <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-            <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-          </select>
-        </div><div style="width:49%; background:#ce0; display:inline-block">
-          <select id='select_3' name="select_3" style="width:100%; display:inline-block" class="">
-            <option value="1">Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 Other option 1 </option>
-            <option value="2">Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 Other option 2 </option>
-            <option value="3">Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 Other option 3 </option>
-            <option value="4">Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 Other option 4 </option>
-            <option value="5">Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 Other option 5 </option>
-            <option value="6">Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 Other option 6 </option>
-          </select>
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_0&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_checkbox_0&quot;&gt;Checkbox 0&lt;/label&gt;</code></pre>
+          </div>
         </div>
-      </div>
-      
-      <input type="file" class="custom_file"/><br/>
-      <input type="file" class="not_custom_file" style="width: 235px;"/><br/>
-      <input type="submit"/>
-      
-      <div style="100%">
-        <div style="width:49%; margin-right:1%; display:inline-block">
-          <input type="file" class="responsive_file" style="width:100%"/><br/>
+        
+        <label><input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/> Checkbox 5</label>
+        <label><input type="checkbox" id="custom_checkbox_6" name="ids[]" value="1"/> Checkbox 6</label>
+        <label><input type="checkbox" id="custom_checkbox_7" name="ids[]" value="2"/> Checkbox 7</label>
+        <label><input type="checkbox" id="custom_checkbox_8" name="ids[]" value="3"/> Checkbox 8</label>
+        <label><input type="checkbox" id="custom_checkbox_9" name="ids[]" value="4"/> Checkbox 9</label>
+        
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_5&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt; Checkbox 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=checkbox]&quot;).custom_form();</code></pre>
+          </div>
         </div>
-        <div style="width:49%; display:inline-block">
-          <input type="file" class="responsive_file" style="width:100%"/><br/>
+      </fieldset>
+      <fieldset>
+        <legend><span>Radios</span></legend>
+  
+        <input type="radio" id="custom_radio_0" name="values[]" value="0"/>
+        <label for="custom_radio_0">radio 0</label>
+  
+        <input type="radio" id="custom_radio_1" name="values[]" value="1"/>
+        <label for="custom_radio_1">radio 1</label>
+  
+        <input type="radio" id="custom_radio_2" name="values[]" value="2"/>
+        <label for="custom_radio_2">radio 2</label>
+  
+        <input type="radio" id="custom_radio_3" name="values[]" value="3"/>
+        <label for="custom_radio_3">radio 3</label>
+  
+        <input type="radio" id="custom_radio_4" name="values[]" value="4"/>
+        <label for="custom_radio_4">radio 4</label>
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;radio&quot; id=&quot;custom_radio_0&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_radio_0&quot;&gt;radio 0&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
         </div>
-      </div>
-      <input type="reset"/>
+  
+        <label><input type="radio" id="custom_radio_5" name="values[]" value="0"/> radio 5</label>
+        <label><input type="radio" id="custom_radio_6" name="values[]" value="1"/> radio 6</label>
+        <label><input type="radio" id="custom_radio_7" name="values[]" value="2"/> radio 7</label>
+        <label><input type="radio" id="custom_radio_8" name="values[]" value="3"/> radio 8</label>
+        <label><input type="radio" id="custom_radio_9" name="values[]" value="4"/> radio 9</label>
+  
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;radio&quot; id=&quot;custom_radio_5&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt; radio 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <legend><span>Selects</span></legend>
+  
+        <label for="custom_select_1">Country</label>
+        <select id="custom_select_1" class="custom_form">
+          <option value="" selected="selected">Select Country</option> 
+          <option value="United States">Spain</option> 
+          <option value="United States">United States</option> 
+          <option value="United Kingdom">United Kingdom</option> 
+          <option value="Afghanistan">Afghanistan</option> 
+          <option value="Albania">Albania</option> 
+          <option value="Algeria">Algeria</option> 
+          <option value="American Samoa">American Samoa</option> 
+          <option value="Andorra">Andorra</option> 
+          <option value="...">...</option> 
+        </select>
+        
+        <label for="custom_select_2">Credit Card</label>
+        <select id="custom_select_2" class="custom_form">
+          <option value="" selected="selected">Select Credit Card</option> 
+          <option value="United States">Visa</option> 
+          <option value="United States">MasterCard</option> 
+          <option value="United Kingdom">American Express</option> 
+          <option value="...">...</option> 
+        </select>
+        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_select_1&quot;&gt;Country&lt;/label&gt;
+  &lt;select id=&quot;custom_select_1&quot;&gt;
+    &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+    &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+  &lt;/select&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_select_3" style="display:block">Country</label>
+            <select id="custom_select_3" class="custom_form_responsive">
+              <option value="" selected="selected">Select Country</option> 
+              <option value="United States">Spain</option> 
+              <option value="United States">United States</option> 
+              <option value="United Kingdom">United Kingdom</option> 
+              <option value="Afghanistan">Afghanistan</option> 
+              <option value="Albania">Albania</option> 
+              <option value="Algeria">Algeria</option> 
+              <option value="American Samoa">American Samoa</option> 
+              <option value="Andorra">Andorra</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_select_4"  style="display:block">Credit Card</label>
+            <select id="custom_select_4" class="custom_form_responsive">
+              <option value="" selected="selected">Select Credit Card</option> 
+              <option value="United States">Visa</option> 
+              <option value="United States">MasterCard</option> 
+              <option value="United Kingdom">American Express</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_3&quot; style=&quot;display:block&quot;&gt;Country&lt;/label&gt;
+      &lt;select id=&quot;custom_select_3&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Spain&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;United States&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;United Kingdom&lt;/option&gt; 
+        &lt;option value=&quot;Afghanistan&quot;&gt;Afghanistan&lt;/option&gt; 
+        &lt;option value=&quot;Albania&quot;&gt;Albania&lt;/option&gt; 
+        &lt;option value=&quot;Algeria&quot;&gt;Algeria&lt;/option&gt; 
+        &lt;option value=&quot;American Samoa&quot;&gt;American Samoa&lt;/option&gt; 
+        &lt;option value=&quot;Andorra&quot;&gt;Andorra&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_4&quot;  style=&quot;display:block&quot;&gt;Credit Card&lt;/label&gt;
+      &lt;select id=&quot;custom_select_4&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Credit Card&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Visa&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;MasterCard&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;American Express&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form({
+    responsive_select:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span>File</span></legend>
+  
+        <label for="custom_file_1">Attachment</label>
+        <input id="custom_file_1" type="file" style="width:400px"/>        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_file_1&quot;&gt;Attachment&lt;/label&gt;
+  &lt;input id=&quot;custom_file_1&quot; type=&quot;file&quot; style=&quot;width:400px&quot;/&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=file]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_file_2">Attachment</label>
+            <input id="custom_file_2" type="file"/>  
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_file_3">Attachment</label>
+            <input id="custom_file_3" type="file"/>  
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_2&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_3&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[typ=file]&quot;).custom_form({
+    responsive_file:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
     </form>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script src="custom_form.js" type="text/javascript" charset="utf-8"></script>
     
     <script type="text/javascript" charset="utf-8">
-      var inputs = $("input[type=checkbox].custom_form,input[type=radio].custom_form,input[type=file].custom_file, select.custom_select").custom_form();
-      
-      $(".responsive_select, .responsive_file").custom_form({
+      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
+      $("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
         responsive_select:true,
         responsive_file:true
-      });
-      
+      })
       
     </script>
   </body>
