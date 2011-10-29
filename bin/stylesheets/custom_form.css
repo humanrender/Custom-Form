@@ -21,7 +21,7 @@
 }
 
 
-.disabled_checkbox{
+.disabled_checkbox, .disabled_radio{
   opacity:0.5;
 }
 

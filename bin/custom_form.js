@@ -130,6 +130,10 @@
     }
   })
 
+  // ============
+  // = Checkbox =
+  // ============
+
   function Checkbox(element,options,identifier){this.constructor.call(this,element,options,identifier);}
   Checkbox.IDENTIFIER = "input_checkbox";
 
@@ -154,22 +158,56 @@
       if(element.is(":disabled")) this.disabled(true,element,replacement);
     },
     checked:function(checked,element,replacement){
-      var input = (element) || (this.get_element()), replacement = (replacement) || (this.get("replacement"));
+      element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
       checked = checked == undefined ? !input.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
-        input.attr("checked",checked);
+        element.attr("checked",checked);
         replacement[checked ? "addClass" : "removeClass"]("checked_"+this.element_type);
-        if(checked) input.trigger("change");
+        if(checked) element.trigger("change");
       }
     },
     mouse_trigger:function(){ return this.get("replacement") },
     click_handler:function(event){
       event.data.checked();
       event.data.get_element().triggerHandler("click");
+    },
+    update:function(){
+      var element = this.get_element();
+      this.checked(element.is(":checked"),element);
     }
   });
 
   FormElement.register_class(Checkbox.IDENTIFIER,Checkbox)
+  
+  // =========
+  // = Radio =
+  // =========
+  
+  function Radio(element,options,identifier){this.constructor.call(this,element,options,identifier);}
+  Radio.IDENTIFIER = "input_radio";
+  var r = Radio.prototype = new Checkbox();
+  r.constructor = FormElement.prototype.constructor;
+  $.extend(r,{
+    uncheckeable:true,
+    element_type:"radio",
+    update:function(){
+      var element = this.get_element();
+      if(this.is_disabled != element.is(":disabled")) this.disabled(!this.is_disabled,element);
+      this.checked(element.is(":checked"),element,null,true)
+    },
+    checked:function(checked,element,replacement,updating){
+      element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
+      (checked != undefined) || (checked = true);
+      if(checked || updating){
+        var checked_radios = $(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);
+        if(checked_radios.length != 0)
+            checked_radios.removeClass("checked_"+this.element_type)
+      }
+      Checkbox.prototype.checked.call(this,checked); // == undefined ? undefined : checked
+    }
+  })
+  
+  FormElement.register_class(Radio.IDENTIFIER,Radio)
 
   function CustomForm(){
     this.init = function(elements, options){

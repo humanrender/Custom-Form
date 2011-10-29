@@ -28,7 +28,7 @@
   
 <%= include_js :form_element %>
 
-<%= include_js :checkbox %>
+<%= include_js :checkbox_and_radio %>
 
 <%= include_js :engine %>
   
