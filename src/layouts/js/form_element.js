@@ -6,13 +6,13 @@
   // = Static Methods =
   // ==================
   FormElement.total_instances = 0;
-  FormElement.build = function(element,options){
+  FormElement.build = function(element){
     var type, klass;
     if(element.is("select")) type = "select";
     else type = "input_"+element.attr("type");
     
     if(!(klass = this.available_classes[type])) throw("No class available to build element of type "+type)
-    return new klass(element,options,(type+"_"+FormElement.total_instances++));
+    return new klass(type+"_"+FormElement.total_instances++);
   }
   
   FormElement.available_classes = {};
@@ -23,12 +23,7 @@
   // =================
   // = Class Methods =
   // =================
-  function FormElement(element,options,identifier){
-    if(element){
-      this.identifier = identifier;
-      this.set_parameters(element,options);
-    }
-  }
+  function FormElement(identifier){this.identifier = identifier;}
   
   var f = FormElement.prototype;
   
@@ -43,15 +38,17 @@
       this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
     },
     
-    init:function(){
-      var element = this.get_element(), replacement = this.set_replacement();
+    init:function(options){
+      var element = this.get_element(), replacement;
+      this.set_parameters(element,options);
+      replacement = this.set_replacement(element);
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.init_mouse_events(element,replacement);
       return this;
     },
-    set_replacement:function(){
-      return this.set(this.get_replacement(),"replacement")
+    set_replacement:function(element){
+      return this.set(this.get_replacement(element),"replacement")
     },
     init_mouse_events:function(element,replacement){
       this.mouse_trigger().bind("mouseenter",this,this.hover_handler)
@@ -99,5 +96,8 @@
         default:
           return element.is(":disabled");
       }
+    },
+    disable_if_disabled:function(element){
+      if(this.is_disabled != element.is(":disabled")) this.disabled(!this.is_disabled,element);
     }
   })

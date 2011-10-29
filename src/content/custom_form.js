@@ -1,12 +1,6 @@
 (function($){
 
   var $$ = {},
-  DEFAULTS = { 
-    file_button:"Choose file",
-    file_label:"No file chosen",
-    responsive_select:false,
-    responsive_file:false
-  },
   METHODS = ["init","checked","update","select","disabled"],
   OVERRIDES = {
     disabled:function(option){
@@ -29,6 +23,10 @@
 <%= include_js :form_element %>
 
 <%= include_js :checkbox_and_radio %>
+
+<%= include_js :select %>
+
+<%= include_js :file %>
 
 <%= include_js :engine %>
   

@@ -1,6 +1,11 @@
   function CustomForm(){
     this.init = function(elements, options){
-      var self = this, options = $.extend(DEFAULTS,(options || {}));
+      var self = this, options = $.extend({ 
+        file_button:"Choose file",
+        file_label:"No file chosen",
+        responsive_select:false,
+        responsive_file:false
+      },(options || {}));
       return elements.each(function(){ 
         // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
         if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;

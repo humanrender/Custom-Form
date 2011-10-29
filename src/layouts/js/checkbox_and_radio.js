@@ -2,7 +2,7 @@
   // = Checkbox =
   // ============
 
-  function Checkbox(element,options,identifier){this.constructor.call(this,element,options,identifier);}
+  function Checkbox(identifier){this.constructor.call(this,identifier);}
   Checkbox.IDENTIFIER = "input_checkbox";
 
   var c = Checkbox.prototype = new FormElement();
@@ -14,7 +14,7 @@
       this.element_id = element.attr("id");
       this.element_name = element.attr("name");
     },
-    get_replacement:function(){
+    get_replacement:function(element){
       return $("<span class='"+this.element_type+"'></span>");
     },
     replace_elements:function(element,replacement){
@@ -27,7 +27,7 @@
     },
     checked:function(checked,element,replacement){
       element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
-      checked = checked == undefined ? !input.is(":checked") : checked;
+      checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
         element.attr("checked",checked);
         replacement[checked ? "addClass" : "removeClass"]("checked_"+this.element_type);
@@ -41,6 +41,7 @@
     },
     update:function(){
       var element = this.get_element();
+      this.disable_if_disabled(element);
       this.checked(element.is(":checked"),element);
     }
   });
@@ -51,7 +52,7 @@
   // = Radio =
   // =========
   
-  function Radio(element,options,identifier){this.constructor.call(this,element,options,identifier);}
+  function Radio(identifier){this.constructor.call(this,identifier);}
   Radio.IDENTIFIER = "input_radio";
   var r = Radio.prototype = new Checkbox();
   r.constructor = FormElement.prototype.constructor;
@@ -60,7 +61,7 @@
     element_type:"radio",
     update:function(){
       var element = this.get_element();
-      if(this.is_disabled != element.is(":disabled")) this.disabled(!this.is_disabled,element);
+      this.disable_if_disabled(element);
       this.checked(element.is(":checked"),element,null,true)
     },
     checked:function(checked,element,replacement,updating){

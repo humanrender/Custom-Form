@@ -21,7 +21,7 @@
 }
 
 
-.disabled_checkbox, .disabled_radio{
+.disabled_checkbox, .disabled_radio, .disabled_select, .disabled_file{
   opacity:0.5;
 }
 
@@ -210,11 +210,8 @@ select, .select{
   
   /* Responsive styles (width 100%) */
   
-  .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content{
-    width:100%;
-  }
-  
-  .responsive_select .select_label, .responsive_file .file_label{
+  .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content,
+  .responsive_select .select_label, .responsive_file .file_label, .responsive_select select{
     width:100%;
   }
   

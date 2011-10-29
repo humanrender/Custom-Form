@@ -110,7 +110,7 @@ title: Custom Forms demo
         <label for="custom_select_1">Country</label>
         <select id="custom_select_1" class="custom_form">
           <option value="" selected="selected">Select Country</option> 
-          <option value="United States">Spain</option> 
+          <option value="Spain">Spain</option> 
           <option value="United States">United States</option> 
           <option value="United Kingdom">United Kingdom</option> 
           <option value="Afghanistan">Afghanistan</option> 
@@ -124,9 +124,9 @@ title: Custom Forms demo
         <label for="custom_select_2">Credit Card</label>
         <select id="custom_select_2" class="custom_form">
           <option value="" selected="selected">Select Credit Card</option> 
-          <option value="United States">Visa</option> 
-          <option value="United States">MasterCard</option> 
-          <option value="United Kingdom">American Express</option> 
+          <option value="Visa">Visa</option> 
+          <option value="MasterCard">MasterCard</option> 
+          <option value="American Express">American Express</option> 
           <option value="...">...</option> 
         </select>
         
@@ -151,7 +151,7 @@ title: Custom Forms demo
             <label for="custom_select_3" style="display:block">Country</label>
             <select id="custom_select_3" class="custom_form_responsive">
               <option value="" selected="selected">Select Country</option> 
-              <option value="United States">Spain</option> 
+              <option value="Spain">Spain</option> 
               <option value="United States">United States</option> 
               <option value="United Kingdom">United Kingdom</option> 
               <option value="Afghanistan">Afghanistan</option> 
@@ -167,9 +167,9 @@ title: Custom Forms demo
             <label for="custom_select_4"  style="display:block">Credit Card</label>
             <select id="custom_select_4" class="custom_form_responsive">
               <option value="" selected="selected">Select Credit Card</option> 
-              <option value="United States">Visa</option> 
-              <option value="United States">MasterCard</option> 
-              <option value="United Kingdom">American Express</option> 
+              <option value="Visa">Visa</option> 
+              <option value="MasterCard">MasterCard</option> 
+              <option value="American Express">American Express</option> 
               <option value="...">...</option> 
             </select>
           </div>
@@ -181,7 +181,7 @@ title: Custom Forms demo
             <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
     &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_select_3&quot; style=&quot;display:block&quot;&gt;Country&lt;/label&gt;
-      &lt;select id=&quot;custom_select_3&quot;&gt;
+      &lt;select id=&quot;custom_select_3&quot; style=&quot;width:100%&quot;&gt;
         &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;Spain&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;United States&lt;/option&gt; 
@@ -197,7 +197,7 @@ title: Custom Forms demo
 
     &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_select_4&quot;  style=&quot;display:block&quot;&gt;Credit Card&lt;/label&gt;
-      &lt;select id=&quot;custom_select_4&quot;&gt;
+      &lt;select id=&quot;custom_select_4&quot; style=&quot;width:100%&quot;&gt;
         &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Credit Card&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;Visa&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;MasterCard&lt;/option&gt; 
@@ -251,12 +251,12 @@ title: Custom Forms demo
             <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
     &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_file_2&quot;&gt;Attachment&lt;/label&gt;
-      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot;/&gt;  
+      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot; style=&quot;width:100%&quot;/&gt;  
     &lt;/div&gt;
   
     &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_file_3&quot;&gt;Attachment&lt;/label&gt;
-      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot;/&gt;  
+      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot; style=&quot;width:100%&quot;/&gt;  
     &lt;/div&gt;
   &lt;/div&gt;</code></pre>
           </div>
@@ -274,12 +274,11 @@ title: Custom Forms demo
     <script src="/custom_form.js" type="text/javascript" charset="utf-8"></script>
     
     <script type="text/javascript" charset="utf-8">
-      //$("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
-      //$("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
-      //  responsive_select:true,
-      //  responsive_file:true
-      //})
-      $("[type=checkbox], [type=radio]").custom_form();
+      $("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
+        responsive_select:true,
+        responsive_file:true
+      })
+      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
     </script>
   </body>
 </html>
