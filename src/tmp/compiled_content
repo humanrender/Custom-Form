@@ -1,0 +1,2303 @@
+{:	data{I"/:ET{:default{:	lastI"�<h1>A Brand New nanoc Site</h1>
+
+<p>You’ve just created a new nanoc site. The page you are looking at right now is the home page for your site. To get started, consider replacing this default homepage with your own customized homepage. Some pointers on how to do so:</p>
+
+<ul>
+  <li><p><strong>Change this page’s content</strong> by editing the “index.html” file in the “content” directory. This is the actual page content, and therefore doesn’t include the header, sidebar or style information (those are part of the layout).</p></li>
+  <li><p><strong>Change the layout</strong>, which is the “default.html” file in the “layouts” directory, and create something unique (and hopefully less bland).</p></li>
+</ul>
+
+<p>If you need any help with customizing your nanoc web site, be sure to check out the documentation (see sidebar), and be sure to subscribe to the discussion group (also see sidebar). Enjoy!</p>;T:rawI"�<h1>A Brand New nanoc Site</h1>
+
+<p>You’ve just created a new nanoc site. The page you are looking at right now is the home page for your site. To get started, consider replacing this default homepage with your own customized homepage. Some pointers on how to do so:</p>
+
+<ul>
+  <li><p><strong>Change this page’s content</strong> by editing the “index.html” file in the “content” directory. This is the actual page content, and therefore doesn’t include the header, sidebar or style information (those are part of the layout).</p></li>
+  <li><p><strong>Change the layout</strong>, which is the “default.html” file in the “layouts” directory, and create something unique (and hopefully less bland).</p></li>
+</ul>
+
+<p>If you need any help with customizing your nanoc web site, be sure to check out the documentation (see sidebar), and be sure to subscribe to the discussion group (also see sidebar). Enjoy!</p>;T:pre@
+I"/stylesheet/;T{;{;I"* {
+  margin: 0;
+  padding: 0;
+
+  font-family: Georgia, Palatino, Times, 'Times New Roman', sans-serif;
+}
+
+body {
+  background: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link,
+a:visited {
+  color: #f30;
+}
+
+a:hover {
+  color: #f90;
+}
+
+#main {
+  position: absolute;
+
+  top: 40px;
+  left: 280px;
+
+  width: 500px;
+}
+
+#main h1 {
+  font-size: 40px;
+  font-weight: normal;
+
+  line-height: 40px;
+
+  letter-spacing: -1px;
+}
+
+#main p {
+  margin: 20px 0;
+  
+  font-size: 15px;
+  
+  line-height: 20px;
+}
+
+#main ul, #main ol {
+  margin: 20px;
+}
+
+#main li {
+  font-size: 15px;
+  
+  line-height: 20px;
+}
+
+#main ul li {
+  list-style-type: square;
+}
+
+#sidebar {
+  position: absolute;
+
+  top: 40px;
+  left: 20px;
+  width: 200px;
+
+  padding: 20px 20px 0 0;
+
+  border-right: 1px solid #ccc;
+
+  text-align: right;
+}
+
+#sidebar h2 {
+  text-transform: uppercase;
+
+  font-size: 13px;
+
+  color: #333;
+
+  letter-spacing: 1px;
+
+  line-height: 20px;
+}
+
+#sidebar ul {
+  list-style-type: none;
+
+  margin: 20px 0;
+}
+
+#sidebar li {
+  font-size: 14px;
+
+  line-height: 20px;
+}
+;T;	@;
+@I"/demo/;T{;{;I"X=<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>index</title>
+  	<link rel="stylesheet" href="stylesheets/custom_form.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+  	<style type="text/css" media="screen">
+  	 /* =DEMO */
+
+     input[type="submit"]{
+       display: -moz-inline-stack; /*Cross browser inline-block*/
+       display: inline-block;
+       vertical-align: middle;
+       zoom: 1;
+       *display: inline;
+     }
+
+     input[type="submit"]{
+       background: #fefefe; /* Old browsers */
+       background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
+       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+       background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+       background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
+       background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
+       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+       background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
+
+       border:1px solid #5B5D5E;
+       padding-top:3px;
+       padding-bottom:3px;
+       font:10px Verdana, sans-serif;
+       color:#0B333B;
+
+       -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+       border-radius: 3px;
+     }
+     /*
+          .notes div{
+            display: -moz-inline-stack;
+            display: inline-block;
+            vertical-align: middle;
+            zoom: 1;
+            *display: inline;
+          }*/
+     
+     label , .notes{
+       font:13px Helvetica, Arial, sans-serif;
+       color:#000;
+     }
+     
+     .notes{
+       margin-top:20px;
+       width:100%;
+       margin-bottom:10px;
+     }
+     
+     .notes .section{
+       border: 1px dashed #999;
+       padding:10px;
+     }
+     
+     .notes .section:first-child{
+       margin-bottom:5px;
+     }
+     
+     .notes pre{
+       font-size:10px;
+       padding:0;
+       margin:0;
+     }
+     
+  	</style>
+  </head>
+  <body>
+    <form autocomplete="off">
+      <!-- 
+        output = ""
+        5.times do |i|
+          output += %~<div>
+            <input type="checkbox" id="custom_checkbox_#{i}" name="ids[]" value="#{i}"/>
+            <label for="custom_checkbox_#{i}">Checkbox #{i}</label>
+          </div>~
+        end
+        
+        
+        5.times do |i|
+          output += %~<div>
+            <input type="radio" id="name_#{i}" name="name" value="#{i}"/>
+            <label for="name_#{i}">Radio #{i}</label>
+            <input type="radio" id="address_#{i}" name="address" value="#{i}"/>
+            <label for="address_#{i}">Radio 2 - #{i}</label>
+          </div>~
+        end
+        
+        
+        puts output   
+
+ 
+        -->
+      <fieldset>
+        <legend><span>Checkboxes</span></legend>
+        
+        <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
+        <label for="custom_checkbox_0">Checkbox 0</label>
+        
+        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1"/>
+        <label for="custom_checkbox_1">Checkbox 1</label>
+        
+        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2"/>
+        <label for="custom_checkbox_2">Checkbox 2</label>
+        
+        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3"/>
+        <label for="custom_checkbox_3">Checkbox 3</label>
+        
+        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4"/>
+        <label for="custom_checkbox_4">Checkbox 4</label>
+        
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_0&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_checkbox_0&quot;&gt;Checkbox 0&lt;/label&gt;</code></pre>
+          </div>
+        </div>
+        
+        <label><input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/> Checkbox 5</label>
+        <label><input type="checkbox" id="custom_checkbox_6" name="ids[]" value="1"/> Checkbox 6</label>
+        <label><input type="checkbox" id="custom_checkbox_7" name="ids[]" value="2"/> Checkbox 7</label>
+        <label><input type="checkbox" id="custom_checkbox_8" name="ids[]" value="3"/> Checkbox 8</label>
+        <label><input type="checkbox" id="custom_checkbox_9" name="ids[]" value="4"/> Checkbox 9</label>
+        
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_5&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt; Checkbox 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=checkbox]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span>Radios</span></legend>
+  
+        <input type="radio" id="custom_radio_0" name="values[]" value="0"/>
+        <label for="custom_radio_0">radio 0</label>
+  
+        <input type="radio" id="custom_radio_1" name="values[]" value="1"/>
+        <label for="custom_radio_1">radio 1</label>
+  
+        <input type="radio" id="custom_radio_2" name="values[]" value="2"/>
+        <label for="custom_radio_2">radio 2</label>
+  
+        <input type="radio" id="custom_radio_3" name="values[]" value="3"/>
+        <label for="custom_radio_3">radio 3</label>
+  
+        <input type="radio" id="custom_radio_4" name="values[]" value="4"/>
+        <label for="custom_radio_4">radio 4</label>
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;radio&quot; id=&quot;custom_radio_0&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_radio_0&quot;&gt;radio 0&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <label><input type="radio" id="custom_radio_5" name="values[]" value="0"/> radio 5</label>
+        <label><input type="radio" id="custom_radio_6" name="values[]" value="1"/> radio 6</label>
+        <label><input type="radio" id="custom_radio_7" name="values[]" value="2"/> radio 7</label>
+        <label><input type="radio" id="custom_radio_8" name="values[]" value="3"/> radio 8</label>
+        <label><input type="radio" id="custom_radio_9" name="values[]" value="4"/> radio 9</label>
+  
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;radio&quot; id=&quot;custom_radio_5&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt; radio 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <legend><span>Selects</span></legend>
+  
+        <label for="custom_select_1">Country</label>
+        <select id="custom_select_1" class="custom_form">
+          <option value="" selected="selected">Select Country</option> 
+          <option value="United States">Spain</option> 
+          <option value="United States">United States</option> 
+          <option value="United Kingdom">United Kingdom</option> 
+          <option value="Afghanistan">Afghanistan</option> 
+          <option value="Albania">Albania</option> 
+          <option value="Algeria">Algeria</option> 
+          <option value="American Samoa">American Samoa</option> 
+          <option value="Andorra">Andorra</option> 
+          <option value="...">...</option> 
+        </select>
+        
+        <label for="custom_select_2">Credit Card</label>
+        <select id="custom_select_2" class="custom_form">
+          <option value="" selected="selected">Select Credit Card</option> 
+          <option value="United States">Visa</option> 
+          <option value="United States">MasterCard</option> 
+          <option value="United Kingdom">American Express</option> 
+          <option value="...">...</option> 
+        </select>
+        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_select_1&quot;&gt;Country&lt;/label&gt;
+  &lt;select id=&quot;custom_select_1&quot;&gt;
+    &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+    &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+  &lt;/select&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_select_3" style="display:block">Country</label>
+            <select id="custom_select_3" class="custom_form_responsive">
+              <option value="" selected="selected">Select Country</option> 
+              <option value="United States">Spain</option> 
+              <option value="United States">United States</option> 
+              <option value="United Kingdom">United Kingdom</option> 
+              <option value="Afghanistan">Afghanistan</option> 
+              <option value="Albania">Albania</option> 
+              <option value="Algeria">Algeria</option> 
+              <option value="American Samoa">American Samoa</option> 
+              <option value="Andorra">Andorra</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_select_4"  style="display:block">Credit Card</label>
+            <select id="custom_select_4" class="custom_form_responsive">
+              <option value="" selected="selected">Select Credit Card</option> 
+              <option value="United States">Visa</option> 
+              <option value="United States">MasterCard</option> 
+              <option value="United Kingdom">American Express</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_3&quot; style=&quot;display:block&quot;&gt;Country&lt;/label&gt;
+      &lt;select id=&quot;custom_select_3&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Spain&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;United States&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;United Kingdom&lt;/option&gt; 
+        &lt;option value=&quot;Afghanistan&quot;&gt;Afghanistan&lt;/option&gt; 
+        &lt;option value=&quot;Albania&quot;&gt;Albania&lt;/option&gt; 
+        &lt;option value=&quot;Algeria&quot;&gt;Algeria&lt;/option&gt; 
+        &lt;option value=&quot;American Samoa&quot;&gt;American Samoa&lt;/option&gt; 
+        &lt;option value=&quot;Andorra&quot;&gt;Andorra&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_4&quot;  style=&quot;display:block&quot;&gt;Credit Card&lt;/label&gt;
+      &lt;select id=&quot;custom_select_4&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Credit Card&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Visa&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;MasterCard&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;American Express&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form({
+    responsive_select:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span>File</span></legend>
+  
+        <label for="custom_file_1">Attachment</label>
+        <input id="custom_file_1" type="file" style="width:400px"/>        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_file_1&quot;&gt;Attachment&lt;/label&gt;
+  &lt;input id=&quot;custom_file_1&quot; type=&quot;file&quot; style=&quot;width:400px&quot;/&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=file]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_file_2">Attachment</label>
+            <input id="custom_file_2" type="file"/>  
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_file_3">Attachment</label>
+            <input id="custom_file_3" type="file"/>  
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_2&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_3&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[typ=file]&quot;).custom_form({
+    responsive_file:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
+    </form>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
+      $("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
+        responsive_select:true,
+        responsive_file:true
+      })
+      
+    </script>
+  </body>
+</html>;T;	I"X=<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  	<title>index</title>
+  	<link rel="stylesheet" href="stylesheets/custom_form.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+  	<style type="text/css" media="screen">
+  	 /* =DEMO */
+
+     input[type="submit"]{
+       display: -moz-inline-stack; /*Cross browser inline-block*/
+       display: inline-block;
+       vertical-align: middle;
+       zoom: 1;
+       *display: inline;
+     }
+
+     input[type="submit"]{
+       background: #fefefe; /* Old browsers */
+       background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
+       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+       background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+       background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
+       background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
+       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+       background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
+
+       border:1px solid #5B5D5E;
+       padding-top:3px;
+       padding-bottom:3px;
+       font:10px Verdana, sans-serif;
+       color:#0B333B;
+
+       -webkit-border-radius: 3px;
+       -moz-border-radius: 3px;
+       border-radius: 3px;
+     }
+     /*
+          .notes div{
+            display: -moz-inline-stack;
+            display: inline-block;
+            vertical-align: middle;
+            zoom: 1;
+            *display: inline;
+          }*/
+     
+     label , .notes{
+       font:13px Helvetica, Arial, sans-serif;
+       color:#000;
+     }
+     
+     .notes{
+       margin-top:20px;
+       width:100%;
+       margin-bottom:10px;
+     }
+     
+     .notes .section{
+       border: 1px dashed #999;
+       padding:10px;
+     }
+     
+     .notes .section:first-child{
+       margin-bottom:5px;
+     }
+     
+     .notes pre{
+       font-size:10px;
+       padding:0;
+       margin:0;
+     }
+     
+  	</style>
+  </head>
+  <body>
+    <form autocomplete="off">
+      <!-- 
+        output = ""
+        5.times do |i|
+          output += %~<div>
+            <input type="checkbox" id="custom_checkbox_#{i}" name="ids[]" value="#{i}"/>
+            <label for="custom_checkbox_#{i}">Checkbox #{i}</label>
+          </div>~
+        end
+        
+        
+        5.times do |i|
+          output += %~<div>
+            <input type="radio" id="name_#{i}" name="name" value="#{i}"/>
+            <label for="name_#{i}">Radio #{i}</label>
+            <input type="radio" id="address_#{i}" name="address" value="#{i}"/>
+            <label for="address_#{i}">Radio 2 - #{i}</label>
+          </div>~
+        end
+        
+        
+        puts output   
+
+ 
+        -->
+      <fieldset>
+        <legend><span>Checkboxes</span></legend>
+        
+        <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
+        <label for="custom_checkbox_0">Checkbox 0</label>
+        
+        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1"/>
+        <label for="custom_checkbox_1">Checkbox 1</label>
+        
+        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2"/>
+        <label for="custom_checkbox_2">Checkbox 2</label>
+        
+        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3"/>
+        <label for="custom_checkbox_3">Checkbox 3</label>
+        
+        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4"/>
+        <label for="custom_checkbox_4">Checkbox 4</label>
+        
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_0&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_checkbox_0&quot;&gt;Checkbox 0&lt;/label&gt;</code></pre>
+          </div>
+        </div>
+        
+        <label><input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/> Checkbox 5</label>
+        <label><input type="checkbox" id="custom_checkbox_6" name="ids[]" value="1"/> Checkbox 6</label>
+        <label><input type="checkbox" id="custom_checkbox_7" name="ids[]" value="2"/> Checkbox 7</label>
+        <label><input type="checkbox" id="custom_checkbox_8" name="ids[]" value="3"/> Checkbox 8</label>
+        <label><input type="checkbox" id="custom_checkbox_9" name="ids[]" value="4"/> Checkbox 9</label>
+        
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;checkbox&quot; id=&quot;custom_checkbox_5&quot; name=&quot;ids[]&quot; value=&quot;0&quot;/&gt; Checkbox 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=checkbox]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span>Radios</span></legend>
+  
+        <input type="radio" id="custom_radio_0" name="values[]" value="0"/>
+        <label for="custom_radio_0">radio 0</label>
+  
+        <input type="radio" id="custom_radio_1" name="values[]" value="1"/>
+        <label for="custom_radio_1">radio 1</label>
+  
+        <input type="radio" id="custom_radio_2" name="values[]" value="2"/>
+        <label for="custom_radio_2">radio 2</label>
+  
+        <input type="radio" id="custom_radio_3" name="values[]" value="3"/>
+        <label for="custom_radio_3">radio 3</label>
+  
+        <input type="radio" id="custom_radio_4" name="values[]" value="4"/>
+        <label for="custom_radio_4">radio 4</label>
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;input type=&quot;radio&quot; id=&quot;custom_radio_0&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt;
+  &lt;label for=&quot;custom_radio_0&quot;&gt;radio 0&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <label><input type="radio" id="custom_radio_5" name="values[]" value="0"/> radio 5</label>
+        <label><input type="radio" id="custom_radio_6" name="values[]" value="1"/> radio 6</label>
+        <label><input type="radio" id="custom_radio_7" name="values[]" value="2"/> radio 7</label>
+        <label><input type="radio" id="custom_radio_8" name="values[]" value="3"/> radio 8</label>
+        <label><input type="radio" id="custom_radio_9" name="values[]" value="4"/> radio 9</label>
+  
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label&gt;&lt;input type=&quot;radio&quot; id=&quot;custom_radio_5&quot; name=&quot;values[]&quot; value=&quot;0&quot;/&gt; radio 5&lt;/label&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=radio]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
+      <fieldset>
+        <legend><span>Selects</span></legend>
+  
+        <label for="custom_select_1">Country</label>
+        <select id="custom_select_1" class="custom_form">
+          <option value="" selected="selected">Select Country</option> 
+          <option value="United States">Spain</option> 
+          <option value="United States">United States</option> 
+          <option value="United Kingdom">United Kingdom</option> 
+          <option value="Afghanistan">Afghanistan</option> 
+          <option value="Albania">Albania</option> 
+          <option value="Algeria">Algeria</option> 
+          <option value="American Samoa">American Samoa</option> 
+          <option value="Andorra">Andorra</option> 
+          <option value="...">...</option> 
+        </select>
+        
+        <label for="custom_select_2">Credit Card</label>
+        <select id="custom_select_2" class="custom_form">
+          <option value="" selected="selected">Select Credit Card</option> 
+          <option value="United States">Visa</option> 
+          <option value="United States">MasterCard</option> 
+          <option value="United Kingdom">American Express</option> 
+          <option value="...">...</option> 
+        </select>
+        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_select_1&quot;&gt;Country&lt;/label&gt;
+  &lt;select id=&quot;custom_select_1&quot;&gt;
+    &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+    &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+  &lt;/select&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_select_3" style="display:block">Country</label>
+            <select id="custom_select_3" class="custom_form_responsive">
+              <option value="" selected="selected">Select Country</option> 
+              <option value="United States">Spain</option> 
+              <option value="United States">United States</option> 
+              <option value="United Kingdom">United Kingdom</option> 
+              <option value="Afghanistan">Afghanistan</option> 
+              <option value="Albania">Albania</option> 
+              <option value="Algeria">Algeria</option> 
+              <option value="American Samoa">American Samoa</option> 
+              <option value="Andorra">Andorra</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_select_4"  style="display:block">Credit Card</label>
+            <select id="custom_select_4" class="custom_form_responsive">
+              <option value="" selected="selected">Select Credit Card</option> 
+              <option value="United States">Visa</option> 
+              <option value="United States">MasterCard</option> 
+              <option value="United Kingdom">American Express</option> 
+              <option value="...">...</option> 
+            </select>
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_3&quot; style=&quot;display:block&quot;&gt;Country&lt;/label&gt;
+      &lt;select id=&quot;custom_select_3&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Spain&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;United States&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;United Kingdom&lt;/option&gt; 
+        &lt;option value=&quot;Afghanistan&quot;&gt;Afghanistan&lt;/option&gt; 
+        &lt;option value=&quot;Albania&quot;&gt;Albania&lt;/option&gt; 
+        &lt;option value=&quot;Algeria&quot;&gt;Algeria&lt;/option&gt; 
+        &lt;option value=&quot;American Samoa&quot;&gt;American Samoa&lt;/option&gt; 
+        &lt;option value=&quot;Andorra&quot;&gt;Andorra&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_select_4&quot;  style=&quot;display:block&quot;&gt;Credit Card&lt;/label&gt;
+      &lt;select id=&quot;custom_select_4&quot;&gt;
+        &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Credit Card&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;Visa&lt;/option&gt; 
+        &lt;option value=&quot;United States&quot;&gt;MasterCard&lt;/option&gt; 
+        &lt;option value=&quot;United Kingdom&quot;&gt;American Express&lt;/option&gt; 
+        &lt;option value=&quot;...&quot;&gt;...&lt;/option&gt; 
+      &lt;/select&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;select&quot;).custom_form({
+    responsive_select:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend><span>File</span></legend>
+  
+        <label for="custom_file_1">Attachment</label>
+        <input id="custom_file_1" type="file" style="width:400px"/>        
+  
+        <div class="notes">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;label for=&quot;custom_file_1&quot;&gt;Attachment&lt;/label&gt;
+  &lt;input id=&quot;custom_file_1&quot; type=&quot;file&quot; style=&quot;width:400px&quot;/&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[type=file]&quot;).custom_form();</code></pre>
+          </div>
+        </div>
+  
+        <div style="width:100%">
+          <div style="width:49%; margin-right:1%; float:left">
+            <label for="custom_file_2">Attachment</label>
+            <input id="custom_file_2" type="file"/>  
+          </div>
+          
+          <div style="width:49%; margin-left:1%; float:left">
+            <label for="custom_file_3">Attachment</label>
+            <input id="custom_file_3" type="file"/>  
+          </div>
+        </div>
+        <div style="clear:both"></div>
+        <div class="notes last">
+          <div class="section">
+            <small>HTML</small>
+            <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
+    &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_2&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  
+    &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
+      &lt;label for=&quot;custom_file_3&quot;&gt;Attachment&lt;/label&gt;
+      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot;/&gt;  
+    &lt;/div&gt;
+  &lt;/div&gt;</code></pre>
+          </div>
+          <div class="section">
+            <small>JS</small>
+            <code><pre>  $(&quot;[typ=file]&quot;).custom_form({
+    responsive_file:true
+  });</code></pre>
+          </div>
+        </div>
+      </fieldset>
+      
+    </form>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script src="custom_form.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript" charset="utf-8">
+      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
+      $("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
+        responsive_select:true,
+        responsive_file:true
+      })
+      
+    </script>
+  </body>
+</html>;T;
+@I"/custom_form/;T{;{;I"�(function($){
+  
+  var $$ = {};
+  
+  var DEFAULTS = {
+    file_button:"Choose file",
+    file_label:"No file chosen",
+    responsive_select:false,
+    responsive_file:false
+  }
+  
+  function get_options(options){ $.extend(DEFAULTS,(options || {})) }
+  
+  function CustomForm(){}
+  
+  $.extend(CustomForm.prototype,{
+    init:function(elements, options){
+      var self = this, options = $.extend(DEFAULTS,(options || {}));
+      return elements.each(function(){ 
+        // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
+        if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;
+        self.new_element(this,options);      
+      });
+    },
+    new_element:function(){
+      
+      //var element = FormElement.get(this);
+      
+      //element.init(options);
+      //this.custom_form_instance = element;
+    }
+  });
+  
+  CustomForm.get_instance = function(){
+    if(!this.instance) this.instance = new CustomForm();
+    console.log(this,this.instance)
+    return this.instance;
+  }
+  
+  CustomForm.decorators = 
+  
+  CustomForm.register_element_decorator = function(){
+    
+  }
+  
+  $.fn.custom_form = function( method ) {
+      var instance = CustomForm.get_instance();
+    if((typeof method != "string") || !method)
+      return instance.init(this,method /*options*/);
+    else{
+      // return execute.apply(this,arguments)
+    }
+  };
+  
+})(jQuery);T;	I"�(function($){
+  
+  var $$ = {};
+  
+  var DEFAULTS = {
+    file_button:"Choose file",
+    file_label:"No file chosen",
+    responsive_select:false,
+    responsive_file:false
+  }
+  
+  function get_options(options){ $.extend(DEFAULTS,(options || {})) }
+  
+  function CustomForm(){}
+  
+  $.extend(CustomForm.prototype,{
+    init:function(elements, options){
+      var self = this, options = $.extend(DEFAULTS,(options || {}));
+      return elements.each(function(){ 
+        // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
+        if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;
+        self.new_element(this,options);      
+      });
+    },
+    new_element:function(){
+      
+      //var element = FormElement.get(this);
+      
+      //element.init(options);
+      //this.custom_form_instance = element;
+    }
+  });
+  
+  CustomForm.get_instance = function(){
+    if(!this.instance) this.instance = new CustomForm();
+    console.log(this,this.instance)
+    return this.instance;
+  }
+  
+  CustomForm.decorators = 
+  
+  CustomForm.register_element_decorator = function(){
+    
+  }
+  
+  $.fn.custom_form = function( method ) {
+      var instance = CustomForm.get_instance();
+    if((typeof method != "string") || !method)
+      return instance.init(this,method /*options*/);
+    else{
+      // return execute.apply(this,arguments)
+    }
+  };
+  
+})(jQuery);T;
+@I"/custom_form.min/;T{;{;I"X(function(d){d._mixin={include:function(k,l){k.call(l.prototype)}};var j=(function(){function t(v){this.element_id=this.element.attr("id");this.element_name=this.element.attr("name");if(this.set_properties){this.set_properties(v)}this.replacement=(v.select_replacement||this.get_replacement).apply(this);this.replace_elements();this.init_replacement();this.init_mouse_events()}function r(v){v?this.replacement.addClass("hover_"+this.element_type):this.replacement.removeClass("hover_"+this.element_type)}function p(v){v?this.replacement.addClass("active_"+this.element_type):this.replacement.removeClass("active_"+this.element_type)}function k(){var w=this.mouse_trigger();w.bind("mouseenter",this,this.hover_handler).bind("mouseleave",this,this.out_handler).bind("click",this,this.click_handler).bind("mouseup",this,this.mouse_up_handler).bind("mousedown",this,this.mouse_down_handler);var v=d("label[for="+this.element_id+"]");if(v.length!=0){v.bind("click",this,l)}else{v=this.replacement.parent("label");if(v.length!=0){v.bind("click",this,l)}}}function u(v){v.data.hover(true)}function m(v){v.data.hover(false)}function n(v){v.data.mouse_in(false)}function s(v){v.data.mouse_in(true)}function q(v){this.replacement[v?"addClass":"removeClass"]("checked_"+this.element_type)}function l(v){if(v.target!=this){return}v.preventDefault();v.data.replacement.triggerHandler("click")}function o(v){switch(v){case true:case false:this.element.attr("disabled",v);this.replacement[v?"addClass":"removeClass"]("disabled_"+this.element_type);this.is_disabled=v;return v;case"none":return !this.element.is(":disabled");default:return this.element.is(":disabled")}}return function(){this.init=t;this.hover=r;this.init_mouse_events=k;this.hover_handler=u;this.out_handler=m;this.active_replacement_class=q;this.mouse_up_handler=n;this.mouse_down_handler=s;this.mouse_in=p;this.label_handler=l;this.disabled=o}})();function e(k){this.element=k;this.element_type="file"}e.prototype.set_properties=function(k){this.label=k.file_label;this.button_label=k.file_button;this.responsive=k.responsive_file};a.prototype.set_properties=function(k){this.responsive=k.responsive_select};e.prototype.get_replacement=function(){return d("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")};e.prototype.replace_elements=function(){this.element_width=this.element.outerWidth();this.element_margin=this.element.css("margin-left");this.element_padding=this.element.css("padding-left");this.element.after(this.replacement);this.replacement.append(this.element)};e.prototype.init_replacement=function(){var k=this.element,l={width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};this.file_label=d(".file_label",this.replacement);this.element.bind("change",this,this.file_change);if(!this.responsive){k.css(l);this.replacement.css(l);this.file_label.css("width",l.width-d(".file_button",this.replacement).outerWidth())}else{this.replacement.addClass("responsive_file")}};e.prototype.file_change=function(k){k.data.update_label()};e.prototype.update_label=function(){var k=this.element.val();if(!k.match(/\S/)){k=this.label}this.file_label.html("<span>"+k+"</span>")};function a(k){this.element=k;this.element_type="select"}e.prototype.mouse_trigger=a.prototype.mouse_trigger=function(){return this.element};a.prototype.get_replacement=function(){var k=d("option:selected",this.element);(k.length!=0)||(k=d("option:first-child",this.element));return d("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+k.text()+"</span></p></span></span>")};a.prototype.init_replacement=function(){this.select_label=d(".select_label",this.replacement);if(!this.responsive){var l={width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};this.element.css(l);this.replacement.css(l);var k=d(".select_button",this.replacement);this.select_label.css({width:l.width-k.outerWidth()})}else{this.replacement.addClass("responsive_select")}this.element.bind("change",this,this.select_change)};a.prototype.replace_elements=function(){this.element_width=this.element.outerWidth();this.element.after(this.replacement);this.replacement.append(this.element)};a.prototype.select_change=function(k){k.data.update_label()};a.prototype.update_label=function(){this.select_label.html("<span>"+d("option:selected",this.element).text()+"</span>")};function h(k){this.element=k;this.element_type="radio";this.uncheckeable=true}function c(k){this.element=k;this.element_type="checkbox";this.uncheckeable=false}c.prototype.mouse_trigger=function(){return this.replacement};c.prototype.replace_elements=function(){this.element.after(this.replacement);this.replacement.append(this.element)};c.prototype.get_replacement=function(){return d("<span class='"+this.element_type+"'></span>")};c.prototype.click_handler=function(k){k.data.checked();k.data.element.triggerHandler("click")};c.prototype.init_replacement=function(){var k=this.element;if(k.is(":checked")){this.checked(true)}if(k.is(":disabled")){this.disabled(true)}};e.prototype.click_handler=a.prototype.click_handler=function(k){};a.initialized=false;a.button_width=0;a.create=function(l){if(!a.initialized){var k=new a(l);a.select_height||(a.select_height=k.element.outerHeight());return k}else{return new a(l)}};e.prototype.update=a.prototype.update=function(){this.element.trigger("change")};a.prototype.select=function(l){var k=typeof l;switch(k){case"number":this.element.val(l);break;case"function":l.apply(this.element);break;default:(k=="string")||(l=l.to_s);this.element.find("option:contains('"+l+"')").attr("selected",true)}this.update()};c.prototype.checked=function(l){var k=this.element;l=l==undefined?!k.is(":checked"):l;if(!this.uncheckeable||(this.uncheckeable&&l)){k.attr("checked",l);this.active_replacement_class(l);if(l){k.trigger("change")}}};c.prototype.update=function(){this.checked(this.element.is(":checked"))};h.prototype=new c();h.prototype.update=function(){this.checked(this.element.is(":checked"),true)};h.prototype.checked=function(m,l){(m!=undefined)||(m=true);if(m||l){var k=this.element;checked_radios=d(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);if(checked_radios.length!=0){checked_radios.removeClass("checked_"+this.element_type)}}c.prototype.checked.call(this,m==undefined?undefined:m)};d._mixin.include(j,c);d._mixin.include(j,h);d._mixin.include(j,a);d._mixin.include(j,e);j.get=function(k){var l=d(k),m=l.is("select")?"select":l.attr("type");switch(m){case"select":return a.create(l);case"checkbox":return new c(l);case"radio":return new h(l);case"file":return new e(l)}};function i(k){k=d.extend({file_button:"Choose file",file_label:"No file chosen",responsive_select:false,responsive_file:false},(k||{}));return this.each(function(){var l=j.get(this);if((this.nodeName=="SELECT"&&this.size>0)||this.custom_form_instance){return true}l.init(k);this.custom_form_instance=l})}var f=["init","checked","update","select","disabled"];var b={disabled:function(l){(l!=undefined)||(l="all");if(this.length==1){return this[0].custom_form_instance.disabled(l)}var k=l=="any"?false:true;this.each(function(){var m=this.custom_form_instance.disabled(l);switch(l){case"all":if(k&&!m){k=false;return false}break;case"any":if(m){k=true;return false}break;case"none":if(!m){k=false;return false}break}});return k}};function g(m){var k=this,l=Array.prototype.slice.call(arguments,1);if(m in b){return b[m].apply(this,l)}return k.each(function(){if(this.custom_form_instance){this.custom_form_instance[m].apply(this.custom_form_instance,l)}})}d.fn.custom_form=function(k){if(k=="init"||(typeof k!="string")||!k){return i.apply(this,arguments)}else{return g.apply(this,arguments)}}})(jQuery);;T;	I"X(function(d){d._mixin={include:function(k,l){k.call(l.prototype)}};var j=(function(){function t(v){this.element_id=this.element.attr("id");this.element_name=this.element.attr("name");if(this.set_properties){this.set_properties(v)}this.replacement=(v.select_replacement||this.get_replacement).apply(this);this.replace_elements();this.init_replacement();this.init_mouse_events()}function r(v){v?this.replacement.addClass("hover_"+this.element_type):this.replacement.removeClass("hover_"+this.element_type)}function p(v){v?this.replacement.addClass("active_"+this.element_type):this.replacement.removeClass("active_"+this.element_type)}function k(){var w=this.mouse_trigger();w.bind("mouseenter",this,this.hover_handler).bind("mouseleave",this,this.out_handler).bind("click",this,this.click_handler).bind("mouseup",this,this.mouse_up_handler).bind("mousedown",this,this.mouse_down_handler);var v=d("label[for="+this.element_id+"]");if(v.length!=0){v.bind("click",this,l)}else{v=this.replacement.parent("label");if(v.length!=0){v.bind("click",this,l)}}}function u(v){v.data.hover(true)}function m(v){v.data.hover(false)}function n(v){v.data.mouse_in(false)}function s(v){v.data.mouse_in(true)}function q(v){this.replacement[v?"addClass":"removeClass"]("checked_"+this.element_type)}function l(v){if(v.target!=this){return}v.preventDefault();v.data.replacement.triggerHandler("click")}function o(v){switch(v){case true:case false:this.element.attr("disabled",v);this.replacement[v?"addClass":"removeClass"]("disabled_"+this.element_type);this.is_disabled=v;return v;case"none":return !this.element.is(":disabled");default:return this.element.is(":disabled")}}return function(){this.init=t;this.hover=r;this.init_mouse_events=k;this.hover_handler=u;this.out_handler=m;this.active_replacement_class=q;this.mouse_up_handler=n;this.mouse_down_handler=s;this.mouse_in=p;this.label_handler=l;this.disabled=o}})();function e(k){this.element=k;this.element_type="file"}e.prototype.set_properties=function(k){this.label=k.file_label;this.button_label=k.file_button;this.responsive=k.responsive_file};a.prototype.set_properties=function(k){this.responsive=k.responsive_select};e.prototype.get_replacement=function(){return d("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")};e.prototype.replace_elements=function(){this.element_width=this.element.outerWidth();this.element_margin=this.element.css("margin-left");this.element_padding=this.element.css("padding-left");this.element.after(this.replacement);this.replacement.append(this.element)};e.prototype.init_replacement=function(){var k=this.element,l={width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};this.file_label=d(".file_label",this.replacement);this.element.bind("change",this,this.file_change);if(!this.responsive){k.css(l);this.replacement.css(l);this.file_label.css("width",l.width-d(".file_button",this.replacement).outerWidth())}else{this.replacement.addClass("responsive_file")}};e.prototype.file_change=function(k){k.data.update_label()};e.prototype.update_label=function(){var k=this.element.val();if(!k.match(/\S/)){k=this.label}this.file_label.html("<span>"+k+"</span>")};function a(k){this.element=k;this.element_type="select"}e.prototype.mouse_trigger=a.prototype.mouse_trigger=function(){return this.element};a.prototype.get_replacement=function(){var k=d("option:selected",this.element);(k.length!=0)||(k=d("option:first-child",this.element));return d("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+k.text()+"</span></p></span></span>")};a.prototype.init_replacement=function(){this.select_label=d(".select_label",this.replacement);if(!this.responsive){var l={width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};this.element.css(l);this.replacement.css(l);var k=d(".select_button",this.replacement);this.select_label.css({width:l.width-k.outerWidth()})}else{this.replacement.addClass("responsive_select")}this.element.bind("change",this,this.select_change)};a.prototype.replace_elements=function(){this.element_width=this.element.outerWidth();this.element.after(this.replacement);this.replacement.append(this.element)};a.prototype.select_change=function(k){k.data.update_label()};a.prototype.update_label=function(){this.select_label.html("<span>"+d("option:selected",this.element).text()+"</span>")};function h(k){this.element=k;this.element_type="radio";this.uncheckeable=true}function c(k){this.element=k;this.element_type="checkbox";this.uncheckeable=false}c.prototype.mouse_trigger=function(){return this.replacement};c.prototype.replace_elements=function(){this.element.after(this.replacement);this.replacement.append(this.element)};c.prototype.get_replacement=function(){return d("<span class='"+this.element_type+"'></span>")};c.prototype.click_handler=function(k){k.data.checked();k.data.element.triggerHandler("click")};c.prototype.init_replacement=function(){var k=this.element;if(k.is(":checked")){this.checked(true)}if(k.is(":disabled")){this.disabled(true)}};e.prototype.click_handler=a.prototype.click_handler=function(k){};a.initialized=false;a.button_width=0;a.create=function(l){if(!a.initialized){var k=new a(l);a.select_height||(a.select_height=k.element.outerHeight());return k}else{return new a(l)}};e.prototype.update=a.prototype.update=function(){this.element.trigger("change")};a.prototype.select=function(l){var k=typeof l;switch(k){case"number":this.element.val(l);break;case"function":l.apply(this.element);break;default:(k=="string")||(l=l.to_s);this.element.find("option:contains('"+l+"')").attr("selected",true)}this.update()};c.prototype.checked=function(l){var k=this.element;l=l==undefined?!k.is(":checked"):l;if(!this.uncheckeable||(this.uncheckeable&&l)){k.attr("checked",l);this.active_replacement_class(l);if(l){k.trigger("change")}}};c.prototype.update=function(){this.checked(this.element.is(":checked"))};h.prototype=new c();h.prototype.update=function(){this.checked(this.element.is(":checked"),true)};h.prototype.checked=function(m,l){(m!=undefined)||(m=true);if(m||l){var k=this.element;checked_radios=d(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);if(checked_radios.length!=0){checked_radios.removeClass("checked_"+this.element_type)}}c.prototype.checked.call(this,m==undefined?undefined:m)};d._mixin.include(j,c);d._mixin.include(j,h);d._mixin.include(j,a);d._mixin.include(j,e);j.get=function(k){var l=d(k),m=l.is("select")?"select":l.attr("type");switch(m){case"select":return a.create(l);case"checkbox":return new c(l);case"radio":return new h(l);case"file":return new e(l)}};function i(k){k=d.extend({file_button:"Choose file",file_label:"No file chosen",responsive_select:false,responsive_file:false},(k||{}));return this.each(function(){var l=j.get(this);if((this.nodeName=="SELECT"&&this.size>0)||this.custom_form_instance){return true}l.init(k);this.custom_form_instance=l})}var f=["init","checked","update","select","disabled"];var b={disabled:function(l){(l!=undefined)||(l="all");if(this.length==1){return this[0].custom_form_instance.disabled(l)}var k=l=="any"?false:true;this.each(function(){var m=this.custom_form_instance.disabled(l);switch(l){case"all":if(k&&!m){k=false;return false}break;case"any":if(m){k=true;return false}break;case"none":if(!m){k=false;return false}break}});return k}};function g(m){var k=this,l=Array.prototype.slice.call(arguments,1);if(m in b){return b[m].apply(this,l)}return k.each(function(){if(this.custom_form_instance){this.custom_form_instance[m].apply(this.custom_form_instance,l)}})}d.fn.custom_form=function(k){if(k=="init"||(typeof k!="string")||!k){return i.apply(this,arguments)}else{return g.apply(this,arguments)}}})(jQuery);;T;
+@I"/custom_form_legacy/;T{;{;I"s.(function( $ ){
+    
+  $._mixin = {
+    include:function(mixin,target){
+      mixin.call(target.prototype);
+    }
+  }
+  
+  var FormElement = (function(){
+    function init(options){
+      this.element_id = this.element.attr("id");
+      this.element_name = this.element.attr("name");
+      if(this.set_properties) this.set_properties(options);
+      this.replacement = (options.select_replacement || this.get_replacement).apply(this)
+      this.replace_elements();
+      this.init_replacement();
+      this.init_mouse_events();
+    }
+    
+    function hover(hover){
+      hover ?
+        this.replacement.addClass("hover_"+this.element_type) :
+        this.replacement.removeClass("hover_"+this.element_type)
+    }
+    
+    function mouse_in(down){
+      down ?
+        this.replacement.addClass("active_"+this.element_type) :
+        this.replacement.removeClass("active_"+this.element_type)
+    }
+    
+    function init_mouse_events(){
+      var mouse_trigger = this.mouse_trigger();
+      mouse_trigger.bind("mouseenter",this,this.hover_handler)
+        .bind("mouseleave",this,this.out_handler)
+        .bind("click",this,this.click_handler)
+        .bind("mouseup",this,this.mouse_up_handler)
+        .bind("mousedown",this,this.mouse_down_handler)
+      
+      var label = $("label[for="+this.element_id+"]") ;
+      if(label.length != 0){
+        label.bind("click",this,label_handler)
+      }else{
+        label = this.replacement.parent("label")
+        if(label.length != 0)
+          label.bind("click",this,label_handler)
+      }
+    }
+    
+    function hover_handler(event){ event.data.hover(true)  }
+    function out_handler(event){ event.data.hover(false) }
+    function mouse_up_handler(event){ event.data.mouse_in(false)  }
+    function mouse_down_handler(event){ event.data.mouse_in(true) }
+    
+    function active_replacement_class(condition){
+      this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
+    }
+    
+    function label_handler(e){ 
+      if(e.target != this) return;
+      e.preventDefault();  
+      e.data.replacement.triggerHandler("click");
+      
+    }
+    
+    function disabled(option){
+      switch(option){
+        case true:
+        case false:
+          this.element.attr("disabled",option);
+          this.replacement[option ? "addClass" : "removeClass"]("disabled_"+this.element_type); 
+          this.is_disabled = option;
+          return option;
+        case "none":
+          return !this.element.is(":disabled");
+        default:
+          return this.element.is(":disabled");
+      }
+    }
+    
+    return function(){
+      this.init = init;
+      this.hover = hover;
+      this.init_mouse_events = init_mouse_events;
+      this.hover_handler = hover_handler;
+      this.out_handler = out_handler;
+      this.active_replacement_class = active_replacement_class;
+      this.mouse_up_handler = mouse_up_handler;
+      this.mouse_down_handler = mouse_down_handler;
+      this.mouse_in = mouse_in;
+      this.label_handler = label_handler;
+      this.disabled = disabled;
+    }
+  })()
+  
+  // style='height:"+Select.select_height+"px;'
+  
+  function File(element){
+    this.element = element; this.element_type = "file";
+  }
+  
+  File.prototype.set_properties = function(options){
+    this.label = options.file_label;
+    this.button_label = options.file_button;
+    this.responsive = options.responsive_file
+  }
+  
+  Select.prototype.set_properties = function(options){
+    this.responsive = options.responsive_select;
+  }
+  
+  File.prototype.get_replacement = function(){
+    return $("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")
+  }
+  
+  File.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element_margin = this.element.css("margin-left");
+    this.element_padding = this.element.css("padding-left");
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  File.prototype.init_replacement = function(){
+    var element = this.element, styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
+    this.file_label = $(".file_label",this.replacement);
+    this.element.bind("change",this,this.file_change);
+    if(!this.responsive){
+      
+      element.css(styles);
+      this.replacement.css(styles);
+      this.file_label.css("width",styles.width-$(".file_button",this.replacement).outerWidth())
+    }else{
+      this.replacement.addClass("responsive_file")
+    }
+  }
+  
+  File.prototype.file_change = function(event){
+    event.data.update_label();
+  }
+  
+  File.prototype.update_label = function(){
+    var text = this.element.val()
+    if(!text.match(/\S/)) text = this.label;
+    this.file_label.html("<span>"+text+"</span>");
+  }
+  
+  function Select(element){ this.element = element; this.element_type = "select";  }
+  File.prototype.mouse_trigger = Select.prototype.mouse_trigger = function(){return this.element;}
+  Select.prototype.get_replacement = function(){
+    var def_option = $("option:selected",this.element);
+    (def_option.length != 0) ||(def_option = $("option:first-child",this.element))
+    return $("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+def_option.text()+"</span></p></span></span>")
+  }
+  
+  Select.prototype.init_replacement = function(){
+    this.select_label = $(".select_label",this.replacement);
+    
+    if(!this.responsive){
+      var styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
+      this.element.css(styles);
+      this.replacement.css(styles);
+      var select_button = $(".select_button",this.replacement);  
+      this.select_label.css({ 
+        width: styles.width-select_button.outerWidth()
+      });
+    }else{
+      this.replacement.addClass("responsive_select")
+    }
+    
+    this.element.bind("change",this,this.select_change)
+  }
+  
+  Select.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  Select.prototype.select_change = function(event){
+    event.data.update_label();
+  }
+  
+  Select.prototype.update_label = function(){
+    this.select_label.html("<span>"+$("option:selected",this.element).text()+"</span>");
+  }
+  
+  function Radio(element){ this.element = element; this.element_type = "radio"; this.uncheckeable = true; }
+  function Checkbox(element){ this.element = element; this.element_type = "checkbox"; this.uncheckeable = false; }
+  Checkbox.prototype.mouse_trigger = function(){
+    return this.replacement
+  }
+  
+  Checkbox.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  Checkbox.prototype.get_replacement = function(){
+    return $("<span class='"+this.element_type+"'></span>");
+  }
+  
+  Checkbox.prototype.click_handler = function (event){
+    event.data.checked();
+    event.data.element.triggerHandler("click");
+  }
+  
+  Checkbox.prototype.init_replacement = function(){
+    var element = this.element;
+    if(element.is(":checked")) this.checked(true);
+    if(element.is(":disabled")) this.disabled(true);
+  }
+  
+  File.prototype.click_handler = Select.prototype.click_handler = function (event){
+  }
+  
+  Select.initialized = false;
+  Select.button_width = 0;
+  
+  Select.create = function(element){
+    if(!Select.initialized){
+      var select = new Select(element)
+      Select.select_height || (Select.select_height = select.element.outerHeight())
+      return select;
+    }else
+      return new Select(element)
+    
+  }
+  
+  File.prototype.update = Select.prototype.update = function(){
+    this.element.trigger("change")
+  }
+  
+  Select.prototype.select = function(selected){
+    var selected_type = typeof selected;
+    switch(selected_type){
+      case "number": this.element.val(selected); break;
+      case "function": selected.apply(this.element); break;
+      default:
+        (selected_type == "string") || (selected = selected.to_s);
+        this.element.find("option:contains('"+selected+"')").attr("selected",true);
+    }
+    this.update();
+  }
+  
+  Checkbox.prototype.checked = function (checked){
+    var input = this.element; 
+    checked = checked == undefined ? !input.is(":checked") : checked;
+    if(!this.uncheckeable || (this.uncheckeable && checked)){ 
+      input.attr("checked",checked);
+      this.active_replacement_class(checked)
+      if(checked) input.trigger("change")
+    }
+  }
+  
+  Checkbox.prototype.update = function(){
+    this.checked(this.element.is(":checked"))
+  }
+  
+  Radio.prototype = new Checkbox();
+  Radio.prototype.update = function(){
+    this.checked(this.element.is(":checked"),true)
+  }
+  
+  Radio.prototype.checked = function(checked,updating){
+    (checked != undefined) || (checked = true)
+    if(checked || updating){
+      var input = this.element;
+      checked_radios = $(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);
+      if(checked_radios.length != 0)
+          checked_radios.removeClass("checked_"+this.element_type)
+    }
+    Checkbox.prototype.checked.call(this,checked == undefined ? undefined : checked);
+  }
+  
+  $._mixin.include(FormElement,Checkbox);
+  $._mixin.include(FormElement,Radio);
+  $._mixin.include(FormElement,Select);
+  $._mixin.include(FormElement,File);
+  
+  FormElement.get = function(_element){
+    var element = $(_element),
+        element_type = element.is("select") ? "select" : element.attr('type');
+      switch( element_type ){
+        case "select": return Select.create(element);
+        case "checkbox": return new Checkbox(element);
+        case "radio": return new Radio(element);
+        case "file": return new File(element);
+      }
+  }
+  
+  function init(options){
+    options = $.extend({
+      file_button:"Choose file",
+      file_label:"No file chosen",
+      responsive_select:false,
+      responsive_file:false
+    },(options || {}))
+    
+    
+    
+    return this.each(function(){      
+      var element = FormElement.get(this);
+      if ((this.nodeName == 'SELECT' && this.size > 0) || this.custom_form_instance) return true;
+      element.init(options);
+      this.custom_form_instance = element;
+    })
+  }
+  
+  var METHODS = ["init","checked","update","select","disabled"];
+  var OVERRIDES = {
+    disabled:function(option){
+      (option != undefined) || (option = "all");
+      if(this.length == 1) return this[0].custom_form_instance.disabled(option);
+      var result = option == "any" ? false : true;
+      this.each(function(){
+        var tmp = this.custom_form_instance.disabled(option);
+        switch(option){
+          case "all": if(result && !tmp) {result = false; return false;}; break;
+          case "any": if(tmp){result = true; return false}; break;
+          case "none": if(!tmp){result = false; return false}; break;
+        }
+      });
+      return result
+    }
+  }
+  
+  function execute(method){
+    var self = this, args = Array.prototype.slice.call(arguments,1);
+    if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
+    return self.each(function(){
+      if(this.custom_form_instance)
+        this.custom_form_instance[method].apply(this.custom_form_instance,args)
+    })
+  }
+  
+  $.fn.custom_form = function( method ) {
+    if(method == "init" || (typeof method != "string") || !method){
+      return init.apply( this, arguments );
+    }else{
+      // try{
+        return execute.apply(this,arguments)
+      // }catch(e){
+        // $.error(e);
+      // }
+    }
+  };
+
+})( jQuery );;T;	I"s.(function( $ ){
+    
+  $._mixin = {
+    include:function(mixin,target){
+      mixin.call(target.prototype);
+    }
+  }
+  
+  var FormElement = (function(){
+    function init(options){
+      this.element_id = this.element.attr("id");
+      this.element_name = this.element.attr("name");
+      if(this.set_properties) this.set_properties(options);
+      this.replacement = (options.select_replacement || this.get_replacement).apply(this)
+      this.replace_elements();
+      this.init_replacement();
+      this.init_mouse_events();
+    }
+    
+    function hover(hover){
+      hover ?
+        this.replacement.addClass("hover_"+this.element_type) :
+        this.replacement.removeClass("hover_"+this.element_type)
+    }
+    
+    function mouse_in(down){
+      down ?
+        this.replacement.addClass("active_"+this.element_type) :
+        this.replacement.removeClass("active_"+this.element_type)
+    }
+    
+    function init_mouse_events(){
+      var mouse_trigger = this.mouse_trigger();
+      mouse_trigger.bind("mouseenter",this,this.hover_handler)
+        .bind("mouseleave",this,this.out_handler)
+        .bind("click",this,this.click_handler)
+        .bind("mouseup",this,this.mouse_up_handler)
+        .bind("mousedown",this,this.mouse_down_handler)
+      
+      var label = $("label[for="+this.element_id+"]") ;
+      if(label.length != 0){
+        label.bind("click",this,label_handler)
+      }else{
+        label = this.replacement.parent("label")
+        if(label.length != 0)
+          label.bind("click",this,label_handler)
+      }
+    }
+    
+    function hover_handler(event){ event.data.hover(true)  }
+    function out_handler(event){ event.data.hover(false) }
+    function mouse_up_handler(event){ event.data.mouse_in(false)  }
+    function mouse_down_handler(event){ event.data.mouse_in(true) }
+    
+    function active_replacement_class(condition){
+      this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
+    }
+    
+    function label_handler(e){ 
+      if(e.target != this) return;
+      e.preventDefault();  
+      e.data.replacement.triggerHandler("click");
+      
+    }
+    
+    function disabled(option){
+      switch(option){
+        case true:
+        case false:
+          this.element.attr("disabled",option);
+          this.replacement[option ? "addClass" : "removeClass"]("disabled_"+this.element_type); 
+          this.is_disabled = option;
+          return option;
+        case "none":
+          return !this.element.is(":disabled");
+        default:
+          return this.element.is(":disabled");
+      }
+    }
+    
+    return function(){
+      this.init = init;
+      this.hover = hover;
+      this.init_mouse_events = init_mouse_events;
+      this.hover_handler = hover_handler;
+      this.out_handler = out_handler;
+      this.active_replacement_class = active_replacement_class;
+      this.mouse_up_handler = mouse_up_handler;
+      this.mouse_down_handler = mouse_down_handler;
+      this.mouse_in = mouse_in;
+      this.label_handler = label_handler;
+      this.disabled = disabled;
+    }
+  })()
+  
+  // style='height:"+Select.select_height+"px;'
+  
+  function File(element){
+    this.element = element; this.element_type = "file";
+  }
+  
+  File.prototype.set_properties = function(options){
+    this.label = options.file_label;
+    this.button_label = options.file_button;
+    this.responsive = options.responsive_file
+  }
+  
+  Select.prototype.set_properties = function(options){
+    this.responsive = options.responsive_select;
+  }
+  
+  File.prototype.get_replacement = function(){
+    return $("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")
+  }
+  
+  File.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element_margin = this.element.css("margin-left");
+    this.element_padding = this.element.css("padding-left");
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  File.prototype.init_replacement = function(){
+    var element = this.element, styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
+    this.file_label = $(".file_label",this.replacement);
+    this.element.bind("change",this,this.file_change);
+    if(!this.responsive){
+      
+      element.css(styles);
+      this.replacement.css(styles);
+      this.file_label.css("width",styles.width-$(".file_button",this.replacement).outerWidth())
+    }else{
+      this.replacement.addClass("responsive_file")
+    }
+  }
+  
+  File.prototype.file_change = function(event){
+    event.data.update_label();
+  }
+  
+  File.prototype.update_label = function(){
+    var text = this.element.val()
+    if(!text.match(/\S/)) text = this.label;
+    this.file_label.html("<span>"+text+"</span>");
+  }
+  
+  function Select(element){ this.element = element; this.element_type = "select";  }
+  File.prototype.mouse_trigger = Select.prototype.mouse_trigger = function(){return this.element;}
+  Select.prototype.get_replacement = function(){
+    var def_option = $("option:selected",this.element);
+    (def_option.length != 0) ||(def_option = $("option:first-child",this.element))
+    return $("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+def_option.text()+"</span></p></span></span>")
+  }
+  
+  Select.prototype.init_replacement = function(){
+    this.select_label = $(".select_label",this.replacement);
+    
+    if(!this.responsive){
+      var styles = {width:this.element_width-parseInt(this.replacement.css("border-left-width"))-parseInt(this.replacement.css("border-right-width"))};
+      this.element.css(styles);
+      this.replacement.css(styles);
+      var select_button = $(".select_button",this.replacement);  
+      this.select_label.css({ 
+        width: styles.width-select_button.outerWidth()
+      });
+    }else{
+      this.replacement.addClass("responsive_select")
+    }
+    
+    this.element.bind("change",this,this.select_change)
+  }
+  
+  Select.prototype.replace_elements = function(){
+    this.element_width = this.element.outerWidth();
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  Select.prototype.select_change = function(event){
+    event.data.update_label();
+  }
+  
+  Select.prototype.update_label = function(){
+    this.select_label.html("<span>"+$("option:selected",this.element).text()+"</span>");
+  }
+  
+  function Radio(element){ this.element = element; this.element_type = "radio"; this.uncheckeable = true; }
+  function Checkbox(element){ this.element = element; this.element_type = "checkbox"; this.uncheckeable = false; }
+  Checkbox.prototype.mouse_trigger = function(){
+    return this.replacement
+  }
+  
+  Checkbox.prototype.replace_elements = function(){
+    this.element.after(this.replacement);
+    this.replacement.append(this.element);
+  }
+  
+  Checkbox.prototype.get_replacement = function(){
+    return $("<span class='"+this.element_type+"'></span>");
+  }
+  
+  Checkbox.prototype.click_handler = function (event){
+    event.data.checked();
+    event.data.element.triggerHandler("click");
+  }
+  
+  Checkbox.prototype.init_replacement = function(){
+    var element = this.element;
+    if(element.is(":checked")) this.checked(true);
+    if(element.is(":disabled")) this.disabled(true);
+  }
+  
+  File.prototype.click_handler = Select.prototype.click_handler = function (event){
+  }
+  
+  Select.initialized = false;
+  Select.button_width = 0;
+  
+  Select.create = function(element){
+    if(!Select.initialized){
+      var select = new Select(element)
+      Select.select_height || (Select.select_height = select.element.outerHeight())
+      return select;
+    }else
+      return new Select(element)
+    
+  }
+  
+  File.prototype.update = Select.prototype.update = function(){
+    this.element.trigger("change")
+  }
+  
+  Select.prototype.select = function(selected){
+    var selected_type = typeof selected;
+    switch(selected_type){
+      case "number": this.element.val(selected); break;
+      case "function": selected.apply(this.element); break;
+      default:
+        (selected_type == "string") || (selected = selected.to_s);
+        this.element.find("option:contains('"+selected+"')").attr("selected",true);
+    }
+    this.update();
+  }
+  
+  Checkbox.prototype.checked = function (checked){
+    var input = this.element; 
+    checked = checked == undefined ? !input.is(":checked") : checked;
+    if(!this.uncheckeable || (this.uncheckeable && checked)){ 
+      input.attr("checked",checked);
+      this.active_replacement_class(checked)
+      if(checked) input.trigger("change")
+    }
+  }
+  
+  Checkbox.prototype.update = function(){
+    this.checked(this.element.is(":checked"))
+  }
+  
+  Radio.prototype = new Checkbox();
+  Radio.prototype.update = function(){
+    this.checked(this.element.is(":checked"),true)
+  }
+  
+  Radio.prototype.checked = function(checked,updating){
+    (checked != undefined) || (checked = true)
+    if(checked || updating){
+      var input = this.element;
+      checked_radios = $(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);
+      if(checked_radios.length != 0)
+          checked_radios.removeClass("checked_"+this.element_type)
+    }
+    Checkbox.prototype.checked.call(this,checked == undefined ? undefined : checked);
+  }
+  
+  $._mixin.include(FormElement,Checkbox);
+  $._mixin.include(FormElement,Radio);
+  $._mixin.include(FormElement,Select);
+  $._mixin.include(FormElement,File);
+  
+  FormElement.get = function(_element){
+    var element = $(_element),
+        element_type = element.is("select") ? "select" : element.attr('type');
+      switch( element_type ){
+        case "select": return Select.create(element);
+        case "checkbox": return new Checkbox(element);
+        case "radio": return new Radio(element);
+        case "file": return new File(element);
+      }
+  }
+  
+  function init(options){
+    options = $.extend({
+      file_button:"Choose file",
+      file_label:"No file chosen",
+      responsive_select:false,
+      responsive_file:false
+    },(options || {}))
+    
+    
+    
+    return this.each(function(){      
+      var element = FormElement.get(this);
+      if ((this.nodeName == 'SELECT' && this.size > 0) || this.custom_form_instance) return true;
+      element.init(options);
+      this.custom_form_instance = element;
+    })
+  }
+  
+  var METHODS = ["init","checked","update","select","disabled"];
+  var OVERRIDES = {
+    disabled:function(option){
+      (option != undefined) || (option = "all");
+      if(this.length == 1) return this[0].custom_form_instance.disabled(option);
+      var result = option == "any" ? false : true;
+      this.each(function(){
+        var tmp = this.custom_form_instance.disabled(option);
+        switch(option){
+          case "all": if(result && !tmp) {result = false; return false;}; break;
+          case "any": if(tmp){result = true; return false}; break;
+          case "none": if(!tmp){result = false; return false}; break;
+        }
+      });
+      return result
+    }
+  }
+  
+  function execute(method){
+    var self = this, args = Array.prototype.slice.call(arguments,1);
+    if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
+    return self.each(function(){
+      if(this.custom_form_instance)
+        this.custom_form_instance[method].apply(this.custom_form_instance,args)
+    })
+  }
+  
+  $.fn.custom_form = function( method ) {
+    if(method == "init" || (typeof method != "string") || !method){
+      return init.apply( this, arguments );
+    }else{
+      // try{
+        return execute.apply(this,arguments)
+      // }catch(e){
+        // $.error(e);
+      // }
+    }
+  };
+
+})( jQuery );;T;
+@"I"/README/;T{;{;I"3<h1 id="section">=====================</h1>
+<p># = Custom Forms v0.1 =
+# =====================</p>
+
+<p>I wrote this after trying a lot of form beautifiers. </p>
+
+<p>Don’t get me wrong, plugins like Uniform.js are great. However, I’m lazy and I don’t like building complicated sprites or giving fixed widths to every element.</p>
+
+<p>I know it’s not the most lightweight plugin out there;  it requires a full 20kb between js, styles and a png. But it does the job for me :D </p>
+
+<p>I’m not a very good designer so I took the designs from the Yahoo! developer network.
+http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html</p>
+
+<p>More method and customization options are on the way.</p>
+
+<p>Feel free to use it or send feedback.</p>
+
+<h1 id="section-1">============</h1>
+<p># = Features =
+# ============</p>
+
+<ul>
+  <li>Checkbox &amp; Radios
+    <ul>
+      <li>Painless styling, no arcane mark-up or anything. Your checkbox gets subtituted for an inline-block span.</li>
+    </ul>
+  </li>
+  <li>Selects
+    <ul>
+      <li>Full CSS styling, no more complicated sprites. </li>
+      <li>Seamless subtitution, the replacement mark-up will have the same size as your original selects.</li>
+      <li>Native select behavior</li>
+    </ul>
+  </li>
+</ul>
+
+<h1 id="section-2">=========</h1>
+<p># = Usage =
+# =========</p>
+
+<p><input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0" />
+  <label for="custom_checkbox_0">Checkbox 0</label></p>
+
+<p><input type="radio" id="name_0" name="name" value="0" />
+  <label for="name_0">Radio 0</label></p>
+
+<p><select id="select_1" name="select_1" class="custom_select">
+    …
+  </select></p>
+
+<script type="text/javascript" charset="utf-8">
+    var inputs = $("input[type=checkbox],input[type=radio], select").custom_form();
+  </script>
+
+<p># Replacement mark-up</p>
+
+<p><span class="checkbox"><input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0" /></span>
+  <label for="custom_checkbox_0">Checkbox 0</label></p>
+
+<p><span class="radio"><input type="radio" id="name_0" name="name" value="0" /></span>
+  <label for="name_0">Radio 0</label></p>
+
+<p><span class="select" style="width: 76px; ">    <br />
+    <span class="select_content">
+      <span class="select_button">
+        <span class="select_button_icon" />      <br />
+      </span>      <br />
+      &lt;p class="select_label" style="width: 50px; padding-right: 0px; "&gt;Option 1&lt;/p&gt;
+    </span>  <br />
+    <select id="select_1" name="select_1" class="checkboxes" style="width: 76px; ">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+    </select>
+  </span></p>
+
+<h1 id="section-3">============</h1>
+<p># = Browsers =
+# ============</p>
+
+<p>IE7+, FF5, Chrome 13.0.782.220, Safari 5</p>
+
+<h1 id="section-4">===========</h1>
+<p># = Roadmap =
+# ===========</p>
+
+<ul>
+  <li>Style refactoring to remove duplicates</li>
+  <li>JS refactoring to reduce file size</li>
+</ul>
+;T;	I"�
+# =====================
+# = Custom Forms v0.1 =
+# =====================
+
+I wrote this after trying a lot of form beautifiers. 
+
+Don't get me wrong, plugins like Uniform.js are great. However, I'm lazy and I don't like building complicated sprites or giving fixed widths to every element.
+
+I know it's not the most lightweight plugin out there;  it requires a full 20kb between js, styles and a png. But it does the job for me :D 
+
+I'm not a very good designer so I took the designs from the Yahoo! developer network.
+http://developer.yahoo.com/ypatterns/about/stencils/fireworks.html
+
+More method and customization options are on the way.
+
+Feel free to use it or send feedback.
+
+# ============
+# = Features =
+# ============
+  
+  - Checkbox & Radios
+    - Painless styling, no arcane mark-up or anything. Your checkbox gets subtituted for an inline-block span.
+    
+  - Selects
+    - Full CSS styling, no more complicated sprites. 
+    - Seamless subtitution, the replacement mark-up will have the same size as your original selects.
+    - Native select behavior
+
+# =========
+# = Usage =
+# =========
+  
+  <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
+  <label for="custom_checkbox_0">Checkbox 0</label>
+  
+  <input type="radio" id="name_0" name="name" value="0"/>
+  <label for="name_0">Radio 0</label>
+  
+  <select id='select_1' name="select_1" class="custom_select">
+    ...
+  </select>
+  
+  <script type="text/javascript" charset="utf-8">
+    var inputs = $("input[type=checkbox],input[type=radio], select").custom_form();
+  </script>
+  
+  # Replacement mark-up
+  
+  <span class="checkbox"><input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"></span>
+  <label for="custom_checkbox_0">Checkbox 0</label>
+  
+  <span class="radio"><input type="radio" id="name_0" name="name" value="0"></span>
+  <label for="name_0">Radio 0</label>
+  
+  <span class="select" style="width: 76px; ">      
+    <span class="select_content">
+      <span class="select_button">
+        <span class="select_button_icon"></span>        
+      </span>        
+      <p class="select_label" style="width: 50px; padding-right: 0px; ">Option 1</p>
+    </span>    
+    <select id="select_1" name="select_1" class="checkboxes" style="width: 76px; ">
+      <option value="1">Option 1</option>
+      <option value="2">Option 2</option>
+      <option value="3">Option 3</option>
+      <option value="4">Option 4</option>
+      <option value="5">Option 5</option>
+      <option value="6">Option 6</option>
+    </select>
+  </span>
+
+# ============
+# = Browsers =
+# ============
+  
+  IE7+, FF5, Chrome 13.0.782.220, Safari 5
+  
+# ===========
+# = Roadmap =
+# ===========
+
+  - Style refactoring to remove duplicates
+  - JS refactoring to reduce file size;T;
+@'I"*/images/custom_forms_sprite-editable/;T{;{ I"!/images/custom_forms_sprite/;T{;{ I"/stylesheets/custom_form/;T{;{;I"/* =========== */
+/* = General = */
+/* =========== */
+
+/*.select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label, .file, .file_button*/
+
+.checkbox, .radio, input[type="checkbox"], input[type="radio"],
+.select, .select .select_button, .select .select_label,
+.file, .file_button, .file .file_button span {
+  display: -moz-inline-stack; /*Cross browser inline-block*/
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+}
+
+/*.checkbox, .radio, */
+.checkbox, .radio , .select .select_button_icon, .file .file_button span{
+  background-image: url('../images/custom_forms_sprite.png');
+  background-repeat: no-repeat;
+}
+
+/* ========================= */
+/* = Checkboxes and Radios = */
+/* ========================= */
+
+input[type=checkbox], input[type=radio]{
+  margin:0;
+  padding:0;
+}
+
+.radio, input[type=radio], .checkbox, input[type=checkbox]{
+  overflow:hidden;
+}
+
+.checkbox, input[type=checkbox]{  
+  height:23px;
+  width:20px;
+}
+
+.radio, input[type=radio]{
+  height:20px;
+  width:20px;
+}
+
+.checkbox input, .radio input{
+  position:relative;
+  display:block;
+  left:-9999px;
+}
+  
+  /* Mouse States */
+  .checkbox{ background-position:0 3px; }
+  .hover_checkbox{ background-position:0 -20px; }
+  .active_checkbox{ background-position:0 3px; }
+  .checked_checkbox{ background-position:0 -43px;  }
+  
+  .radio{ background-position:0 -66px; }
+  .hover_radio{ background-position:0 -86px; }
+  .active_radio{ background-position:0 -66px; }
+  .checked_radio{ background-position:0 -106px; }
+  
+/* =================== */
+/* = Selects & Files = */
+/* =================== */
+
+select, .select{
+  min-width:100px;
+}
+
+.file{
+  min-width:180px;
+}
+
+.select, .file{
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #DDDDDD;
+  position:relative;
+  
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px; 
+}
+
+.select, .select .select_label, .select .select_content, .select select, .file, .file .file_label{
+  height:32px;
+  line-height:32px;
+}
+
+.select select, .file input[type="file"]{
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: relative;
+  -webkit-appearance: none;
+  top: -32px;
+  display:block;
+}
+
+.select .select_label, .file .file_label{
+  float:left;
+  margin:0;
+  overflow:hidden;  
+}
+
+.file_label, .file_button, .select .select_label{
+  font-size:13px;
+  font-family: Helvetica, Arial, sans-serif;
+  color:#000;
+}
+
+.select .select_label span , .file .file_label span {
+  padding-right:35px;
+  padding-left:10px;
+}
+
+.select .select_content{
+  overflow:hidden;
+  display:block;
+}
+
+.select .select_button{
+  width:28px;
+}
+
+.select .select_button, .file .file_button {
+  height:30px;
+  position:relative;
+  top:1px;
+  float:right;
+  border-left:1px solid #ddd;
+  border-right:1px solid #fff;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px; 
+}
+
+.select .select_button_icon{
+  background-position:0 -125px;
+}
+
+.select .select_button_icon, .file_content{
+  height:30px;
+  display:block;
+}
+
+.file input[type="file"]{
+  font-size:100px;
+  height:100%; 
+}
+
+.file .file_content{
+  width:100%;
+}
+
+.file .file_button{
+  padding:2px 6px 3px;
+  height:25px;
+  line-height:27px;
+}
+
+.file .file_button span{
+ width:1px;
+ height:30px; 
+ margin-top:-1px;
+ margin-left:-6px;
+ margin-right:6px;
+ background-position:0px -157px;
+}
+
+/*.file_label{
+  margin:0;
+  border-left:1px solid #5B5D5E; 
+  height:18px;
+  padding-top:2px;
+  padding-left:10px;
+}*/
+
+  /* Mouse States*/
+  
+  .select .select_button, .file .file_button{
+    background: #f9f9f9; /* Old browsers */
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #e9e9e9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#e9e9e9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* IE10+ */
+    background: linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0 ); /* IE6-9 */
+  }
+  
+  .hover_select .select_button, .hover_file .file_button{
+    background: #e9e9e9; /* Old browsers */
+    background: -moz-linear-gradient(top, #e9e9e9 0%, #f9f9f9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e9e9e9), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* IE10+ */
+    background: linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
+  }
+  
+  /* Responsive styles (width 100%) */
+  
+  .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content{
+    width:100%;
+  }
+  
+  .responsive_select .select_label, .responsive_file .file_label{
+    width:100%;
+  }
+  
+  .responsive_select .select_label{
+    margin-right:-31px;
+  }
+  
+  .responsive_file .file_label{
+    margin-right:-80px;
+  }
+  
+  .responsive_select .select_button{
+    right:-1px;
+  }
+;T;	I"/* =========== */
+/* = General = */
+/* =========== */
+
+/*.select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label, .file, .file_button*/
+
+.checkbox, .radio, input[type="checkbox"], input[type="radio"],
+.select, .select .select_button, .select .select_label,
+.file, .file_button, .file .file_button span {
+  display: -moz-inline-stack; /*Cross browser inline-block*/
+  display: inline-block;
+  vertical-align: middle;
+  zoom: 1;
+  *display: inline;
+}
+
+/*.checkbox, .radio, */
+.checkbox, .radio , .select .select_button_icon, .file .file_button span{
+  background-image: url('../images/custom_forms_sprite.png');
+  background-repeat: no-repeat;
+}
+
+/* ========================= */
+/* = Checkboxes and Radios = */
+/* ========================= */
+
+input[type=checkbox], input[type=radio]{
+  margin:0;
+  padding:0;
+}
+
+.radio, input[type=radio], .checkbox, input[type=checkbox]{
+  overflow:hidden;
+}
+
+.checkbox, input[type=checkbox]{  
+  height:23px;
+  width:20px;
+}
+
+.radio, input[type=radio]{
+  height:20px;
+  width:20px;
+}
+
+.checkbox input, .radio input{
+  position:relative;
+  display:block;
+  left:-9999px;
+}
+  
+  /* Mouse States */
+  .checkbox{ background-position:0 3px; }
+  .hover_checkbox{ background-position:0 -20px; }
+  .active_checkbox{ background-position:0 3px; }
+  .checked_checkbox{ background-position:0 -43px;  }
+  
+  .radio{ background-position:0 -66px; }
+  .hover_radio{ background-position:0 -86px; }
+  .active_radio{ background-position:0 -66px; }
+  .checked_radio{ background-position:0 -106px; }
+  
+/* =================== */
+/* = Selects & Files = */
+/* =================== */
+
+select, .select{
+  min-width:100px;
+}
+
+.file{
+  min-width:180px;
+}
+
+.select, .file{
+  overflow:hidden;
+  background:#fff;
+  border:1px solid #DDDDDD;
+  position:relative;
+  
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px; 
+}
+
+.select, .select .select_label, .select .select_content, .select select, .file, .file .file_label{
+  height:32px;
+  line-height:32px;
+}
+
+.select select, .file input[type="file"]{
+  opacity: 0;
+  filter: alpha(opacity=0);
+  position: relative;
+  -webkit-appearance: none;
+  top: -32px;
+  display:block;
+}
+
+.select .select_label, .file .file_label{
+  float:left;
+  margin:0;
+  overflow:hidden;  
+}
+
+.file_label, .file_button, .select .select_label{
+  font-size:13px;
+  font-family: Helvetica, Arial, sans-serif;
+  color:#000;
+}
+
+.select .select_label span , .file .file_label span {
+  padding-right:35px;
+  padding-left:10px;
+}
+
+.select .select_content{
+  overflow:hidden;
+  display:block;
+}
+
+.select .select_button{
+  width:28px;
+}
+
+.select .select_button, .file .file_button {
+  height:30px;
+  position:relative;
+  top:1px;
+  float:right;
+  border-left:1px solid #ddd;
+  border-right:1px solid #fff;
+  -moz-border-radius-topleft: 0px;
+  -moz-border-radius-topright: 6px;
+  -moz-border-radius-bottomright: 6px;
+  -moz-border-radius-bottomleft: 0px;
+  -webkit-border-radius: 0px 6px 6px 0px;
+  border-radius: 0px 6px 6px 0px; 
+}
+
+.select .select_button_icon{
+  background-position:0 -125px;
+}
+
+.select .select_button_icon, .file_content{
+  height:30px;
+  display:block;
+}
+
+.file input[type="file"]{
+  font-size:100px;
+  height:100%; 
+}
+
+.file .file_content{
+  width:100%;
+}
+
+.file .file_button{
+  padding:2px 6px 3px;
+  height:25px;
+  line-height:27px;
+}
+
+.file .file_button span{
+ width:1px;
+ height:30px; 
+ margin-top:-1px;
+ margin-left:-6px;
+ margin-right:6px;
+ background-position:0px -157px;
+}
+
+/*.file_label{
+  margin:0;
+  border-left:1px solid #5B5D5E; 
+  height:18px;
+  padding-top:2px;
+  padding-left:10px;
+}*/
+
+  /* Mouse States*/
+  
+  .select .select_button, .file .file_button{
+    background: #f9f9f9; /* Old browsers */
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #e9e9e9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9f9f9), color-stop(100%,#e9e9e9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* IE10+ */
+    background: linear-gradient(top, #f9f9f9 0%,#e9e9e9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#e9e9e9',GradientType=0 ); /* IE6-9 */
+  }
+  
+  .hover_select .select_button, .hover_file .file_button{
+    background: #e9e9e9; /* Old browsers */
+    background: -moz-linear-gradient(top, #e9e9e9 0%, #f9f9f9 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e9e9e9), color-stop(100%,#f9f9f9)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* IE10+ */
+    background: linear-gradient(top, #e9e9e9 0%,#f9f9f9 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e9e9e9', endColorstr='#f9f9f9',GradientType=0 ); /* IE6-9 */
+  }
+  
+  /* Responsive styles (width 100%) */
+  
+  .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content{
+    width:100%;
+  }
+  
+  .responsive_select .select_label, .responsive_file .file_label{
+    width:100%;
+  }
+  
+  .responsive_select .select_label{
+    margin-right:-31px;
+  }
+  
+  .responsive_file .file_label{
+    margin-right:-80px;
+  }
+  
+  .responsive_select .select_button{
+    right:-1px;
+  }
+;T;
+@2:versioni

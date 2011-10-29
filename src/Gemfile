@@ -1,0 +1,6 @@
+source :rubygems
+
+gem "nanoc3"
+gem "rack"
+gem "mime-types"
+gem "kramdown"
