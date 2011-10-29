@@ -9,6 +9,9 @@ compile '*' do
     case item[:extension]
       when "markdown"
         filter :kramdown
+      when "js"
+        filter :erb
+        filter :yui
       else
         filter :erb
     end

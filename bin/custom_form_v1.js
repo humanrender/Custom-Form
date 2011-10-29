@@ -60,7 +60,6 @@
       if(e.target != this) return;
       e.preventDefault();  
       e.data.replacement.triggerHandler("click");
-      
     }
     
     function disabled(option){
@@ -92,8 +91,6 @@
       this.disabled = disabled;
     }
   })()
-  
-  // style='height:"+Select.select_height+"px;'
   
   function File(element){
     this.element = element; this.element_type = "file";
