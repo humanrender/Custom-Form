@@ -11,7 +11,7 @@ compile '*' do
         filter :kramdown
       when "js"
         filter :erb
-        filter :yui
+        # filter :yui
       else
         filter :erb
     end

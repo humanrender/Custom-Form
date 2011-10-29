@@ -25,7 +25,7 @@
   // =================
   function FormElement(element,options,identifier){
     if(element){
-      this.$$custom_form_identifier = identifier;
+      this.identifier = identifier;
       this.set_parameters(element,options);
     }
   }
@@ -33,11 +33,11 @@
   var f = FormElement.prototype;
   
   $.extend(f,{
-    get_element:function(){return $$[this.$$custom_form_identifier].element;},
-    get:function(label){return $$[this.$$custom_form_identifier].children[label];},
-    set:function(object,label){ $$[this.$$custom_form_identifier].children[label] = object; return object; },
-    get_id:function(){return this.$$custom_form_identifier;},
-    kill:function(){return this.$$custom_form_identifier;},
+    get_element:function(){return $$[this.identifier].element;},
+    get:function(label){return $$[this.identifier].children[label];},
+    set:function(object,label){ $$[this.identifier].children[label] = object; return object; },
+    get_id:function(){return this.identifier;},
+    kill:function(){return this.identifier;},
     
     active_replacement_class:function(condition){
       this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
@@ -48,6 +48,7 @@
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.init_mouse_events(element,replacement);
+      return this;
     },
     set_replacement:function(){
       return this.set(this.get_replacement(),"replacement")

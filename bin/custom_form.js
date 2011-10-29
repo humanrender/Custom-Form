@@ -6,7 +6,25 @@
     file_label:"No file chosen",
     responsive_select:false,
     responsive_file:false
-  };
+  },
+  METHODS = ["init","checked","update","select","disabled"],
+  OVERRIDES = {
+    disabled:function(option){
+      (option != undefined) || (option = "all");
+      if(this.length == 1) return $$[this[0].$$custom_form_identifier].instance.disabled(option);
+      var result = option == "any" ? false : true;
+      var self = this;
+      this.each(function(){
+        var tmp = $$[this.$$custom_form_identifier].instance.disabled(option);
+        switch(option){
+          case "all": if(result && !tmp) {result = false; return false;}; break;
+          case "any": if(tmp){result = true; return false}; break;
+          case "none": if(!tmp){result = false; return false}; break;
+        }
+      });
+      return result
+    }
+  }
   
   // ===============
   // = FormElement =
@@ -35,7 +53,7 @@
   // =================
   function FormElement(element,options,identifier){
     if(element){
-      this.$$custom_form_identifier = identifier;
+      this.identifier = identifier;
       this.set_parameters(element,options);
     }
   }
@@ -43,11 +61,11 @@
   var f = FormElement.prototype;
   
   $.extend(f,{
-    get_element:function(){return $$[this.$$custom_form_identifier].element;},
-    get:function(label){return $$[this.$$custom_form_identifier].children[label];},
-    set:function(object,label){ $$[this.$$custom_form_identifier].children[label] = object; return object; },
-    get_id:function(){return this.$$custom_form_identifier;},
-    kill:function(){return this.$$custom_form_identifier;},
+    get_element:function(){return $$[this.identifier].element;},
+    get:function(label){return $$[this.identifier].children[label];},
+    set:function(object,label){ $$[this.identifier].children[label] = object; return object; },
+    get_id:function(){return this.identifier;},
+    kill:function(){return this.identifier;},
     
     active_replacement_class:function(condition){
       this.replacement[condition ? "addClass" : "removeClass"]("checked_"+this.element_type)
@@ -58,6 +76,7 @@
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.init_mouse_events(element,replacement);
+      return this;
     },
     set_replacement:function(){
       return this.set(this.get_replacement(),"replacement")
@@ -110,6 +129,7 @@
       }
     }
   })
+
   function Checkbox(element,options,identifier){this.constructor.call(this,element,options,identifier);}
   Checkbox.IDENTIFIER = "input_checkbox";
 
@@ -150,45 +170,47 @@
   });
 
   FormElement.register_class(Checkbox.IDENTIFIER,Checkbox)
-  function CustomForm(){}
 
-  $.extend(CustomForm.prototype,{
-    init:function(elements, options){
+  function CustomForm(){
+    this.init = function(elements, options){
       var self = this, options = $.extend(DEFAULTS,(options || {}));
       return elements.each(function(){ 
         // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
         if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;
-        self.new_element(this).init(options);      
+        this.$$custom_form_identifier = self.new_element(this).init(options).identifier;      
       });
-    },
-    execute:function execute(method){
-      var self = this, args = Array.prototype.slice.call(arguments,1);
-      // if(method in OVERRIDES) return  OVERRIDES[method].apply(this,args);
-      return self.each(function(){
-        // if(this.custom_form_instance)
-          // this.custom_form_instance[method].apply(this.custom_form_instance,args);
+    };
+    this.execute = function execute(elements,arguments){
+      var method = arguments[0];
+      var args = Array.prototype.slice.call(arguments,1);
+      if(method in OVERRIDES) return  OVERRIDES[method].apply(elements,args);
+      return elements.each(function(){
+        if(this.$$custom_form_identifier){
+          var form_element_instance = $$[this.$$custom_form_identifier].instance;
+          form_element_instance[method].apply(form_element_instance,args);
+        }
       })
-    },
-    new_element:function(element,options){
+    };
+    this.new_element = function(element,options){
       var $element = $(element),
           instance = FormElement.build($element,options), 
           id = instance.get_id();
       this.register_instance(id,instance,$element);
       return instance;
-    },
-    register_instance:function(id,instance,element){
+    }
+    this.register_instance = function(id,instance,element){
       $$[id] = {
         element:element,
         instance:instance,
         children:{}
       };
-    },
-    unregister_instance:function(instance){
+    }
+    this.unregister_instance = function(instance){
       var label = instance.get_id();
       instance = instance.kill();
       delete $$[label];
     }
-  });
+  }
   
   CustomForm.get_custom_form_instance = function(){
     if(!this.instance) this.instance = new CustomForm();

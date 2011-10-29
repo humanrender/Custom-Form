@@ -20,6 +20,11 @@
   background-repeat: no-repeat;
 }
 
+
+.disabled_checkbox{
+  opacity:0.5;
+}
+
 /* ========================= */
 /* = Checkboxes and Radios = */
 /* ========================= */
