@@ -20,11 +20,6 @@
   background-repeat: no-repeat;
 }
 
-
-.disabled_checkbox, .disabled_radio, .disabled_select, .disabled_file{
-  opacity:0.5;
-}
-
 /* ========================= */
 /* = Checkboxes and Radios = */
 /* ========================= */
@@ -94,8 +89,6 @@ select, .select{
 }
 
 .select select, .file input[type="file"]{
-  opacity: 0;
-  filter: alpha(opacity=0);
   position: relative;
   -webkit-appearance: none;
   top: -32px;
@@ -211,7 +204,7 @@ select, .select{
   /* Responsive styles (width 100%) */
   
   .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content,
-  .responsive_select .select_label, .responsive_file .file_label, .responsive_select select{
+  .responsive_select .select_label, .responsive_file .file_label, .responsive_select select, .responsive_file input{
     width:100%;
   }
   
@@ -226,3 +219,13 @@ select, .select{
   .responsive_select .select_button{
     right:-1px;
   }
+  
+.select select, .file input[type="file"]{
+  opacity: 0;
+  filter: alpha(opacity=0);
+}
+
+.disabled_checkbox, .disabled_radio, .disabled_select, .disabled_file{
+  opacity:0.5;
+  filter: alpha(opacity = 50);
+}

@@ -50,6 +50,7 @@
   var f = FormElement.prototype;
   
   $.extend(f,{
+    is_disabled:false,
     get_element:function(){return $$[this.identifier].element;},
     get:function(label){return $$[this.identifier].children[label];},
     set:function(object,label){ $$[this.identifier].children[label] = object; return object; },
@@ -66,6 +67,7 @@
       replacement = this.set_replacement(element);
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
+      this.disable_if_disabled(element);
       this.init_mouse_events(element,replacement);
       return this;
     },

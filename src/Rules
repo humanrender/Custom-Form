@@ -14,6 +14,7 @@ compile '*' do
         filter :yui
       else
         filter :erb
+        filter :relativize_paths, :type=>:html
     end
   end
 end
