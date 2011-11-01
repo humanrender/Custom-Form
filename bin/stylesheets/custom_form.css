@@ -73,6 +73,8 @@ input[type=checkbox], input[type=radio]{
 
 select, .select{
   min-width:100px;
+  border:0;
+  padding:0;
 }
 
 .select{

@@ -272,7 +272,7 @@
     },
     init_mouse_events:function(element,replacement){
       FormElement.prototype.init_mouse_events.call(this,element,replacement);
-      if($.browser.mozilla)
+      if($.browser.mozilla || $.browser.msie)
         element.bind("keyup",this,this.key_up);
     },
     key_up:function(event){
