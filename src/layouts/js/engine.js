@@ -1,3 +1,11 @@
+  $$.fn.ie6 = function(){return $.browser.msie && parseInt($.browser.version) <= 6}
+  
+  $$.fn.ie6_instance = function(){
+    return new function(){
+      this.init = this.execute = function(elements){return elements};
+    }()
+  }
+
   function CustomForm(){
     this.init = function(elements, options){
       var self = this, options = $.extend({ 
@@ -45,6 +53,7 @@
   }
   
   CustomForm.get_custom_form_instance = function(){
-    if(!this.instance) this.instance = new CustomForm();
+    if(!this.instance)
+      this.instance = !$$.fn.ie6() ? new CustomForm() : $$.fn.ie6_instance();
     return this.instance;
   }

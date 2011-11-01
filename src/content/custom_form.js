@@ -1,6 +1,6 @@
 (function($){
 
-  var $$ = {},
+  var $$ = {fn:{}},
   METHODS = ["init","checked","update","select","disabled"],
   OVERRIDES = {
     disabled:function(option){

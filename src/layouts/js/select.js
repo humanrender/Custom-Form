@@ -37,7 +37,16 @@
         replacement.addClass("responsive_select")
       }
     
-      // element.bind("change",this,this.select_change)
+      element.bind("change",this,this.select_change)
+    },
+    init_mouse_events:function(element,replacement){
+      FormElement.prototype.init_mouse_events.call(this,element,replacement);
+      if($.browser.mozilla)
+        element.bind("keyup",this,this.key_up);
+    },
+    key_up:function(event){
+      if(event.which == 38 || event.which == 40)
+        event.data.update();
     },
     select_change:function(event){
       event.data.update_label();
