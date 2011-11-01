@@ -10,7 +10,7 @@ module CustomFormHelper
   end
   
   def tabindex
-    " tabindex='{Tabindex.instance.tabindex}'"
+    " tabindex='#{Tabindex.instance.tabindex}'"
   end
 end
 
@@ -19,7 +19,7 @@ class Tabindex
   
   include Singleton
   
-  def self.tabindex
+  def tabindex
     return @@index = @@index + 1
   end
 end

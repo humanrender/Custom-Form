@@ -16,7 +16,7 @@
     get_replacement:function(element){
       var def_option = $("option:selected",element);
       (def_option.length != 0) ||(def_option = $("option:first-child",element))
-      return $("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><p class='select_label'><span>"+def_option.text()+"</span></p></span></span>")
+      return $("<span class='select'><span class='select_content' ><span class='select_button'><span class='select_button_icon'></span></span><span class='select_label'><span>"+def_option.text()+"</span></span></span></span>")
     },
     replace_elements:function(element,replacement){
       this.element_width = element.outerWidth();

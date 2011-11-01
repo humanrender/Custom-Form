@@ -6,6 +6,8 @@ class YuiCompressorFilter < Nanoc3::Filter
     compressed = case @item[:extension]
       when "js"
         YUI::JavaScriptCompressor.new(:munge=>true).compress(content)
+      when "css"
+        YUI::CssCompressor.new().compress(content)
       else
         raise "Invalid extension for yui compression"
     end
