@@ -15,7 +15,7 @@
       this.responsive = options.responsive_file;
     },
     get_replacement:function(){
-      return $("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><p class='file_label'><span>"+this.label+"</span></p></span></span>")
+      return $("<span class='file'><span class='file_content'><span class='file_button'><span></span>"+this.button_label+"</span><span class='file_label'><span>"+this.label+"</span></span></span></span>")
     },
     replace_elements:function(element,replacement){
       if(!this.responsive){
@@ -24,7 +24,9 @@
         this.element_padding = element.css("padding-left");
       }
       element.after(replacement);
-      replacement.append(element);
+      var wrap = $("<span class='file_wrap'></span>");
+      replacement.append(wrap);
+      wrap.append(element);
     },
     init_replacement:function(element,replacement){
       var file_label = file_label = this.set($(".file_label",replacement),"file_label");
@@ -33,7 +35,7 @@
         var styles = {width:this.element_width-parseInt(replacement.css("border-left-width"))-parseInt(replacement.css("border-right-width"))};
         element.css(styles);
         replacement.css(styles);
-        file_label.css("width",styles.width-$(".file_button",replacement).outerWidth())
+        // file_label.css("width",styles.width-$(".file_button",replacement).outerWidth())
       }else{
         replacement.addClass("responsive_file")
       }
