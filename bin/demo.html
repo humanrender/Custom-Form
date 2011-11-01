@@ -1,122 +1,102 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<title>index</title>
-  	<link rel="stylesheet" href="stylesheets/custom_form.css" type="text/css" media="screen" title="no title" charset="utf-8"/>
+  	<link rel="stylesheet" href="stylesheets/custom_form.css" type="text/css" media="screen" title="no title" charset="utf-8"/> 
   	<style type="text/css" media="screen">
-  	 /* =DEMO */
+ /* =DEMO */
 
-     input[type="submit"]{
-       display: -moz-inline-stack; /*Cross browser inline-block*/
-       display: inline-block;
-       vertical-align: middle;
-       zoom: 1;
-       *display: inline;
-     }
+ input[type="submit"]{
+   display: -moz-inline-stack; /*Cross browser inline-block*/
+   display: inline-block;
+   vertical-align: middle;
+   zoom: 1;
+   *display: inline;
+ }
 
-     input[type="submit"]{
-       background: #fefefe; /* Old browsers */
-       background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
-       background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
-       background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
-       background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
-       background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
-       filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
-       background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
+ input[type="submit"]{
+   background: #fefefe; /* Old browsers */
+   background: -moz-linear-gradient(top, #fefefe 0%, #cccccc 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#cccccc)); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* Opera11.10+ */
+   background: -ms-linear-gradient(top, #fefefe 0%,#cccccc 100%); /* IE10+ */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#cccccc',GradientType=0 ); /* IE6-9 */
+   background: linear-gradient(top, #fefefe 0%,#cccccc 100%); /* W3C */
 
-       border:1px solid #5B5D5E;
-       padding-top:3px;
-       padding-bottom:3px;
-       font:10px Verdana, sans-serif;
-       color:#0B333B;
+   border:1px solid #5B5D5E;
+   padding-top:3px;
+   padding-bottom:3px;
+   font:10px Verdana, sans-serif;
+   color:#0B333B;
 
-       -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-       border-radius: 3px;
-     }
-     /*
-          .notes div{
-            display: -moz-inline-stack;
-            display: inline-block;
-            vertical-align: middle;
-            zoom: 1;
-            *display: inline;
-          }*/
-     
-     label , .notes{
-       font:13px Helvetica, Arial, sans-serif;
-       color:#000;
-     }
-     
-     .notes{
-       margin-top:20px;
-       width:100%;
-       margin-bottom:10px;
-     }
-     
-     .notes .section{
-       border: 1px dashed #999;
-       padding:10px;
-     }
-     
-     .notes .section:first-child{
-       margin-bottom:5px;
-     }
-     
-     .notes pre{
-       font-size:10px;
-       padding:0;
-       margin:0;
-     }
-     
-  	</style>
+   -webkit-border-radius: 3px;
+   -moz-border-radius: 3px;
+   border-radius: 3px;
+ }
+ /*
+      .notes div{
+        display: -moz-inline-stack;
+        display: inline-block;
+        vertical-align: middle;
+        zoom: 1;
+        *display: inline;
+      }*/
+ 
+ label , .notes{
+   font:13px Helvetica, Arial, sans-serif;
+   color:#000;
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   user-select: none;
+ }
+ 
+ .notes{
+   margin-top:20px;
+   width:100%;
+   margin-bottom:10px;
+ }
+ 
+ .notes .section{
+   border: 1px dashed #999;
+   padding:10px;
+ }
+ 
+ .notes .section:first-child{
+   margin-bottom:5px;
+ }
+ 
+ .notes pre{
+   font-size:10px;
+   padding:0;
+   margin:0;
+ }
+ 
+</style>
   </head>
   <body>
     <form autocomplete="off">
-      <!-- 
-        output = ""
-        5.times do |i|
-          output += %~<div>
-            <input type="checkbox" id="custom_checkbox_#{i}" name="ids[]" value="#{i}"/>
-            <label for="custom_checkbox_#{i}">Checkbox #{i}</label>
-          </div>~
-        end
-        
-        
-        5.times do |i|
-          output += %~<div>
-            <input type="radio" id="name_#{i}" name="name" value="#{i}"/>
-            <label for="name_#{i}">Radio #{i}</label>
-            <input type="radio" id="address_#{i}" name="address" value="#{i}"/>
-            <label for="address_#{i}">Radio 2 - #{i}</label>
-          </div>~
-        end
-        
-        
-        puts output   
-
- 
-        -->
       <fieldset>
         <legend><span>Checkboxes</span></legend>
         
-        <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0"/>
-        <label for="custom_checkbox_0">Checkbox 0</label>
+          <input type="checkbox" id="custom_checkbox_0" name="ids[0]" value="1"  tabindex='1'/>
+          <label for="custom_checkbox_0">Checkbox 0</label>
         
-        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1"/>
-        <label for="custom_checkbox_1">Checkbox 1</label>
+          <input type="checkbox" id="custom_checkbox_1" name="ids[1]" value="1"  tabindex='2'/>
+          <label for="custom_checkbox_1">Checkbox 1</label>
         
-        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2"/>
-        <label for="custom_checkbox_2">Checkbox 2</label>
+          <input type="checkbox" id="custom_checkbox_2" name="ids[2]" value="1"  tabindex='3'/>
+          <label for="custom_checkbox_2">Checkbox 2</label>
         
-        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3"/>
-        <label for="custom_checkbox_3">Checkbox 3</label>
+          <input type="checkbox" id="custom_checkbox_3" name="ids[3]" value="1"  tabindex='4'/>
+          <label for="custom_checkbox_3">Checkbox 3</label>
         
-        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4"/>
-        <label for="custom_checkbox_4">Checkbox 4</label>
+          <input type="checkbox" id="custom_checkbox_4" name="ids[4]" value="1"  tabindex='5'/>
+          <label for="custom_checkbox_4">Checkbox 4</label>
+        
         
         <div class="notes">
           <div class="section">
@@ -126,11 +106,17 @@
           </div>
         </div>
         
-        <label><input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/> Checkbox 5</label>
-        <label><input type="checkbox" id="custom_checkbox_6" name="ids[]" value="1"/> Checkbox 6</label>
-        <label><input type="checkbox" id="custom_checkbox_7" name="ids[]" value="2"/> Checkbox 7</label>
-        <label><input type="checkbox" id="custom_checkbox_8" name="ids[]" value="3"/> Checkbox 8</label>
-        <label><input type="checkbox" id="custom_checkbox_9" name="ids[]" value="4"/> Checkbox 9</label>
+        
+          <label><input type="checkbox" id="custom_checkbox_5" name="ids[5]" value="1"  tabindex='6'/> Checkbox 5</label>
+        
+          <label><input type="checkbox" id="custom_checkbox_6" name="ids[6]" value="1"  tabindex='7'/> Checkbox 6</label>
+        
+          <label><input type="checkbox" id="custom_checkbox_7" name="ids[7]" value="1"  tabindex='8'/> Checkbox 7</label>
+        
+          <label><input type="checkbox" id="custom_checkbox_8" name="ids[8]" value="1"  tabindex='9'/> Checkbox 8</label>
+        
+          <label><input type="checkbox" id="custom_checkbox_9" name="ids[9]" value="1"  tabindex='10'/> Checkbox 9</label>
+        
         
         <div class="notes last">
           <div class="section">
@@ -146,20 +132,22 @@
       <fieldset>
         <legend><span>Radios</span></legend>
   
-        <input type="radio" id="custom_radio_0" name="values[]" value="0"/>
-        <label for="custom_radio_0">radio 0</label>
-  
-        <input type="radio" id="custom_radio_1" name="values[]" value="1"/>
-        <label for="custom_radio_1">radio 1</label>
-  
-        <input type="radio" id="custom_radio_2" name="values[]" value="2"/>
-        <label for="custom_radio_2">radio 2</label>
-  
-        <input type="radio" id="custom_radio_3" name="values[]" value="3"/>
-        <label for="custom_radio_3">radio 3</label>
-  
-        <input type="radio" id="custom_radio_4" name="values[]" value="4"/>
-        <label for="custom_radio_4">radio 4</label>
+        
+          <input type="radio" id="custom_radio_0" name="value" value="0"  tabindex='11'/>
+          <label for="custom_radio_0">Radio 0</label>
+        
+          <input type="radio" id="custom_radio_1" name="value" value="1"  tabindex='12'/>
+          <label for="custom_radio_1">Radio 1</label>
+        
+          <input type="radio" id="custom_radio_2" name="value" value="2"  tabindex='13'/>
+          <label for="custom_radio_2">Radio 2</label>
+        
+          <input type="radio" id="custom_radio_3" name="value" value="3"  tabindex='14'/>
+          <label for="custom_radio_3">Radio 3</label>
+        
+          <input type="radio" id="custom_radio_4" name="value" value="4"  tabindex='15'/>
+          <label for="custom_radio_4">Radio 4</label>
+        
   
         <div class="notes">
           <div class="section">
@@ -173,11 +161,17 @@
           </div>
         </div>
   
-        <label><input type="radio" id="custom_radio_5" name="values[]" value="0"/> radio 5</label>
-        <label><input type="radio" id="custom_radio_6" name="values[]" value="1"/> radio 6</label>
-        <label><input type="radio" id="custom_radio_7" name="values[]" value="2"/> radio 7</label>
-        <label><input type="radio" id="custom_radio_8" name="values[]" value="3"/> radio 8</label>
-        <label><input type="radio" id="custom_radio_9" name="values[]" value="4"/> radio 9</label>
+        
+          <label for="custom_radio_5"><input type="radio" id="custom_radio_5" name="value" value="5"  tabindex='16'/> Radio 5</label>
+        
+          <label for="custom_radio_6"><input type="radio" id="custom_radio_6" name="value" value="6"  tabindex='17'/> Radio 6</label>
+        
+          <label for="custom_radio_7"><input type="radio" id="custom_radio_7" name="value" value="7"  tabindex='18'/> Radio 7</label>
+        
+          <label for="custom_radio_8"><input type="radio" id="custom_radio_8" name="value" value="8"  tabindex='19'/> Radio 8</label>
+        
+          <label for="custom_radio_9"><input type="radio" id="custom_radio_9" name="value" value="9"  tabindex='20'/> Radio 9</label>
+        
   
         <div class="notes last">
           <div class="section">
@@ -195,9 +189,9 @@
         <legend><span>Selects</span></legend>
   
         <label for="custom_select_1">Country</label>
-        <select id="custom_select_1" class="custom_form">
+        <select id="custom_select_1" class="custom_form" name="country_1"  tabindex='21'>
           <option value="" selected="selected">Select Country</option> 
-          <option value="United States">Spain</option> 
+          <option value="Spain">Spain</option> 
           <option value="United States">United States</option> 
           <option value="United Kingdom">United Kingdom</option> 
           <option value="Afghanistan">Afghanistan</option> 
@@ -209,11 +203,11 @@
         </select>
         
         <label for="custom_select_2">Credit Card</label>
-        <select id="custom_select_2" class="custom_form">
+        <select id="custom_select_2" class="custom_form" name="credit_card"  tabindex='22'> 
           <option value="" selected="selected">Select Credit Card</option> 
-          <option value="United States">Visa</option> 
-          <option value="United States">MasterCard</option> 
-          <option value="United Kingdom">American Express</option> 
+          <option value="Visa">Visa</option> 
+          <option value="MasterCard">MasterCard</option> 
+          <option value="American Express">American Express</option> 
           <option value="...">...</option> 
         </select>
         
@@ -236,9 +230,9 @@
         <div style="width:100%">
           <div style="width:49%; margin-right:1%; float:left">
             <label for="custom_select_3" style="display:block">Country</label>
-            <select id="custom_select_3" class="custom_form_responsive">
+            <select id="custom_select_3" class="custom_form_responsive" name="country_2"  tabindex='23'>
               <option value="" selected="selected">Select Country</option> 
-              <option value="United States">Spain</option> 
+              <option value="Spain">Spain</option> 
               <option value="United States">United States</option> 
               <option value="United Kingdom">United Kingdom</option> 
               <option value="Afghanistan">Afghanistan</option> 
@@ -252,11 +246,11 @@
           
           <div style="width:49%; margin-left:1%; float:left">
             <label for="custom_select_4"  style="display:block">Credit Card</label>
-            <select id="custom_select_4" class="custom_form_responsive">
+            <select id="custom_select_4" class="custom_form_responsive" name="credit_card_2"  tabindex='24'>
               <option value="" selected="selected">Select Credit Card</option> 
-              <option value="United States">Visa</option> 
-              <option value="United States">MasterCard</option> 
-              <option value="United Kingdom">American Express</option> 
+              <option value="Visa">Visa</option> 
+              <option value="MasterCard">MasterCard</option> 
+              <option value="American Express">American Express</option> 
               <option value="...">...</option> 
             </select>
           </div>
@@ -268,7 +262,7 @@
             <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
     &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_select_3&quot; style=&quot;display:block&quot;&gt;Country&lt;/label&gt;
-      &lt;select id=&quot;custom_select_3&quot;&gt;
+      &lt;select id=&quot;custom_select_3&quot; style=&quot;width:100%&quot;&gt;
         &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Country&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;Spain&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;United States&lt;/option&gt; 
@@ -284,7 +278,7 @@
 
     &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_select_4&quot;  style=&quot;display:block&quot;&gt;Credit Card&lt;/label&gt;
-      &lt;select id=&quot;custom_select_4&quot;&gt;
+      &lt;select id=&quot;custom_select_4&quot; style=&quot;width:100%&quot;&gt;
         &lt;option value=&quot;&quot; selected=&quot;selected&quot;&gt;Select Credit Card&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;Visa&lt;/option&gt; 
         &lt;option value=&quot;United States&quot;&gt;MasterCard&lt;/option&gt; 
@@ -338,12 +332,12 @@
             <code><pre>  &lt;div style=&quot;width:100%&quot;&gt;
     &lt;div style=&quot;width:49%; margin-right:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_file_2&quot;&gt;Attachment&lt;/label&gt;
-      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot;/&gt;  
+      &lt;input id=&quot;custom_file_2&quot; type=&quot;file&quot; style=&quot;width:100%&quot;/&gt;  
     &lt;/div&gt;
   
     &lt;div style=&quot;width:49%; margin-left:1%; float:left&quot;&gt;
       &lt;label for=&quot;custom_file_3&quot;&gt;Attachment&lt;/label&gt;
-      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot;/&gt;  
+      &lt;input id=&quot;custom_file_3&quot; type=&quot;file&quot; style=&quot;width:100%&quot;/&gt;  
     &lt;/div&gt;
   &lt;/div&gt;</code></pre>
           </div>
@@ -357,20 +351,19 @@
           </div>
         </div>
       </fieldset>
-      
+      <input type="submit"/>
     </form>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script src="custom_form.js" type="text/javascript" charset="utf-8"></script>
     
     <script type="text/javascript" charset="utf-8">
-      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
       $("select.custom_form_responsive, #custom_file_2, #custom_file_3").custom_form({
         responsive_select:true,
         responsive_file:true,
         file_label:"Select file",
         file_button:"Browse"
       })
-      
+      $("[type=checkbox], [type=radio], select.custom_form, #custom_file_1").custom_form();
     </script>
   </body>
 </html>

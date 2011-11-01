@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+compile '/stylesheet/' do
+  # don’t filter or layout
+end
+
+compile '*' do
+  unless item.binary?
+    case item[:extension]
+      when "markdown"
+        filter :kramdown
+      when "js"
+        filter :erb
+        filter :yui
+      when "css"
+        filter :relativize_paths, :type=>:css
+        filter :yui
+      else
+        filter :erb
+        filter :relativize_paths, :type=>:html
+    end
+  end
+end
+
+route '*' do
+  identifier = item.identifier.chop
+  case item[:extension]
+    when "markdown"
+      identifier + ".html"
+    else
+      identifier + '.' + item[:extension]
+  end
+end
+
+layout '*', :erb

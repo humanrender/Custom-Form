@@ -2,11 +2,8 @@
 /* = General = */
 /* =========== */
 
-/*.select, .checkbox, .radio, .select .select_button, .checkbox + label, .radio + label, .file, .file_button*/
-
 .checkbox, .radio, input[type="checkbox"], input[type="radio"],
-.select, .select .select_button, .select .select_label,
-.file, .file_button, .file .file_button span {
+.select, .select .select_button, .select .select_label, .file, .file_button, .file .file_button span{
   display: -moz-inline-stack; /*Cross browser inline-block*/
   display: inline-block;
   vertical-align: middle;
@@ -14,10 +11,15 @@
   *display: inline;
 }
 
-/*.checkbox, .radio, */
-.checkbox, .radio , .select .select_button_icon, .file .file_button span{
+.checkbox, .radio , .select .select_button_icon{
   background-image: url('../images/custom_forms_sprite.png');
   background-repeat: no-repeat;
+}
+
+.focus_select{
+  -webkit-box-shadow: 1px 1px 2px 0px #ccc;
+  -moz-box-shadow: 1px 1px 2px 0px #ccc;
+  box-shadow: 1px 1px 2px 0px #ccc;
 }
 
 /* ========================= */
@@ -52,27 +54,28 @@ input[type=checkbox], input[type=radio]{
   /* Mouse States */
   .checkbox{ background-position:0 3px; }
   .hover_checkbox{ background-position:0 -20px; }
+  .focus_checkbox{ background-position:-21px -20px; }
   .active_checkbox{ background-position:0 3px; }
+  .focus_checkbox{ background-position:-21px -20px; }
   .checked_checkbox{ background-position:0 -43px;  }
+  .focus_checkbox.checked_checkbox{ background-position:-21px -43px; }
   
   .radio{ background-position:0 -66px; }
   .hover_radio{ background-position:0 -86px; }
+  .focus_radio { background-position:-20px -86px; }
   .active_radio{ background-position:0 -66px; }
   .checked_radio{ background-position:0 -106px; }
-  
-/* =================== */
-/* = Selects & Files = */
-/* =================== */
+  .focus_radio.checked_radio { background-position:-20px -106px; }
+
+/* =========== */
+/* = Selects = */
+/* =========== */
 
 select, .select{
   min-width:100px;
 }
 
-.file{
-  min-width:180px;
-}
-
-.select, .file{
+.select{
   overflow:hidden;
   background:#fff;
   border:1px solid #DDDDDD;
@@ -83,35 +86,35 @@ select, .select{
   border-radius: 6px; 
 }
 
-.select, .select .select_label, .select .select_content, .select select, .file, .file .file_label{
+.select, .select .select_label, .select .select_content, .select select{
   height:32px;
   line-height:32px;
 }
 
-.select select, .file input[type="file"]{
-  opacity: 0;
-  filter: alpha(opacity=0);
+.select select{
   position: relative;
   -webkit-appearance: none;
   top: -32px;
   display:block;
 }
 
-.select .select_label, .file .file_label{
+.select .select_label{
   float:left;
   margin:0;
   overflow:hidden;  
 }
 
-.file_label, .file_button, .select .select_label{
-  font-size:13px;
+.select .select_label{
+  font-size:11px;
   font-family: Helvetica, Arial, sans-serif;
   color:#000;
+  white-space: nowrap;
 }
 
-.select .select_label span , .file .file_label span {
+.select .select_label span{
   padding-right:35px;
-  padding-left:10px;
+  padding-left:8px;
+  display:block;
 }
 
 .select .select_content{
@@ -120,10 +123,10 @@ select, .select{
 }
 
 .select .select_button{
-  width:28px;
+  width:22px;
 }
 
-.select .select_button, .file .file_button {
+.select .select_button, .file .file_button{
   height:30px;
   position:relative;
   top:1px;
@@ -139,45 +142,15 @@ select, .select{
 }
 
 .select .select_button_icon{
-  background-position:0 -125px;
+  background-position:0px -125px;
 }
 
-.select .select_button_icon, .file_content{
+.select .select_button_icon{
   height:30px;
   display:block;
 }
 
-.file input[type="file"]{
-  font-size:100px;
-  height:100%; 
-}
 
-.file .file_content{
-  width:100%;
-}
-
-.file .file_button{
-  padding:2px 6px 3px;
-  height:25px;
-  line-height:27px;
-}
-
-.file .file_button span{
- width:1px;
- height:30px; 
- margin-top:-1px;
- margin-left:-6px;
- margin-right:6px;
- background-position:0px -157px;
-}
-
-/*.file_label{
-  margin:0;
-  border-left:1px solid #5B5D5E; 
-  height:18px;
-  padding-top:2px;
-  padding-left:10px;
-}*/
 
   /* Mouse States*/
   
@@ -205,11 +178,8 @@ select, .select{
   
   /* Responsive styles (width 100%) */
   
-  .responsive_file, .responsive_file .file_content, .responsive_select, .responsive_select .select_content{
-    width:100%;
-  }
-  
-  .responsive_select .select_label, .responsive_file .file_label{
+  .responsive_select, .responsive_select .select_content,
+  .responsive_select .select_label, .responsive_select select{
     width:100%;
   }
   
@@ -217,10 +187,92 @@ select, .select{
     margin-right:-31px;
   }
   
-  .responsive_file .file_label{
-    margin-right:-80px;
-  }
-  
   .responsive_select .select_button{
     right:-1px;
   }
+  
+  .select select, .file_wrap input{
+    opacity: 0;
+    filter: alpha(opacity=0);
+  }
+
+  .disabled_checkbox, .disabled_radio, .disabled_select, .disabled_file{
+    opacity:0.5;
+    filter: alpha(opacity = 50);
+  }
+  
+/* ======== */
+/* = File = */
+/* ======== */
+
+.file .file_button span{
+  background-image: url('../images/custom_forms_sprite.png');
+  background-repeat: no-repeat;
+}
+
+.file{
+  height:32px;
+  background-color:#ce0;
+  overflow:hidden;
+  min-width:180px;
+  position:relative;
+  
+  background:#fff;
+  border:1px solid #DDDDDD;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px; 
+}
+
+.file_content{
+  height:32px;
+  position:absolute;
+  z-index:1;
+  width:100%;
+  display:block;
+}
+
+.file_wrap{
+  height: 32px;
+  overflow: hidden;
+  position: absolute;
+  z-index:2;
+  width:100%;
+  display:block;
+}
+
+.file_wrap input{
+  font-size:100px;
+  -webkit-appearance: none;
+}
+
+.responsive_file{
+  width:100%;
+}
+
+.focus_file{
+  -webkit-box-shadow: 1px 1px 2px 0px #ccc;
+  -moz-box-shadow: 1px 1px 2px 0px #ccc;
+  box-shadow: 1px 1px 2px 0px #ccc;
+}
+
+.file_label{
+  display:block;
+  line-height:32px;
+  
+  margin:0;
+  height:32px;
+  padding-left:10px;
+}
+
+.file_label, .file_button{
+  font-size:11px;
+  font-family: Helvetica, Arial, sans-serif;
+  color:#000;
+}
+
+.file .file_button{
+  padding:2px 6px 3px;
+  height:25px;
+  line-height:27px;
+}
