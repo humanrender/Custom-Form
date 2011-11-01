@@ -212,20 +212,18 @@
   $.extend(r,{
     uncheckeable:true,
     element_type:"radio",
-    update:function(){
-      var element = this.get_element();
+    update:function(element,replacement){
+       var element = (element || this.get_element()), 
+          klass = "checked_"+this.element_type, checked = element.is(":checked"),
+          replacement = (replacement || this.get("replacement"));
       this.disable_if_disabled(element);
-      this.checked(element.is(":checked"),element,null,true)
-    },
-    checked:function(checked,element,replacement,updating){
-      element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
-      (checked != undefined) || (checked = true);
-      if(checked || updating){
-        var checked_radios = $(".checked_radio").has("[name='"+this.element_name+"']").not(this.element_id);
+      
+      if(checked){
+        var checked_radios = $("."+klass).has("[name='"+this.element_name+"']").not(this.element_id);
         if(checked_radios.length != 0)
-            checked_radios.removeClass("checked_"+this.element_type)
-      }
-      Checkbox.prototype.checked.call(this,checked); // == undefined ? undefined : checked
+            checked_radios.removeClass(klass)
+        replacement.addClass(klass)
+      } 
     }
   })
   
