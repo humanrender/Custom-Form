@@ -114,6 +114,7 @@ select, .select{
 .select .select_label span{
   padding-right:35px;
   padding-left:8px;
+  display:block;
 }
 
 .select .select_content{
@@ -141,7 +142,7 @@ select, .select{
 }
 
 .select .select_button_icon{
-  background-position:-4px -125px;
+  background-position:0px -125px;
 }
 
 .select .select_button_icon{
@@ -190,7 +191,7 @@ select, .select{
     right:-1px;
   }
   
-  .select select{
+  .select select, .file_wrap input{
     opacity: 0;
     filter: alpha(opacity=0);
   }
@@ -242,7 +243,6 @@ select, .select{
 
 .file_wrap input{
   font-size:100px;
-  opacity:0;
   -webkit-appearance: none;
 }
 
