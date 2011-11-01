@@ -37,7 +37,7 @@
         replacement.addClass("responsive_select")
       }
     
-      element.bind("change",this,this.select_change)
+      // element.bind("change",this,this.select_change)
     },
     select_change:function(event){
       event.data.update_label();

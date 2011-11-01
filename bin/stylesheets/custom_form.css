@@ -20,6 +20,12 @@
   background-repeat: no-repeat;
 }
 
+.focus_select, .focus_file{
+  -webkit-box-shadow: 1px 1px 2px 0px #ccc;
+  -moz-box-shadow: 1px 1px 2px 0px #ccc;
+  box-shadow: 1px 1px 2px 0px #ccc;
+}
+
 /* ========================= */
 /* = Checkboxes and Radios = */
 /* ========================= */
@@ -52,14 +58,18 @@ input[type=checkbox], input[type=radio]{
   /* Mouse States */
   .checkbox{ background-position:0 3px; }
   .hover_checkbox{ background-position:0 -20px; }
+  .focus_checkbox{ background-position:-21px -20px; }
   .active_checkbox{ background-position:0 3px; }
+  .focus_checkbox{ background-position:-21px -20px; }
   .checked_checkbox{ background-position:0 -43px;  }
+  .focus_checkbox.checked_checkbox{ background-position:-21px -43px; }
   
   .radio{ background-position:0 -66px; }
   .hover_radio{ background-position:0 -86px; }
+  .focus_radio { background-position:-20px -86px; }
   .active_radio{ background-position:0 -66px; }
   .checked_radio{ background-position:0 -106px; }
-  
+  .focus_radio.checked_radio { background-position:-20px -106px; }
 /* =================== */
 /* = Selects & Files = */
 /* =================== */

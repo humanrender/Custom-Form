@@ -1,10 +1,10 @@
 --- 
 title: Custom Forms demo
 ---
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   	<title>index</title>
@@ -15,21 +15,10 @@ title: Custom Forms demo
     <form autocomplete="off">
       <fieldset>
         <legend><span>Checkboxes</span></legend>
-        
-        <input type="checkbox" id="custom_checkbox_0" name="ids[]" value="0" checked="checked"/>
-        <label for="custom_checkbox_0">Checkbox 0</label>
-        
-        <input type="checkbox" id="custom_checkbox_1" name="ids[]" value="1"/>
-        <label for="custom_checkbox_1">Checkbox 1</label>
-        
-        <input type="checkbox" id="custom_checkbox_2" name="ids[]" value="2"/>
-        <label for="custom_checkbox_2">Checkbox 2</label>
-        
-        <input type="checkbox" id="custom_checkbox_3" name="ids[]" value="3"/>
-        <label for="custom_checkbox_3">Checkbox 3</label>
-        
-        <input type="checkbox" id="custom_checkbox_4" name="ids[]" value="4"/>
-        <label for="custom_checkbox_4">Checkbox 4</label>
+        <% (0..4).each do |i| %>
+          <input type="checkbox" id="custom_checkbox_<%=i%>" name="ids[<%=i%>]" value="1" <%=tabindex%>/>
+          <label for="custom_checkbox_<%=i%>">Checkbox <%=i%></label>
+        <% end %>
         
         <div class="notes">
           <div class="section">
@@ -39,11 +28,9 @@ title: Custom Forms demo
           </div>
         </div>
         
-        <label><input type="checkbox" id="custom_checkbox_5" name="ids[]" value="0"/> Checkbox 5</label>
-        <label><input type="checkbox" id="custom_checkbox_6" name="ids[]" value="1"/> Checkbox 6</label>
-        <label><input type="checkbox" id="custom_checkbox_7" name="ids[]" value="2"/> Checkbox 7</label>
-        <label><input type="checkbox" id="custom_checkbox_8" name="ids[]" value="3"/> Checkbox 8</label>
-        <label><input type="checkbox" id="custom_checkbox_9" name="ids[]" value="4"/> Checkbox 9</label>
+        <% (5..9).each do |i| %>
+          <label><input type="checkbox" id="custom_checkbox_<%=i%>" name="ids[<%=i%>]" value="1" <%=tabindex%>/> Checkbox <%=i%></label>
+        <% end %>
         
         <div class="notes last">
           <div class="section">
@@ -59,20 +46,10 @@ title: Custom Forms demo
       <fieldset>
         <legend><span>Radios</span></legend>
   
-        <input type="radio" id="custom_radio_0" name="values[]" value="0"/>
-        <label for="custom_radio_0">radio 0</label>
-  
-        <input type="radio" id="custom_radio_1" name="values[]" value="1"/>
-        <label for="custom_radio_1">radio 1</label>
-  
-        <input type="radio" id="custom_radio_2" name="values[]" value="2"/>
-        <label for="custom_radio_2">radio 2</label>
-  
-        <input type="radio" id="custom_radio_3" name="values[]" value="3"/>
-        <label for="custom_radio_3">radio 3</label>
-  
-        <input type="radio" id="custom_radio_4" name="values[]" value="4"/>
-        <label for="custom_radio_4">radio 4</label>
+        <% (0..4).each do |i| %>
+          <input type="radio" id="custom_radio_<%=i%>" name="value" value="<%=i%>" <%=tabindex%>/>
+          <label for="custom_radio_<%=i%>">Radio <%=i%></label>
+        <% end %>
   
         <div class="notes">
           <div class="section">
@@ -86,11 +63,9 @@ title: Custom Forms demo
           </div>
         </div>
   
-        <label><input type="radio" id="custom_radio_5" name="values[]" value="0"/> radio 5</label>
-        <label><input type="radio" id="custom_radio_6" name="values[]" value="1"/> radio 6</label>
-        <label><input type="radio" id="custom_radio_7" name="values[]" value="2"/> radio 7</label>
-        <label><input type="radio" id="custom_radio_8" name="values[]" value="3"/> radio 8</label>
-        <label><input type="radio" id="custom_radio_9" name="values[]" value="4"/> radio 9</label>
+        <% (5..9).each do |i| %>
+          <label for="custom_radio_<%=i%>"><input type="radio" id="custom_radio_<%=i%>" name="value" value="<%=i%>" <%=tabindex%>/> Radio <%=i%></label>
+        <% end %>
   
         <div class="notes last">
           <div class="section">
@@ -108,7 +83,7 @@ title: Custom Forms demo
         <legend><span>Selects</span></legend>
   
         <label for="custom_select_1">Country</label>
-        <select id="custom_select_1" class="custom_form">
+        <select id="custom_select_1" class="custom_form" name="country_1" <%=tabindex%>>
           <option value="" selected="selected">Select Country</option> 
           <option value="Spain">Spain</option> 
           <option value="United States">United States</option> 
@@ -122,7 +97,7 @@ title: Custom Forms demo
         </select>
         
         <label for="custom_select_2">Credit Card</label>
-        <select id="custom_select_2" class="custom_form">
+        <select id="custom_select_2" class="custom_form" name="credit_card" <%=tabindex%>> 
           <option value="" selected="selected">Select Credit Card</option> 
           <option value="Visa">Visa</option> 
           <option value="MasterCard">MasterCard</option> 
@@ -149,7 +124,7 @@ title: Custom Forms demo
         <div style="width:100%">
           <div style="width:49%; margin-right:1%; float:left">
             <label for="custom_select_3" style="display:block">Country</label>
-            <select id="custom_select_3" class="custom_form_responsive">
+            <select id="custom_select_3" class="custom_form_responsive" name="country_2" <%=tabindex%>>
               <option value="" selected="selected">Select Country</option> 
               <option value="Spain">Spain</option> 
               <option value="United States">United States</option> 
@@ -165,7 +140,7 @@ title: Custom Forms demo
           
           <div style="width:49%; margin-left:1%; float:left">
             <label for="custom_select_4"  style="display:block">Credit Card</label>
-            <select id="custom_select_4" class="custom_form_responsive">
+            <select id="custom_select_4" class="custom_form_responsive" name="credit_card_2" <%=tabindex%>>
               <option value="" selected="selected">Select Credit Card</option> 
               <option value="Visa">Visa</option> 
               <option value="MasterCard">MasterCard</option> 
@@ -219,7 +194,7 @@ title: Custom Forms demo
         <legend><span>File</span></legend>
   
         <label for="custom_file_1">Attachment</label>
-        <input id="custom_file_1" type="file" style="width:400px"/>        
+        <input id="custom_file_1" type="file" style="width:400px" disabled="disabled"/>        
   
         <div class="notes">
           <div class="section">
@@ -268,7 +243,7 @@ title: Custom Forms demo
           </div>
         </div>
       </fieldset>
-      
+      <input type="submit"/>
     </form>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script src="/custom_form.js" type="text/javascript" charset="utf-8"></script>

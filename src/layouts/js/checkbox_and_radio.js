@@ -30,19 +30,28 @@
       checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
         element.attr("checked",checked);
-        replacement[checked ? "addClass" : "removeClass"]("checked_"+this.element_type);
         if(checked) element.trigger("change");
+        else this.update(element,replacement)
       }
     },
     mouse_trigger:function(){ return this.get("replacement") },
     click_handler:function(event){
-      event.data.checked();
-      event.data.get_element().triggerHandler("click");
+      if(event.data.is_disabled) return;
+      var self = event.data;
+      self.get_element().focus().triggerHandler("click");
+      if(event.target == this)
+        self.checked();
     },
-    update:function(){
-      var element = this.get_element();
+    change:function(event){
+      event.data.update($(this));
+    },
+    update:function(element,replacement){
+      var element = (element || this.get_element()), 
+          klass = "checked_"+this.element_type, checked = element.is(":checked"),
+          replacement = (replacement || this.get("replacement"));
       this.disable_if_disabled(element);
-      this.checked(element.is(":checked"),element);
+      if(checked && !replacement.hasClass(klass)) replacement.addClass(klass)
+      else if(!checked && replacement.hasClass(klass)) replacement.removeClass(klass)
     }
   });
 

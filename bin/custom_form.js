@@ -75,33 +75,49 @@
       return this.set(this.get_replacement(element),"replacement")
     },
     init_mouse_events:function(element,replacement){
-      this.mouse_trigger().bind("mouseenter",this,this.hover_handler)
+      var mouse_trigger = this.mouse_trigger(), label;
+      mouse_trigger.bind("mouseenter",this,this.hover_handler)
        .bind("mouseleave",this,this.out_handler)
-       .bind("click",this,this.click_handler)
        .bind("mouseup",this,this.mouse_up_handler)
-       .bind("mousedown",this,this.mouse_down_handler)
+       .bind("mousedown",this,this.mouse_down_handler);
+      label = replacement.parent("label");
+      if(label.length == 0)
+        mouse_trigger.bind("click",this,this.click_handler)
+      element.bind("focusin",this,this.focus_in)
+        .bind("focusout",this,this.focus_out)
+        .bind("change",this,this.change);
+    },
+    focus_in:function(event){
+      event.data.focus(true);
+    },
+    focus_out:function(event){
+      event.data.focus(false);
+    },
+    focus:function(focus){
+      if(this.is_disabled) return;
+      this.get("replacement")[focus ? "addClass" : "removeClass"]("focus_"+this.element_type);
+    },
+    change:function(){
       
-      var label = $("label[for="+this.element_id+"]");
-      if(label.length != 0){
-        label.bind("click",this,this.label_handler)
-      }else{
-        label = replacement.parent("label")
-        if(label.length != 0)
-          label.bind("click",this,this.label_handler)
-      }
     },
     label_handler:function(event){ 
       if(event.target != this) return;
       event.preventDefault();  
-      event.data.get("replacement").triggerHandler("click");
+      event.data.get_element().triggerHandler("change");
     },
-    hover_handler:     function(event){ event.data.hover(true)      },
+    hover_handler:     function(event){ 
+      event.data.hover(true)      
+    },
     out_handler:       function(event){ event.data.hover(false)     },
     mouse_up_handler:  function(event){ event.data.mouse_in(false)  },
     mouse_down_handler:function(event){ event.data.mouse_in(true)   },
     
-    hover:function(hover){ this.get("replacement")[hover ? "addClass" : "removeClass"]("hover_"+this.element_type) },
+    hover:function(hover){ 
+      if(this.is_disabled) return;
+      this.get("replacement")[hover ? "addClass" : "removeClass"]("hover_"+this.element_type);
+    },
     mouse_in:function(down){
+      if(this.is_disabled) return;
       this.get("replacement")[down ? "addClass" : "removeClass"]("active_"+this.element_type)
     },
     
@@ -158,19 +174,28 @@
       checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
         element.attr("checked",checked);
-        replacement[checked ? "addClass" : "removeClass"]("checked_"+this.element_type);
         if(checked) element.trigger("change");
+        else this.update(element,replacement)
       }
     },
     mouse_trigger:function(){ return this.get("replacement") },
     click_handler:function(event){
-      event.data.checked();
-      event.data.get_element().triggerHandler("click");
+      if(event.data.is_disabled) return;
+      var self = event.data;
+      self.get_element().focus().triggerHandler("click");
+      if(event.target == this)
+        self.checked();
     },
-    update:function(){
-      var element = this.get_element();
+    change:function(event){
+      event.data.update($(this));
+    },
+    update:function(element,replacement){
+      var element = (element || this.get_element()), 
+          klass = "checked_"+this.element_type, checked = element.is(":checked"),
+          replacement = (replacement || this.get("replacement"));
       this.disable_if_disabled(element);
-      this.checked(element.is(":checked"),element);
+      if(checked && !replacement.hasClass(klass)) replacement.addClass(klass)
+      else if(!checked && replacement.hasClass(klass)) replacement.removeClass(klass)
     }
   });
 
@@ -245,7 +270,7 @@
         replacement.addClass("responsive_select")
       }
     
-      element.bind("change",this,this.select_change)
+      // element.bind("change",this,this.select_change)
     },
     select_change:function(event){
       event.data.update_label();
