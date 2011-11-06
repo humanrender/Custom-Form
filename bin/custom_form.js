@@ -28,6 +28,14 @@
   // = Static Methods =
   // ==================
   FormElement.total_instances = 0;
+  FormElement.browser_string = function(){
+    var key, version, browser, b = $.browser;
+    for(key in b){
+      if(key == "version") version = parseInt(b.version)
+      else browser = key;
+    }
+   return browser+" "+browser+version+(b.msie ? "" : " not_msie"); 
+  }();
   FormElement.build = function(element){
     var type, klass;
     if(element.is("select")) type = "select";
@@ -65,6 +73,7 @@
       var element = this.get_element(), replacement;
       this.set_parameters(element,options);
       replacement = this.set_replacement(element);
+      replacement.addClass(FormElement.browser_string) 
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.disable_if_disabled(element);
@@ -380,11 +389,13 @@
         responsive_select:false,
         responsive_file:false
       },(options || {}));
-      return elements.each(function(){ 
+      elements = elements.each(function(){ 
         // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
         if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;
         this.$$custom_form_identifier = self.new_element(this).init(options).identifier;      
       });
+      
+      return elements;
     };
     this.execute = function execute(elements,arguments){
       var method = arguments[0];

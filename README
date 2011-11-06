@@ -96,6 +96,9 @@ file_label: The button text for inputs with type file (default: Choose file)
 # = Changelog =
 # =============
 
+06-11-2011  Browser information in class. Completely rewritten opacity styles.
+            Selects have a weird behavior in IE, if their opacity is 0 it requires a double-click instead of a click to open. So I added the .not_msie class to apply opacity styles to compliant browsers and deliver opacity with filters for all msie versions (including ie9). If IE10 supports filters or doesn't have this behavior, specific classes to target ie9< could be added instead of not_msie
+
 01-11-2011  Tab navigation enabled,corrected disabled behavior and modified custom styles for selects
 
 29-10-2011  Active classes such as .active_checkbox and .active_radio now reference the :active state. Checked states are now given classes like .checked_checkbox and .checked_radio

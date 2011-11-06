@@ -6,6 +6,14 @@
   // = Static Methods =
   // ==================
   FormElement.total_instances = 0;
+  FormElement.browser_string = function(){
+    var key, version, browser, b = $.browser;
+    for(key in b){
+      if(key == "version") version = parseInt(b.version)
+      else browser = key;
+    }
+   return browser+" "+browser+version+(b.msie ? "" : " not_msie"); 
+  }();
   FormElement.build = function(element){
     var type, klass;
     if(element.is("select")) type = "select";
@@ -43,6 +51,7 @@
       var element = this.get_element(), replacement;
       this.set_parameters(element,options);
       replacement = this.set_replacement(element);
+      replacement.addClass(FormElement.browser_string) 
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.disable_if_disabled(element);
