@@ -15,6 +15,22 @@
     button_width:0,
     click_handler:$.noop,
     element_type:"select",
+    redraw : function(){
+     var element = this.get_element();
+     element.removeAttr('style');
+     this.element_width = element.outerWidth();
+     
+     var replacement = this.get('replacement'),
+         select_content = replacement.find('.select_content'),
+         select_label = this.set($(".select_label",replacement),"select_label"),
+         styles = {width:this.element_width-parseInt(replacement.css("border-left-width"))-parseInt(replacement.css("border-right-width")) };
+         
+     element.css(styles); replacement.css(styles);
+     var select_button = $(".select_button",replacement);  
+     select_label.css({ 
+       width: styles.width-select_button.outerWidth()-parseInt(select_content.css("border-left-width"))-parseInt(select_content.css("border-right-width"))
+     });
+   },
     set_parameters:function(element,options){
       this.responsive = options.responsive_select;
     },
@@ -32,12 +48,7 @@
       var select_label = this.set($(".select_label",replacement),"select_label");
     
       if(!this.responsive){
-        var styles = {width:this.element_width-FormElement.element_border_width(replacement)};
-        element.css(styles); replacement.css(styles);
-        var select_button = $(".select_button",replacement);
-        select_label.css({ 
-          width: styles.width-FormElement.element_border_width(select_button)-select_button.outerWidth()
-        });
+        this.redraw();
       }else{
         replacement.addClass("responsive_select")
       }
