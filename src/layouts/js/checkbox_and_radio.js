@@ -22,8 +22,11 @@
       replacement.append(element);
     },
     init_replacement:function(element,replacement){
-      if(element.is(":checked")) this.checked(true,element,replacement);
-      if(element.is(":disabled")) this.disabled(true,element,replacement);
+      var c,d;
+      if((c = element.is(":checked"))) this.checked(true,element,replacement);
+      if((d = element.is(":disabled"))) this.disabled(true,element,replacement);
+      if(c || d)
+        this.update(element,replacement)
     },
     checked:function(checked,element,replacement){
       element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));

@@ -175,8 +175,11 @@
       replacement.append(element);
     },
     init_replacement:function(element,replacement){
-      if(element.is(":checked")) this.checked(true,element,replacement);
-      if(element.is(":disabled")) this.disabled(true,element,replacement);
+      var c,d;
+      if((c = element.is(":checked"))) this.checked(true,element,replacement);
+      if((d = element.is(":disabled"))) this.disabled(true,element,replacement);
+      if(c || d)
+        this.update(element,replacement)
     },
     checked:function(checked,element,replacement){
       element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
@@ -241,6 +244,11 @@
   // ==========
   // = Select =
   // ==========
+  
+  FormElement.element_border_width = function(element){
+      return parseInt(element.css("border-left-width"))-parseInt(element.css("border-right-width"));
+    }
+  
   function Select(identifier){this.constructor.call(this,identifier);}
   Select.IDENTIFIER = "select";
 
@@ -267,11 +275,11 @@
       var select_label = this.set($(".select_label",replacement),"select_label");
     
       if(!this.responsive){
-        var styles = {width:this.element_width-parseInt(replacement.css("border-left-width"))-parseInt(replacement.css("border-right-width"))};
+        var styles = {width:this.element_width-FormElement.element_border_width(replacement)};
         element.css(styles); replacement.css(styles);
-        var select_button = $(".select_button",replacement);  
+        var select_button = $(".select_button",replacement);
         select_label.css({ 
-          width: styles.width-select_button.outerWidth()
+          width: styles.width-FormElement.element_border_width(select_button)-select_button.outerWidth()
         });
       }else{
         replacement.addClass("responsive_select")

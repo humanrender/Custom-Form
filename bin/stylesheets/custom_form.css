@@ -129,6 +129,7 @@ select, .select{
 
 .select .select_button{
   width:22px;
+  border-left:4px solid red!important;
 }
 
 .select .select_button, .file .file_button{

@@ -1,6 +1,11 @@
   // ==========
   // = Select =
   // ==========
+  
+  FormElement.element_border_width = function(element){
+      return parseInt(element.css("border-left-width"))-parseInt(element.css("border-right-width"));
+    }
+  
   function Select(identifier){this.constructor.call(this,identifier);}
   Select.IDENTIFIER = "select";
 
@@ -27,11 +32,11 @@
       var select_label = this.set($(".select_label",replacement),"select_label");
     
       if(!this.responsive){
-        var styles = {width:this.element_width-parseInt(replacement.css("border-left-width"))-parseInt(replacement.css("border-right-width"))};
+        var styles = {width:this.element_width-FormElement.element_border_width(replacement)};
         element.css(styles); replacement.css(styles);
-        var select_button = $(".select_button",replacement);  
+        var select_button = $(".select_button",replacement);
         select_label.css({ 
-          width: styles.width-select_button.outerWidth()
+          width: styles.width-FormElement.element_border_width(select_button)-select_button.outerWidth()
         });
       }else{
         replacement.addClass("responsive_select")

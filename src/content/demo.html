@@ -29,7 +29,7 @@ title: Custom Forms demo
         </div>
         
         <% (5..9).each do |i| %>
-          <label><input type="checkbox" id="custom_checkbox_<%=i%>" name="ids[<%=i%>]" value="1" <%=tabindex%>/> Checkbox <%=i%></label>
+          <label><input type="checkbox" id="custom_checkbox_<%=i%>" name="ids[<%=i%>]" value="1" <%=tabindex%> <%="checked='checked'" if i == 6%>/> Checkbox <%=i%></label>
         <% end %>
         
         <div class="notes last">
@@ -47,7 +47,7 @@ title: Custom Forms demo
         <legend><span>Radios</span></legend>
   
         <% (0..4).each do |i| %>
-          <input type="radio" id="custom_radio_<%=i%>" name="value" value="<%=i%>" <%=tabindex%>/>
+          <input type="radio" id="custom_radio_<%=i%>" name="value" value="<%=i%>" <%=tabindex%> <%="checked='checked'" if i == 3%>/>
           <label for="custom_radio_<%=i%>">Radio <%=i%></label>
         <% end %>
   
@@ -86,7 +86,7 @@ title: Custom Forms demo
         <select id="custom_select_1" class="custom_form" name="country_1" <%=tabindex%>>
           <option value="" selected="selected">Select Country</option> 
           <option value="Spain">Spain</option> 
-          <option value="United States">United States</option> 
+          <option value="United States" selected="selected">United States</option> 
           <option value="United Kingdom">United Kingdom</option> 
           <option value="Afghanistan">Afghanistan</option> 
           <option value="Albania">Albania</option> 
@@ -143,7 +143,7 @@ title: Custom Forms demo
             <select id="custom_select_4" class="custom_form_responsive" name="credit_card_2" <%=tabindex%>>
               <option value="" selected="selected">Select Credit Card</option> 
               <option value="Visa">Visa</option> 
-              <option value="MasterCard">MasterCard</option> 
+              <option value="MasterCard" selected="selected">MasterCard</option> 
               <option value="American Express">American Express</option> 
               <option value="...">...</option> 
             </select>
