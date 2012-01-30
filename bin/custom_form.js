@@ -186,8 +186,9 @@
       checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
         element.attr("checked",checked);
-        if(checked) element.trigger("change");
-        else this.update(element,replacement)
+        element.trigger("change");
+        // if(checked) element.trigger("change");
+        // else this.update(element,replacement)
       }
     },
     mouse_trigger:function(){ return this.get("replacement") },
