@@ -48,10 +48,12 @@
     },
     
     init:function(options){
-      var element = this.get_element(), replacement;
+      var element = this.get_element(), replacement, element_id = element.attr("id");
       this.set_parameters(element,options);
       replacement = this.set_replacement(element);
-      replacement.addClass(FormElement.browser_string) 
+      replacement.addClass(FormElement.browser_string)
+      if(element_id.match(/\S/))
+         replacement.addClass("custom-form_"+element_id)
       this.replace_elements(element,replacement);
       this.init_replacement(element,replacement);
       this.disable_if_disabled(element);
