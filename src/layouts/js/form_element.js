@@ -1,3 +1,13 @@
+  // =========
+  // = Utils =
+  // =========
+
+  function css_num(element,property){
+    property = parseFloat(element.css(property));
+    if(isNaN(property)) return 0;
+    return property;
+  }
+
   // ===============
   // = FormElement =
   // ===============

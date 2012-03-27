@@ -3,8 +3,8 @@
   // ==========
   
   FormElement.element_border_width = function(element){
-      return parseInt(element.css("border-left-width"))-parseInt(element.css("border-right-width"));
-    }
+    return parseInt(element.css("border-left-width"))-parseInt(element.css("border-right-width"));
+  }
   
   function Select(identifier){this.constructor.call(this,identifier);}
   Select.IDENTIFIER = "select";
@@ -23,12 +23,14 @@
      var replacement = this.get('replacement'),
          select_content = replacement.find('.select_content'),
          select_label = this.set($(".select_label",replacement),"select_label"),
-         styles = {width:this.element_width-parseInt(replacement.css("border-left-width"))-parseInt(replacement.css("border-right-width")) };
+         styles = {
+           width:this.element_width-css_num(replacement,"border-left-width")-css_num(replacement,"border-right-width")            
+        };
          
      element.css(styles); replacement.css(styles);
      var select_button = $(".select_button",replacement);  
      select_label.css({ 
-       width: styles.width-select_button.outerWidth()-parseInt(select_content.css("border-left-width"))-parseInt(select_content.css("border-right-width"))
+       width: styles.width-select_button.outerWidth()-css_num(select_content,"border-left-width")-css_num(select_content,"border-right-width")
      });
    },
     set_parameters:function(element,options){

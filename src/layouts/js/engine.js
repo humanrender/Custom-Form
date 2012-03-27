@@ -16,7 +16,7 @@
       },(options || {}));
       elements = elements.each(function(){ 
         // Don't initialize if it is is a select and it's size is not 0 or if the plugin has already been initalized in this element
-        if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_initialized) return true;
+        if ((this.nodeName == 'SELECT' && this.size > 0) || this.$$custom_form_identifier) return true;
         this.$$custom_form_identifier = self.new_element(this).init(options).identifier;      
       });
       
