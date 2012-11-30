@@ -272,23 +272,22 @@
     click_handler:$.noop,
     element_type:"select",
     redraw : function(){
-     var element = this.get_element();
-     element.removeAttr('style');
-     this.element_width = element.outerWidth();
-     
-     var replacement = this.get('replacement'),
-         select_content = replacement.find('.select_content'),
-         select_label = this.set($(".select_label",replacement),"select_label"),
-         styles = {
-           width:this.element_width-css_num(replacement,"border-left-width")-css_num(replacement,"border-right-width")            
-        };
-         
-     element.css(styles); replacement.css(styles);
-     var select_button = $(".select_button",replacement);  
-     select_label.css({ 
-       width: styles.width-select_button.outerWidth()-css_num(select_content,"border-left-width")-css_num(select_content,"border-right-width")
-     });
-   },
+      var element = this.get_element();
+      element.removeAttr('style');
+      this.element_width = element.outerWidth();
+
+      var replacement = this.get('replacement'),
+          select_content = replacement.find('.select_content'),
+          select_label = this.set($(".select_label",replacement),"select_label"),
+          styles = {
+            width:this.element_width-css_num(replacement,"border-left-width")-css_num(replacement,"border-right-width")            
+         };
+      element.css(styles); replacement.css(styles);
+      var select_button = $(".select_button",replacement);  
+      select_label.css({ 
+        width: styles.width-select_button.outerWidth()-css_num(select_content,"border-left-width")-css_num(select_content,"border-right-width")-css_num(select_label,"border-right-width")-css_num(select_label,"border-left-width")
+      });
+    },
     set_parameters:function(element,options){
       this.responsive = options.responsive_select;
     },
