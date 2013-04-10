@@ -1,4 +1,4 @@
-  $$.fn.ie6 = function(){return $.browser.msie && parseInt($.browser.version) <= 6}
+  $$.fn.ie6 = function(){return $$._browser.msie && parseInt($$._browser.version) <= 6}
   
   $$.fn.ie6_instance = function(){
     return new function(){

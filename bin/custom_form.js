@@ -1,6 +1,6 @@
 (function($){
 
-  var $$ = {fn:{}},
+  var $$ = {fn:{}},  
   METHODS = ["init","checked","update","select","disabled"],
   OVERRIDES = {
     disabled:function(option){
@@ -18,7 +18,17 @@
       });
       return result
     }
-  }
+  };
+  
+  $$._browser = $.browser || (function(){
+    var a,c,b;
+    b=function(e){e=e.toLowerCase();var d=/(chrome)[ \/]([\w.]+)/.exec(e)||/(webkit)[ \/]([\w.]+)/.exec(e)||/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(e)||/(msie) ([\w.]+)/.exec(e)||e.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+)|)/.exec(e)||[];return{browser:d[1]||"",version:d[2]||"0"}};
+    a=b(navigator.userAgent);c={};
+    if(a.browser){c[a.browser]=true;c.version=a.version}
+    if(c.chrome){c.webkit=true}
+    else{if(c.webkit){c.safari=true}}
+    return c;
+  })();
   
   // =========
   // = Utils =
@@ -39,7 +49,7 @@
   // ==================
   FormElement.total_instances = 0;
   FormElement.browser_string = function(){
-    var key, version, browser, b = $.browser;
+    var key, version, browser, b = $$._browser;
     for(key in b){
       if(key == "version") version = parseInt(b.version)
       else browser = key;
@@ -314,7 +324,7 @@
     },
     init_mouse_events:function(element,replacement){
       FormElement.prototype.init_mouse_events.call(this,element,replacement);
-      if($.browser.mozilla || $.browser.msie)
+      if($$._browser.mozilla || $$._browser.msie)
         element.bind("keyup",this,this.key_up);
     },
     key_up:function(event){
@@ -406,7 +416,7 @@
   
   FormElement.register_class(File.IDENTIFIER,File)
 
-  $$.fn.ie6 = function(){return $.browser.msie && parseInt($.browser.version) <= 6}
+  $$.fn.ie6 = function(){return $$._browser.msie && parseInt($$._browser.version) <= 6}
   
   $$.fn.ie6_instance = function(){
     return new function(){

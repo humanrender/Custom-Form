@@ -17,7 +17,7 @@
   // ==================
   FormElement.total_instances = 0;
   FormElement.browser_string = function(){
-    var key, version, browser, b = $.browser;
+    var key, version, browser, b = $$._browser;
     for(key in b){
       if(key == "version") version = parseInt(b.version)
       else browser = key;
