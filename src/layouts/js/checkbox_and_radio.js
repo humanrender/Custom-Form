@@ -32,7 +32,7 @@
       element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
       checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
-        element.attr("checked",checked);
+        element.prop("checked",checked);
         element.trigger("change");
         // if(checked) element.trigger("change");
         // else this.update(element,replacement)

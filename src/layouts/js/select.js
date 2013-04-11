@@ -84,7 +84,7 @@
         case "function": selected.apply(element); break;
         default:
           (selected_type == "string") || (selected = selected.to_s);
-          element.find("option:contains('"+selected+"')").attr("selected",true);
+          element.find("option:contains('"+selected+"')").prop("selected",true);
       }
       this.update();
     }

@@ -292,6 +292,10 @@ select, .select{
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
 }
 
+.msie10.select select, .msie13.select select, .msie11.select select, .msie12.select select{
+  opacity: 0!important;
+}
+
 .disabled_checkbox, .disabled_radio, .disabled_select, .disabled_file{
   opacity:0.5;
 }

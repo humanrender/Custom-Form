@@ -207,7 +207,7 @@
       element = (element) || (this.get_element()); replacement = (replacement) || (this.get("replacement"));
       checked = checked == undefined ? !element.is(":checked") : checked;
       if(!this.uncheckeable || (this.uncheckeable && checked)){ 
-        element.attr("checked",checked);
+        element.prop("checked",checked);
         element.trigger("change");
         // if(checked) element.trigger("change");
         // else this.update(element,replacement)
@@ -350,7 +350,7 @@
         case "function": selected.apply(element); break;
         default:
           (selected_type == "string") || (selected = selected.to_s);
-          element.find("option:contains('"+selected+"')").attr("selected",true);
+          element.find("option:contains('"+selected+"')").prop("selected",true);
       }
       this.update();
     }
