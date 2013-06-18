@@ -75,7 +75,7 @@
     update:function(){
       var element = this.get_element();
       this.disable_if_disabled(element);
-      element.trigger("change");
+      this.update_label();
     },
     select:function(selected){
       var selected_type = typeof selected, element = this.get_element();
