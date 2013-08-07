@@ -79,7 +79,7 @@
       this.disable_if_disabled(element);
       
       if(checked){
-        var checked_radios = $("."+klass).has("[name='"+this.element_name+"']").not(this.element_id);
+        var checked_radios = element.closest("form").find("." + klass).has("[name='" + this.element_name + "']").not(this.element_id);
         if(checked_radios.length != 0)
             checked_radios.removeClass(klass)
         replacement.addClass(klass)
