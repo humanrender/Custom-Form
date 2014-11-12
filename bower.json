@@ -1,0 +1,8 @@
+{
+  "name": "custom-form",
+  "private": true,
+  "main": [
+    "bin/custom_form.js"
+    "bin/stylesheets/custom_form.css"
+  ]
+}
